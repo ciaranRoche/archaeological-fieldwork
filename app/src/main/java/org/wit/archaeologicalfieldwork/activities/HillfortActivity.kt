@@ -12,10 +12,8 @@ import org.wit.archaeologicalfieldwork.models.HillfortModel
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
-    lateinit var app: MainApp
-
     var hillfort = HillfortModel()
-    val hillforts = ArrayList<HillfortModel>()
+    lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +23,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setOnClickListener(){
             hillfort.name = hillfortName.text.toString()
-            hillfort.description = hillfortDescription.text.toString()
+            hillfort.description = description.text.toString()
             if(hillfort.name.isNotEmpty()){
-                hillforts.add(hillfort.copy())
-                info("add Button Pressed : $hillfort")
-                hillforts.forEach{info("${it.name}")}
+                app.hillforts.add(hillfort.copy())
+                app.hillforts.forEach{info("Add Button Pressed : ${it}")}
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
             }else{
                 toast("Please Enter a title")
             }
