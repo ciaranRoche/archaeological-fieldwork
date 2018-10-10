@@ -2,6 +2,8 @@ package org.wit.archaeologicalfieldwork.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
@@ -19,6 +21,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
 
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
         app = application as MainApp
 
         btnAdd.setOnClickListener(){
@@ -33,5 +38,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 toast("Please Enter a title")
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
