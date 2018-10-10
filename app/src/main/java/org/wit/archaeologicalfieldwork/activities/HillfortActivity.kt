@@ -15,6 +15,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
 
     var hillfort = HillfortModel()
+    val hillforts = ArrayList<HillfortModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +25,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setOnClickListener(){
             hillfort.name = hillfortName.text.toString()
+            hillfort.description = hillfortDescription.text.toString()
             if(hillfort.name.isNotEmpty()){
+                hillforts.add(hillfort.copy())
                 info("add Button Pressed : $hillfort")
+                hillforts.forEach{info("${it.name}")}
             }else{
                 toast("Please Enter a title")
             }

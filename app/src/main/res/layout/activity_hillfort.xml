@@ -51,6 +51,19 @@
           android:textColor="@color/colorPrimaryDark"
           android:textSize="14sp"/>
 
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/hillfortDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:hint="@string/hint_HillFortDescription"
+          android:inputType="text"
+          android:maxLength="25"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="14sp"/>
+
         <Button
           android:id="@+id/btnAdd"
           android:layout_width="match_parent"
