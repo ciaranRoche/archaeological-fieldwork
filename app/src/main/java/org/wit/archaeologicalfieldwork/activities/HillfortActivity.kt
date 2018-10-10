@@ -46,7 +46,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnDelete.setOnClickListener(){
             app.hillforts.delete(hillfort.copy())
             setResult(AppCompatActivity.RESULT_OK)
-            finish()git
+            finish()
         }
 
         btnAdd.setOnClickListener(){
