@@ -20,4 +20,14 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     hillforts.forEach{info("${it}")}
   }
 
+  override fun update(hillfort: HillfortModel) {
+    var foundHillfort: HillfortModel? = hillforts.find {h -> h.id == hillfort.id}
+    if (foundHillfort != null){
+      hillfort.name = hillfort.name
+      hillfort.description = hillfort.description
+      logAll()
+    }
+  }
+
+
 }

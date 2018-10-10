@@ -26,6 +26,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         app = application as MainApp
 
+        if (intent.hasExtra("hillfort_edit")){
+            info("hello")
+            hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
+            hillfortName.setText(hillfort.name)
+            description.setText(hillfort.description)
+        }
+
         btnAdd.setOnClickListener(){
             hillfort.name = hillfortName.text.toString()
             hillfort.description = description.text.toString()
