@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ArchaeologicalFieldwork</string>
+    <string name="app_name">Archaeological Fieldwork</string>
+    <string name="button_addHillFort">Add HillFort</string>
+    <string name="hint_HillFortTitle">Hillfort Title</string>
 </resources>
