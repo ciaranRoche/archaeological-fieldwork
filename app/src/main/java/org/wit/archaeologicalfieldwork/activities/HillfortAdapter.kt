@@ -26,7 +26,6 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>) : 
   class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView), AnkoLogger {
 
     fun bind(hillfort: HillfortModel) {
-      info(hillfort.name)
       itemView.hillfortName.text = hillfort.name
       itemView.description.text = hillfort.description
     }
