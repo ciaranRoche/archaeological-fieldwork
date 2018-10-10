@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
@@ -38,6 +39,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortName.setText(hillfort.name)
             description.setText(hillfort.description)
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+        } else {
+            btnDelete.visibility = View.INVISIBLE
+        }
+
+        btnDelete.setOnClickListener(){
+            app.hillforts.delete(hillfort.copy())
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()git
         }
 
         btnAdd.setOnClickListener(){

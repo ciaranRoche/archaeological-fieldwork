@@ -30,5 +30,12 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     }
   }
 
+  override fun delete(hillfort: HillfortModel) {
+    var foundHillfort: HillfortModel? = hillforts.find { h -> h.id == hillfort.id }
+    if (foundHillfort != null){
+      hillforts.remove(foundHillfort)
+    }
+  }
+
 
 }
