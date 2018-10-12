@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 
 interface HillfortListener {
@@ -32,6 +33,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>, pr
     fun bind(hillfort: HillfortModel, listener: HillfortListener) {
       itemView.hillfortName.text = hillfort.name
       itemView.description.text = hillfort.description
+      itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
       itemView.setOnClickListener{listener.onHillfortClick(hillfort)}
 
     }
