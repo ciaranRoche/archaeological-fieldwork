@@ -11,17 +11,21 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.archaeologicalfieldwork.helpers.readImage
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.models.HillfortModel
+import org.wit.archaeologicalfieldwork.models.Location
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     lateinit var app : MainApp
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +58,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.description = description.text.toString()
             if(hillfort.name.isNotEmpty()){
                 if(intent.hasExtra("hillfort_edit")){
-                    info("boop")
                     app.hillforts.update(hillfort.copy())
                 } else {
-                    info("boop boop")
                     app.hillforts.create(hillfort.copy())
                 }
                 setResult(AppCompatActivity.RESULT_OK)
@@ -67,8 +69,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
+        hillfortLocation.setOnClickListener(){
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
         chooseImage.setOnClickListener{
-            info("Select Image")
             showImagePicker(this, IMAGE_REQUEST)
         }
     }
@@ -94,6 +99,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null){
                     hillfort.image = data.getData().toString()
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    location = data.extras.getParcelable<Location>("location")
                 }
             }
         }

@@ -2,6 +2,7 @@
     <!--General Strings-->
 
     <string name="app_name">Archaeological Fieldwork</string>
+    <string name="title_activity_maps">Map</string>
 
     <!--Button Strings-->
 
@@ -10,6 +11,7 @@
     <string name="button_addImage"> Add Image</string>
     <string name="select_hillfort_image">Select Hillfort Image</string>
     <string name="button_deleteHillfort">Remove Hillfort</string>
+    <string name="button_location">Set Location</string>
 
     <!--Hint Strings-->
     <string name="hint_HillFortTitle">Hillfort Title</string>
@@ -18,6 +20,7 @@
     <!--Menu Strings-->
     <string name="menu_addHillfort">Add</string>
     <string name="menu_cancelHillfort">Cancel</string>
+
 
 
 </resources>
