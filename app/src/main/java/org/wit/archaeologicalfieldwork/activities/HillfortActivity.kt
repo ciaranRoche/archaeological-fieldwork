@@ -13,6 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import org.wit.archaeologicalfieldwork.BuildConfig
 import org.wit.archaeologicalfieldwork.helpers.readImage
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
