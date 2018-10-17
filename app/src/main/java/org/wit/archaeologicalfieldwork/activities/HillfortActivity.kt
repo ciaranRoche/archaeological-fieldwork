@@ -22,11 +22,11 @@ import org.wit.archaeologicalfieldwork.models.Location
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
-    var hillfort = HillfortModel()
     lateinit var app : MainApp
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     var location = Location(52.245696, -7.139102, 15f)
+    var hillfort = HillfortModel(location = location)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +43,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             hillfortName.setText(hillfort.name)
             description.setText(hillfort.description)
+            location = hillfort.location
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
         } else {
             btnDelete.visibility = View.INVISIBLE
@@ -57,6 +58,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener(){
             hillfort.name = hillfortName.text.toString()
             hillfort.description = description.text.toString()
+            hillfort.location = location
             if(hillfort.name.isNotEmpty()){
                 if(intent.hasExtra("hillfort_edit")){
                     app.hillforts.update(hillfort.copy())
