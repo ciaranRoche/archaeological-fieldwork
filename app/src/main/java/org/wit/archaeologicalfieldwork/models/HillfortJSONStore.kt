@@ -18,12 +18,10 @@ fun generateRandomId(): Long {
   return Random().nextLong()
 }
 
-class HillfortJSONStore : HillfortStore, AnkoLogger {
-  val context: Context
+class HillfortJSONStore(val context: Context) : HillfortStore, AnkoLogger {
   var hillforts = mutableListOf<HillfortModel>()
 
-  constructor(context: Context){
-    this.context = context
+  init {
     if(exists(context, JSON_FILE)){
       deserialize()
     }
