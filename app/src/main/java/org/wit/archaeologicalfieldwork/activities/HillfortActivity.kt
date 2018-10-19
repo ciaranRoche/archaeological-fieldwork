@@ -47,7 +47,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortName.setText(hillfort.name)
             description.setText(hillfort.description)
             location = hillfort.location
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
+            //hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
         } else {
             btnDelete.visibility = View.INVISIBLE
         }
@@ -105,7 +105,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null){
                     var image: String = data.getData().toString()
                     hillfort.images += image
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    toast("Image Uploaded")
+                  //  hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                 }
             }
             LOCATION_REQUEST -> {
