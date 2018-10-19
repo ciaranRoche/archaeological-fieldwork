@@ -22,18 +22,21 @@ import org.wit.archaeologicalfieldwork.models.Location
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
-    var hillfort = HillfortModel()
     lateinit var app : MainApp
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     var location = Location(52.245696, -7.139102, 15f)
+    var hillfort = HillfortModel(location = location)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
 
         toolbarAdd.title = title
+
         setSupportActionBar(toolbarAdd)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         app = application as MainApp
 
@@ -43,7 +46,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
             hillfortName.setText(hillfort.name)
             description.setText(hillfort.description)
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+            location = hillfort.location
+            //hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
         } else {
             btnDelete.visibility = View.INVISIBLE
         }
@@ -57,6 +61,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener(){
             hillfort.name = hillfortName.text.toString()
             hillfort.description = description.text.toString()
+            hillfort.location = location
             if(hillfort.name.isNotEmpty()){
                 if(intent.hasExtra("hillfort_edit")){
                     app.hillforts.update(hillfort.copy())
@@ -98,8 +103,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode){
             IMAGE_REQUEST -> {
                 if (data != null){
-                    hillfort.image = data.getData().toString()
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    var image: String = data.getData().toString()
+                    hillfort.images += image
+                    toast("Image Uploaded")
+                  //  hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                 }
             }
             LOCATION_REQUEST -> {
@@ -110,3 +117,4 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 }
+
