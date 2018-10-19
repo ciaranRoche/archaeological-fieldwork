@@ -20,10 +20,10 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     buildTypes.each {
-      it.buildConfigField 'String', 'google_key' , "\"$System.env.GOOGLE_API_TOKEN\""
+      it.buildConfigField 'String', 'google_key', "\"$System.env.GOOGLE_API_TOKEN\""
     }
   }
-  lintOptions{
+  lintOptions {
     abortOnError false
     disable 'MissingTranslation'
   }

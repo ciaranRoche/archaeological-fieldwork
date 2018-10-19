@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 
@@ -38,6 +39,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+      R.id.profile -> startActivityForResult<ProfileActivity>(0)
     }
     return super.onOptionsItemSelected(item)
   }
