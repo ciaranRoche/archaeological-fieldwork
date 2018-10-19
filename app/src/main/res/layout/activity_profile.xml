@@ -6,20 +6,90 @@
   android:layout_height="match_parent"
   tools:context=".activities.profile.ProfileActivity">
 
-  <android.support.design.widget.AppBarLayout
-    android:id="@+id/appBarLayout"
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    android:fitsSystemWindows="true"
-    app:elevation="0dip"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbarAdd"
+    <android.support.design.widget.AppBarLayout
+      android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:titleTextColor="@color/colorPrimary"/>
-  </android.support.design.widget.AppBarLayout>
+      android:background="@color/colorAccent"
+      android:fitsSystemWindows="true"
+      app:elevation="0dip"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+      <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/colorPrimary"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/appBarLayout"
+      android:fillViewport="true">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/userName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:hint="@string/hint_userName"
+          android:inputType="text"
+          android:maxLength="25"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="14sp"/>
+
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/userEmail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:hint="@string/hint_userEmail"
+          android:inputType="text"
+          android:maxLength="25"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="14sp"/>
+
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/userPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:hint="@string/hint_userPassword"
+          android:inputType="text"
+          android:maxLength="25"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="14sp"/>
+
+        <Button
+          android:id="@+id/saveUser"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:background="@color/colorAccent"
+          android:paddingBottom="8dp"
+          android:paddingTop="8dp"
+          android:text="@string/button_signUp"
+          android:textColor="@color/colorPrimary"
+          android:textSize="16sp"/>
+
+      </LinearLayout>
+    </ScrollView>
+
+  </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

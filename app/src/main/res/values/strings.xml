@@ -12,10 +12,14 @@
   <string name="select_hillfort_image">Select Hillfort Image</string>
   <string name="button_deleteHillfort">Remove Hillfort</string>
   <string name="button_location">Set Location</string>
+  <string name="button_signUp">Sign Up</string>
 
   <!--Hint Strings-->
   <string name="hint_HillFortTitle">Hillfort Title</string>
   <string name="hint_HillFortDescription">Description</string>
+  <string name="hint_userName">User Name</string>
+  <string name="hint_userEmail">User Email</string>
+  <string name="hint_userPassword">Password</string>
 
   <!--Menu Strings-->
   <string name="menu_addHillfort">Add</string>
