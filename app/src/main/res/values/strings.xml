@@ -13,6 +13,7 @@
   <string name="button_deleteHillfort">Remove Hillfort</string>
   <string name="button_location">Set Location</string>
   <string name="button_signUp">Sign Up</string>
+  <string name="button_logIn">Log In</string>
 
   <!--Hint Strings-->
   <string name="hint_HillFortTitle">Hillfort Title</string>
@@ -25,6 +26,9 @@
   <string name="menu_addHillfort">Add</string>
   <string name="menu_cancelHillfort">Cancel</string>
   <string name="menu_profile">Profile</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

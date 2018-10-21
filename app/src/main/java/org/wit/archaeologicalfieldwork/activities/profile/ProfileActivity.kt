@@ -2,7 +2,6 @@ package org.wit.archaeologicalfieldwork.activities.profile
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
