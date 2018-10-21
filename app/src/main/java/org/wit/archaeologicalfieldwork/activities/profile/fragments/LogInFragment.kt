@@ -10,9 +10,11 @@ import android.widget.Button
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivityForResult
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.models.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.UserModel
 import org.wit.archaeologicalfieldwork.models.UserStore
@@ -36,8 +38,11 @@ class LogInFragment : Fragment(), AnkoLogger{
 
     login?.setOnClickListener {
       info("Sup boy")
-      if(users.findUser(email?.text.toString(), password?.text.toString())){
-        startActivityForResult<ProfileActivity>(0)
+      if(users.verifyUser(email?.text.toString(), password?.text.toString())){
+        val loggedUser = users.findUser(email?.text.toString())
+        userLogged = loggedUser.id.toString()
+        toast(userLogged)
+        startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggedUser), 0)
       }else{
         toast("Incorrect Details")
       }

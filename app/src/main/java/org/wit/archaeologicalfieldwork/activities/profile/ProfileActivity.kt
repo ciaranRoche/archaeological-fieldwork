@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
@@ -26,17 +27,12 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
 
     app = application as MainApp
 
-    saveUser.setOnClickListener {
-      user.name = userName.text.toString()
-      user.email = userEmail.text.toString()
-      user.password = userPassword.text.toString()
-      if(user.email.isNotEmpty() and user.password.isNotEmpty()){
-        app.users.create(user.copy())
-        setResult(AppCompatActivity.RESULT_OK)
-        finish()
-      }else{
-        toast("Please fill out email and password")
-      }
+    if(intent.hasExtra("logged_in")){
+      user = intent.extras.getParcelable<UserModel?>("logged_in")!!
+      profile_name.text = user.name
+      profile_email.text = user.email
+    }else{
+      startActivityForResult<UserActivity>(0)
     }
   }
 }

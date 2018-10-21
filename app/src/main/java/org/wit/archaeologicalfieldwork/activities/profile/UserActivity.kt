@@ -12,7 +12,7 @@ import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragme
 import org.wit.archaeologicalfieldwork.main.MainApp
 
 
-val userLogged = false
+var userLogged = ""
 
 class UserActivity : AppCompatActivity(), AnkoLogger {
   lateinit var app: MainApp
@@ -20,7 +20,7 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
-    if(userLogged){
+    if(userLogged.isNotEmpty()){
       startActivityForResult<ProfileActivity>(0)
     }else {
       setContentView(R.layout.activity_user)

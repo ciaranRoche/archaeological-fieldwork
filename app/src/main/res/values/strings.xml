@@ -28,4 +28,9 @@
   <string name="menu_cancelHillfort">Cancel</string>
   <string name="menu_profile">Profile</string>
 
+  <!-- Profile Strings-->
+  <string name="profile_title">Profile</string>
+  <string name="profile_name">Name</string>
+  <string name="profile_email">Email</string>
+
 </resources>
