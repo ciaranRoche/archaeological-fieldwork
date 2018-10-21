@@ -1,38 +1,50 @@
 package org.wit.archaeologicalfieldwork.activities.profile.fragments
 
-import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import org.wit.archaeologicalfieldwork.R
-import android.widget.TextView
-import android.widget.Toast
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.support.v4.startActivityForResult
+import org.jetbrains.anko.support.v4.toast
+import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.models.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.UserModel
+import org.wit.archaeologicalfieldwork.models.UserStore
 
 
 class LogInFragment : Fragment(), AnkoLogger{
+
+  var user = UserModel()
+  lateinit var users: UserStore
+
   override fun onCreate(savedInstanceState: Bundle?){
     super.onCreate(savedInstanceState)
+    users = UserJSONStore(this.context!!)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater!!.inflate(R.layout.login_fragment,container,false)
-    val loginView = view.findViewById<TextView>(R.id.login_view)
-    loginView.setOnClickListener {
-      loginView.setTextColor(Color.RED)
-      Toast.makeText(view.context, "Login Clicked", Toast.LENGTH_SHORT).show()
-    }
+    val view = inflater.inflate(R.layout.login_fragment,container,false)
+    val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
+    val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
+    val login: Button? = view.findViewById(R.id.fragment_login)
 
-   val button: Button? = view?.findViewById(R.id.boop)
-
-    button?.setOnClickListener {
-      info ("Hello")
+    login?.setOnClickListener {
+      info("Sup boy")
+      if(users.findUser(email?.text.toString(), password?.text.toString())){
+        startActivityForResult<ProfileActivity>(0)
+      }else{
+        toast("Incorrect Details")
+      }
     }
 
     return view
   }
 }
+
+

@@ -40,6 +40,16 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
     users.remove(user)
   }
 
+  override fun findUser(email: String, password: String): Boolean{
+    var foundUser: UserModel? = users.find { u -> u.email == email }
+    if (foundUser != null) {
+      if(foundUser.password.equals(password)){
+        return true
+      }
+    }
+    return false
+  }
+
   private fun serialize() {
     val jsonString = gsonBuild.toJson(users, list)
     write(context, USER_FILE, jsonString)
