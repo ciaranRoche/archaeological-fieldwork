@@ -9,10 +9,13 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.LogInFragment
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragment
+import org.wit.archaeologicalfieldwork.main.MainApp
+
 
 val userLogged = false
 
 class UserActivity : AppCompatActivity(), AnkoLogger {
+  lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
@@ -26,7 +29,9 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
       supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    logIn.setOnClickListener {
+    app = application as MainApp
+
+    logIn?.setOnClickListener {
       info("Log In Clicked")
       val logInFragment = LogInFragment()
       val manager = supportFragmentManager
@@ -36,7 +41,7 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
       transaction.commit()
     }
 
-    signUp.setOnClickListener {
+    signUp?.setOnClickListener {
       info("Sign Up Clicked")
       val signupFragment = SignupFragment()
       val manager = supportFragmentManager
