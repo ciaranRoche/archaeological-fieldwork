@@ -50,6 +50,7 @@ class HillfortJSONStore(val context: Context) : HillfortStore, AnkoLogger {
 
   override fun delete(hillfort: HillfortModel) {
     hillforts.remove(hillfort)
+    serialize()
   }
 
   private fun serialize() {

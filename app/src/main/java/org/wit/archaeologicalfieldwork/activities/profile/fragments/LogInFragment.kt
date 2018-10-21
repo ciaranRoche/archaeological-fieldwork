@@ -15,6 +15,7 @@ import org.jetbrains.anko.support.v4.startActivityForResult
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
+import org.wit.archaeologicalfieldwork.activities.profile.userid
 import org.wit.archaeologicalfieldwork.models.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.UserModel
 import org.wit.archaeologicalfieldwork.models.UserStore
@@ -37,11 +38,10 @@ class LogInFragment : Fragment(), AnkoLogger{
     val login: Button? = view.findViewById(R.id.fragment_login)
 
     login?.setOnClickListener {
-      info("Sup boy")
       if(users.verifyUser(email?.text.toString(), password?.text.toString())){
-        val loggedUser = users.findUser(email?.text.toString())
-        userLogged = loggedUser.id.toString()
-        toast(userLogged)
+        val loggedUser = users.findUserEmail(email?.text.toString())
+        userLogged = true
+        userid = loggedUser.id
         startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggedUser), 0)
       }else{
         toast("Incorrect Details")

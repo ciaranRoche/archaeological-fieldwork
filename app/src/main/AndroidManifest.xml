@@ -24,9 +24,12 @@
     </activity>
     <activity
       android:name=".activities.profile.ProfileActivity"
-      android:parentActivityName=".activities.HillfortListActivity"/>
-    <activity android:name=".activities.profile.UserActivity"
-      android:parentActivityName=".activities.HillfortListActivity"/>
+      android:parentActivityName=".activities.HillfortListActivity" />
+    <activity
+      android:name=".activities.profile.UserActivity"
+      android:parentActivityName=".activities.HillfortListActivity" />
+    <activity android:name=".activities.profile.ProfileSettingsActivity"
+      android:parentActivityName=".activities.profile.ProfileActivity"/>
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"
@@ -35,6 +38,7 @@
     <activity
       android:name=".activities.MapsActivity"
       android:label="@string/title_activity_maps" />
+
   </application>
 
 </manifest>

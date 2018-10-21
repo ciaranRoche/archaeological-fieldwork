@@ -27,10 +27,13 @@
   <string name="menu_addHillfort">Add</string>
   <string name="menu_cancelHillfort">Cancel</string>
   <string name="menu_profile">Profile</string>
+  <string name="menu_settings">Profile Settings</string>
 
   <!-- Profile Strings-->
   <string name="profile_title">Profile</string>
   <string name="profile_name">Name</string>
   <string name="profile_email">Email</string>
+  <string name="button_updateUser">Update User</string>
+  <string name="button_deleteUser">Delete User</string>
 
 </resources>
