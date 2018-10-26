@@ -12,24 +12,26 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme.Launcher">
-    <activity
-      android:name=".activities.HillfortActivity"
-      android:parentActivityName=".activities.HillfortListActivity" />
     <activity android:name=".activities.HillfortListActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity
+      android:name=".activities.HillfortActivity"
+      android:parentActivityName=".activities.HillfortListActivity" />
     <activity
       android:name=".activities.profile.ProfileActivity"
       android:parentActivityName=".activities.HillfortListActivity" />
     <activity
       android:name=".activities.profile.UserActivity"
       android:parentActivityName=".activities.HillfortListActivity" />
-    <activity android:name=".activities.profile.ProfileSettingsActivity"
-      android:parentActivityName=".activities.profile.ProfileActivity"/>
+    <activity
+      android:name=".activities.profile.ProfileSettingsActivity"
+      android:parentActivityName=".activities.profile.ProfileActivity" />
+    <activity android:name=".activities.HillFortProfileActivity"
+      android:parentActivityName=".activities.HillfortListActivity" />
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"
