@@ -96,7 +96,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             toast("Hillfort Visited")
             loggeduser.hillforts += hillfort.id
             app.users.update(loggeduser)
-            System.out.println(app.users.findUserEmail(loggeduser.email))
         }
     }
 
