@@ -35,5 +35,6 @@
   <string name="profile_email">Email</string>
   <string name="button_updateUser">Update User</string>
   <string name="button_deleteUser">Delete User</string>
+  <string name="menu_logout">Logout</string>
 
 </resources>
