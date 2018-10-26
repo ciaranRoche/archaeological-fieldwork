@@ -14,6 +14,7 @@ val gsonBuild = GsonBuilder().setPrettyPrinting().create()
 val list = object : TypeToken<ArrayList<UserModel>>() {}.type
 
 class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
+
   var users = mutableListOf<UserModel>()
 
   init {
@@ -33,6 +34,7 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
       foundUser.name = user.name
       foundUser.email = user.email
       foundUser.password = user.password
+      foundUser.hillforts = user.hillforts
       serialize()
     }
   }
@@ -58,6 +60,11 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
   override fun findUserId(id: Long): UserModel {
     val foundUser: UserModel? = users.find { u -> u.id == id }
     return foundUser!!
+  }
+
+  override fun getVisitedHillforts(user: UserModel): List<Long> {
+    val foundUser = findUserId(user.id)
+    return foundUser.hillforts
   }
 
   private fun serialize() {

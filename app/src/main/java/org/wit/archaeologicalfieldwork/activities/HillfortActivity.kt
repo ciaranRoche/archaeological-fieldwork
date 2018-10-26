@@ -7,13 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import org.jetbrains.anko.*
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import org.wit.archaeologicalfieldwork.BuildConfig
+import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
+import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.helpers.readImage
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
@@ -48,9 +49,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             description.setText(hillfort.description)
             location = hillfort.location
             //hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
+            if (loggeduser.hillforts.isNotEmpty()){
+                System.out.println(loggeduser.hillforts + "  " + hillfort.id)
+                var found = loggeduser.hillforts.find { h -> h == hillfort.id }
+                if (found != null){
+                    visitedBox.isChecked = true
+                }
+            }
         } else {
             btnDelete.visibility = View.INVISIBLE
         }
+
 
         btnDelete.setOnClickListener(){
             app.hillforts.delete(hillfort.copy())
@@ -81,6 +90,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         chooseImage.setOnClickListener{
             showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        visitedBox.setOnClickListener{
+            toast("Hillfort Visited")
+            loggeduser.hillforts += hillfort.id
+            app.users.update(loggeduser)
+            System.out.println(app.users.findUserEmail(loggeduser.email))
         }
     }
 

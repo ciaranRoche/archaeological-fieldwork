@@ -11,6 +11,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 
@@ -24,6 +25,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort_list)
     app = application as MainApp
+
+    if(!userLogged){
+      startActivityForResult<UserActivity>(0)
+    }
 
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)

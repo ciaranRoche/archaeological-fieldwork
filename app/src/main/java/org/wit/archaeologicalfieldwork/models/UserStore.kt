@@ -7,4 +7,5 @@ interface UserStore{
   fun findUserEmail(email: String) : UserModel
   fun findUserId(id: Long) : UserModel
   fun verifyUser(email: String, password: String) : Boolean
+  fun getVisitedHillforts(user: UserModel): List<Long>
 }

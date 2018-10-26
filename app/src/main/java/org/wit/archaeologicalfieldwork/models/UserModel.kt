@@ -6,4 +6,4 @@ import kotlinx.android.parcel.Parcelize
 
 @SuppressLint("ParecelCreator")
 @Parcelize
-data class UserModel(var id: Long = 0,var name: String = "", var email: String = "", var password: String = "") : Parcelable
+data class UserModel(var id: Long = 0,var name: String = "", var email: String = "", var password: String = "", var hillforts: List<Long> = emptyList()) : Parcelable

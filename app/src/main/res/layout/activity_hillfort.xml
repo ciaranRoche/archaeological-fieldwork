@@ -64,6 +64,12 @@
           android:textColor="@color/colorPrimaryDark"
           android:textSize="14sp"/>
 
+        <CheckBox
+          android:id="@+id/visitedBox"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Visited" />
+
         <Button
           android:id="@+id/chooseImage"
           android:layout_width="match_parent"
