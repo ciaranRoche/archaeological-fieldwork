@@ -9,21 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.startActivityForResult
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
-import org.wit.archaeologicalfieldwork.activities.profile.userid
 import org.wit.archaeologicalfieldwork.models.UserJSONStore
-import org.wit.archaeologicalfieldwork.models.UserModel
 import org.wit.archaeologicalfieldwork.models.UserStore
 
 
 class LogInFragment : Fragment(), AnkoLogger{
 
-  var user = UserModel()
   lateinit var users: UserStore
 
   override fun onCreate(savedInstanceState: Bundle?){
@@ -41,7 +37,7 @@ class LogInFragment : Fragment(), AnkoLogger{
       if(users.verifyUser(email?.text.toString(), password?.text.toString())){
         val loggedUser = users.findUserEmail(email?.text.toString())
         userLogged = true
-        userid = loggedUser.id
+        loggeduser = loggedUser
         startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggedUser), 0)
       }else{
         toast("Incorrect Details")

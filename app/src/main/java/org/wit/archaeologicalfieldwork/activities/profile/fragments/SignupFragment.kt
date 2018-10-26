@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.startActivityForResult
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
-import org.wit.archaeologicalfieldwork.activities.profile.userid
 import org.wit.archaeologicalfieldwork.models.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.UserModel
 import org.wit.archaeologicalfieldwork.models.UserStore
@@ -45,8 +44,9 @@ class SignupFragment : Fragment(), AnkoLogger{
       if (user.password.equals(verifyPassword?.text.toString())){
         if(user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()){
           users.create(user.copy())
+          val loggedUser = users.findUserEmail(email?.text.toString())
           userLogged = true
-          userid = user.id
+          loggeduser = loggedUser
           startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", user), 0)
         }else{
           toast("Please fill out All fields")

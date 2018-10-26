@@ -5,7 +5,6 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HillfortActivity
 import org.wit.archaeologicalfieldwork.activities.HillfortListActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.UserModel
@@ -52,7 +51,6 @@ class ProfileSettingsActivity : AppCompatActivity() {
       app.users.delete(user.copy())
       setResult(AppCompatActivity.RESULT_OK)
       userLogged = false
-      userid = 0L
       startActivityForResult<HillfortListActivity>(0)
     }
   }

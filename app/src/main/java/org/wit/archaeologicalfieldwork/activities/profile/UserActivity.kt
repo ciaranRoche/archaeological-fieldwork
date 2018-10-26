@@ -11,9 +11,7 @@ import org.wit.archaeologicalfieldwork.activities.profile.fragments.LogInFragmen
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragment
 import org.wit.archaeologicalfieldwork.main.MainApp
 
-
 var userLogged = false
-var userid = 0L
 
 class UserActivity : AppCompatActivity(), AnkoLogger {
   lateinit var app: MainApp
