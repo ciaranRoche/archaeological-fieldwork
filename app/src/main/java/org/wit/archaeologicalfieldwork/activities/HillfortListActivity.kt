@@ -9,6 +9,9 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 
@@ -23,6 +26,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     setContentView(R.layout.activity_hillfort_list)
     app = application as MainApp
 
+    if(!userLogged){
+      startActivityForResult<UserActivity>(0)
+    }
+
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)
 
@@ -35,15 +42,18 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     menuInflater.inflate(R.menu.menu_main, menu)
     return super.onCreateOptionsMenu(menu)
   }
+
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+      R.id.profile -> startActivityForResult<UserActivity>(0)
     }
     return super.onOptionsItemSelected(item)
   }
 
   override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+    startActivityForResult(intentFor<HillFortProfileActivity>().putExtra("hillfort", hillfort), 0)
+    //startActivityForResult<HillFortProfileActivity>(0)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

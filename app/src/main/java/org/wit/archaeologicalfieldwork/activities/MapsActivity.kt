@@ -22,6 +22,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
   var location = Location()
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_maps)
     location = intent.extras.getParcelable<Location>("location")

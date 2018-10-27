@@ -1,27 +1,48 @@
 <resources>
-    <!--General Strings-->
+  <!--General Strings-->
 
-    <string name="app_name">Archaeological Fieldwork</string>
-    <string name="title_activity_maps">Map</string>
+  <string name="app_name">Archaeological Fieldwork</string>
+  <string name="title_activity_maps">Map</string>
 
-    <!--Button Strings-->
+  <!--Button Strings-->
 
-    <string name="button_addHillFort">Add HillFort</string>
-    <string name="save_hillfort">Save Hillfort</string>
-    <string name="button_addImage"> Add Image</string>
-    <string name="select_hillfort_image">Select Hillfort Image</string>
-    <string name="button_deleteHillfort">Remove Hillfort</string>
-    <string name="button_location">Set Location</string>
+  <string name="button_addHillFort">Add HillFort</string>
+  <string name="save_hillfort">Save Hillfort</string>
+  <string name="button_addImage"> Add Image</string>
+  <string name="select_hillfort_image">Select Hillfort Image</string>
+  <string name="button_deleteHillfort">Remove Hillfort</string>
+  <string name="button_location">Set Location</string>
+  <string name="button_signUp">Sign Up</string>
+  <string name="button_logIn">Log In</string>
+  <string name="button_addProfileImage">Add Profile Image</string>
+  <string name="button_updateProfileImage">Update Profile Image</string>
 
-    <!--Hint Strings-->
-    <string name="hint_HillFortTitle">Hillfort Title</string>
-    <string name="hint_HillFortDescription">Description</string>
+  <!--Hint Strings-->
+  <string name="hint_HillFortTitle">Hillfort Title</string>
+  <string name="hint_HillFortDescription">Description</string>
+  <string name="hint_userName">Name</string>
+  <string name="hint_userEmail">Email</string>
+  <string name="hint_userPassword">Password</string>
+  <string name="hint_verifyPassword">Verify Password</string>
 
-    <!--Menu Strings-->
-    <string name="menu_addHillfort">Add</string>
-    <string name="menu_cancelHillfort">Cancel</string>
+  <!--Menu Strings-->
+  <string name="menu_addHillfort">Add</string>
+  <string name="menu_cancelHillfort">Cancel</string>
+  <string name="menu_profile">Profile</string>
+  <string name="menu_settings">Profile Settings</string>
+  <string name="menu_editHillfort">Edit</string>
 
-   
+  <!-- Profile Strings-->
+  <string name="profile_title">Profile</string>
+  <string name="profile_name">Name</string>
+  <string name="profile_email">Email</string>
+  <string name="button_updateUser">Update User</string>
+  <string name="button_deleteUser">Delete User</string>
+  <string name="menu_logout">Logout</string>
 
+  <!-- Message Strings -->
+  <string name="message_welcome">Welcome to the Archaeological Fieldwork Community</string>
+  <string name="message_login">Login with your email and password </string>
+  <string name="message_signup">Fill out the form below to join the Archaeological Fieldwork Community</string>
 
 </resources>

@@ -4,14 +4,14 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:id="@+id/profile"
-    android:icon="@android:drawable/ic_menu_view"
-    android:title="@string/menu_profile"
+    android:id="@+id/item_settings"
+    android:icon="@drawable/baseline_settings_white_18dp"
+    android:title="@string/menu_settings"
     app:showAsAction="always" />
 
   <item
-    android:id="@+id/item_add"
-    android:icon="@android:drawable/ic_menu_add"
-    android:title="@string/menu_addHillfort"
+    android:id="@+id/item_logout"
+    android:icon="@drawable/baseline_settings_backup_restore_white_18dp"
+    android:title="@string/menu_logout"
     app:showAsAction="always" />
 </menu>
