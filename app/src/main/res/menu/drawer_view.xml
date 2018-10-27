@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
   <group android:checkableBehavior="single">
     <item
-      android:id="@+id/nav_camera"
+      android:id="@+id/nav_profile"
       android:icon="@drawable/baseline_settings_white_18dp"
-      android:title="boop" />
+      android:title="@string/menu_profile" />
     <item
-      android:id="@+id/nav_gallery"
-      android:icon="@drawable/baseline_edit_white_18dp"
-      android:title="name" />
+      android:id="@+id/nav_hillfort"
+      android:icon="@drawable/baseline_notes_white_18dp"
+      android:title="@string/menu_hillforts" />
   </group>
 </menu>

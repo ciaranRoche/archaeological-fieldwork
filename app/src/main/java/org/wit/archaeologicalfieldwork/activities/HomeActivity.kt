@@ -9,7 +9,10 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
+import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -22,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
     val toolbar: Toolbar = findViewById(R.id.toolbar)
     setSupportActionBar(toolbar)
+
     val actionbar: ActionBar? = supportActionBar
     actionbar?.apply {
       setDisplayHomeAsUpEnabled(true)
@@ -32,16 +36,20 @@ class HomeActivity : AppCompatActivity() {
 
     val navigationView: NavigationView = findViewById(R.id.nav_view)
     navigationView.setNavigationItemSelectedListener { menuItem ->
-      // set item as selected to persist highlight
+
       menuItem.isChecked = true
-      // close drawer when item is tapped
-      drawerLayout.closeDrawers()
 
-      // Add code here to update the UI based on the item selected
-      // For example, swap UI fragments here
-
+      when (menuItem.itemId){
+        R.id.nav_profile -> {
+          startActivityForResult<UserActivity>(0)
+        }
+        R.id.nav_hillfort -> {
+          startActivityForResult<HillfortListActivity>(0)
+        }
+      }
+      drawerLayout.closeDrawer(GravityCompat.START)
       true
-    }
+   }
 
     drawerLayout.addDrawerListener(
         object : DrawerLayout.DrawerListener {
