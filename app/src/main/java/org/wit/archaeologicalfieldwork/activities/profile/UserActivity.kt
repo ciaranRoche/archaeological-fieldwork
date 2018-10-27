@@ -1,5 +1,6 @@
 package org.wit.archaeologicalfieldwork.activities.profile
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_user.*
@@ -9,6 +10,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.LogInFragment
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragment
+import org.wit.archaeologicalfieldwork.activities.profile.fragments.WelcomeFragment
 import org.wit.archaeologicalfieldwork.main.MainApp
 
 var userLogged = false
@@ -16,6 +18,7 @@ var userLogged = false
 class UserActivity : AppCompatActivity(), AnkoLogger {
   lateinit var app: MainApp
 
+  @SuppressLint("ResourceAsColor")
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
@@ -26,12 +29,18 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
       toolbarAuth.title = "Auth"
       setSupportActionBar(toolbarAuth)
       supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+      val welcomeFragment = WelcomeFragment()
+      val manager = supportFragmentManager
+      val transaction = manager.beginTransaction()
+      transaction.replace(R.id.fragment_container, welcomeFragment)
+      transaction.addToBackStack(null)
+      transaction.commit()
     }
 
     app = application as MainApp
 
     logIn?.setOnClickListener {
-      info("Log In Clicked")
       val logInFragment = LogInFragment()
       val manager = supportFragmentManager
       val transaction = manager.beginTransaction()
@@ -41,7 +50,6 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
     }
 
     signUp?.setOnClickListener {
-      info("Sign Up Clicked")
       val signupFragment = SignupFragment()
       val manager = supportFragmentManager
       val transaction = manager.beginTransaction()
