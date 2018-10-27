@@ -6,12 +6,13 @@
   android:orientation="vertical"
   android:padding="16dp"
   >
+
     <TextView
       android:id="@+id/signup_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Signup boy"
-      android:textSize="50sp"/>
+      android:text="Fill out the form below to join the Archaeological Fieldwork Community"
+      android:textSize="18sp" />
 
     <android.support.design.widget.TextInputEditText
       android:id="@+id/fragment_userName"

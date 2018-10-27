@@ -48,7 +48,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortName.setText(hillfort.name)
             description.setText(hillfort.description)
             location = hillfort.location
-            //hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
             if (loggeduser.hillforts.isNotEmpty()){
                 System.out.println(loggeduser.hillforts + "  " + hillfort.id)
                 var found = loggeduser.hillforts.find { h -> h == hillfort.id }

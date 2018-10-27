@@ -6,12 +6,14 @@
   android:orientation="vertical"
   android:padding="16dp"
   >
-    <TextView
-      android:id="@+id/login_view"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Login boy"
-      android:textSize="50sp"/>
+
+  <TextView
+    android:id="@+id/login_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Login with your email and password "
+    android:textSize="18sp" />
+
 
     <android.support.design.widget.TextInputEditText
       android:id="@+id/fragment_userEmailLogin"
@@ -45,10 +47,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="16dp"
       android:background="@color/colorAccent"
-      android:paddingBottom="8dp"
       android:paddingTop="8dp"
+      android:paddingBottom="8dp"
       android:text="@string/button_logIn"
       android:textColor="@color/colorPrimary"
-      android:textSize="16sp"/>
+      android:textSize="18sp" />
 
 </LinearLayout>
