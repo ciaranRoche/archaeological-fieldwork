@@ -31,6 +31,7 @@
   <string name="menu_profile">Profile</string>
   <string name="menu_settings">Profile Settings</string>
   <string name="menu_editHillfort">Edit</string>
+  <string name="menu_optionsHeading">Archaeological Fieldwork Menu</string>
 
   <!-- Profile Strings-->
   <string name="profile_title">Profile</string>
