@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

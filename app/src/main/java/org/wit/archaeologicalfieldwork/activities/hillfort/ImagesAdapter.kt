@@ -1,9 +1,10 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.helpers.ImageHolder
 
 class ImageAdapter(images: List<String>) : RecyclerView.Adapter<ImageHolder>() {
 

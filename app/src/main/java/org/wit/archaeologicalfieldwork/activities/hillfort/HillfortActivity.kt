@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,13 +10,8 @@ import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
-import org.wit.archaeologicalfieldwork.BuildConfig
-import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
-import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
 import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
-import org.wit.archaeologicalfieldwork.activities.profile.userLogged
-import org.wit.archaeologicalfieldwork.helpers.readImage
-import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 import org.wit.archaeologicalfieldwork.models.Location

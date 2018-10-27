@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.helpers
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

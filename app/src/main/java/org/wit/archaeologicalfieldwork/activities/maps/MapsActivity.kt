@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.activities.maps
 
 import android.app.Activity
 import android.content.Intent

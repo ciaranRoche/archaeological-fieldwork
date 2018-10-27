@@ -14,33 +14,33 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme.Launcher"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".activities.HillfortListActivity">
+    <activity android:name=".activities.hillfort.HillfortListActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <activity
-      android:name=".activities.HillfortActivity"
-      android:parentActivityName=".activities.HillfortListActivity" />
+      android:name=".activities.hillfort.HillfortActivity"
+      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
       android:name=".activities.profile.ProfileActivity"
-      android:parentActivityName=".activities.HillfortListActivity" />
+      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
       android:name=".activities.profile.UserActivity"
-      android:parentActivityName=".activities.HillfortListActivity" />
+      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
       android:name=".activities.profile.ProfileSettingsActivity"
       android:parentActivityName=".activities.profile.ProfileActivity" />
-    <activity android:name=".activities.HillFortProfileActivity"
-      android:parentActivityName=".activities.HillfortListActivity" />
+    <activity android:name=".activities.hillfort.HillFortProfileActivity"
+      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="@string/google_key" />
 
     <activity
-      android:name=".activities.MapsActivity"
+      android:name=".activities.maps.MapsActivity"
       android:label="@string/title_activity_maps" />
 
   </application>

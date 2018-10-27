@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
