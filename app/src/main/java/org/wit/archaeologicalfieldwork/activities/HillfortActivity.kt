@@ -50,7 +50,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             location = hillfort.location
             if (loggeduser.hillforts.isNotEmpty()){
                 System.out.println(loggeduser.hillforts + "  " + hillfort.id)
-                var found = loggeduser.hillforts.find { h -> h == hillfort.id }
+                val found = loggeduser.hillforts.find { h -> h == hillfort.id }
                 if (found != null){
                     visitedBox.isChecked = true
                 }

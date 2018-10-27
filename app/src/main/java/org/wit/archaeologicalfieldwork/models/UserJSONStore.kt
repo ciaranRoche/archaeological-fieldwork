@@ -35,6 +35,7 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
       foundUser.email = user.email
       foundUser.password = user.password
       foundUser.hillforts = user.hillforts
+      foundUser.userImage = user.userImage
       serialize()
     }
   }
