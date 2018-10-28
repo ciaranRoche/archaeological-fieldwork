@@ -20,7 +20,8 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.hillfort.HillfortListActivity"/>
+    <activity android:name=".activities.hillfort.HillfortListActivity"
+      android:parentActivityName=".activities.HomeActivity"/>
     <activity
       android:name=".activities.hillfort.HillfortActivity"
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />
@@ -29,7 +30,7 @@
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
       android:name=".activities.profile.UserActivity"
-      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
+      android:parentActivityName=".activities.HomeActivity" />
     <activity
       android:name=".activities.profile.ProfileSettingsActivity"
       android:parentActivityName=".activities.profile.ProfileActivity" />
