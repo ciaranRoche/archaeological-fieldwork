@@ -27,6 +27,10 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_profile_settings)
 
+    if(!userLogged){
+      startActivityForResult<UserActivity>(0)
+    }
+
     toolbarSettings.title = "Profile Settings"
 
     setSupportActionBar(toolbarSettings)
@@ -34,13 +38,13 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
 
     app = application as MainApp
 
+    // Todo Refactor to use only one, parceable or stored user var
     if (intent.hasExtra("edit_user")){
       user = intent.extras.getParcelable<UserModel>("edit_user")
       settingsUserName.setText(user.name)
       settingsUserEmail.setText(user.email)
       settingsUserPassword.setText(user.password)
       settingsUserVerifyPassword.setText(user.password)
-      info("Boop2")
       if(user.userImage.isNotEmpty()){
         profileImage.setText(R.string.button_updateProfileImage)
         Picasso.get().load(user.userImage)
@@ -49,8 +53,20 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
             .centerCrop()
             .into(userImage)
       }
+    } else {
+      settingsUserName.setText(loggeduser.name)
+      settingsUserEmail.setText(loggeduser.email)
+      settingsUserPassword.setText(user.password)
+      settingsUserVerifyPassword.setText(user.password)
+      if(loggeduser.userImage.isNotEmpty()){
+        profileImage.setText(R.string.button_updateProfileImage)
+        Picasso.get().load(loggeduser.userImage)
+            .config(Bitmap.Config.RGB_565)
+            .resize(500,500)
+            .centerCrop()
+            .into(userImage)
+      }
     }
-
     updateUser.setOnClickListener {
       user.name = settingsUserName.text.toString()
       user.email = settingsUserEmail.text.toString()
@@ -71,7 +87,6 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
       userLogged = false
       startActivityForResult<HillfortListActivity>(0)
     }
-
     profileImage.setOnClickListener{
       showImagePicker(this, IMAGE_REQUEST)
     }

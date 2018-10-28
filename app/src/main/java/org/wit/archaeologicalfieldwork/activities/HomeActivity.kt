@@ -12,7 +12,9 @@ import android.view.View
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
+import org.wit.archaeologicalfieldwork.activities.profile.ProfileSettingsActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 
 class HomeActivity : AppCompatActivity() {
 
@@ -45,6 +47,9 @@ class HomeActivity : AppCompatActivity() {
         }
         R.id.nav_hillfort -> {
           startActivityForResult<HillfortListActivity>(0)
+        }
+        R.id.nav_settings -> {
+          startActivityForResult<ProfileSettingsActivity>(0)
         }
       }
       drawerLayout.closeDrawer(GravityCompat.START)
