@@ -68,7 +68,8 @@
           android:id="@+id/visitedBox"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Visited" />
+          android:text="Visited"
+          />
 
         <Button
           android:id="@+id/chooseImage"

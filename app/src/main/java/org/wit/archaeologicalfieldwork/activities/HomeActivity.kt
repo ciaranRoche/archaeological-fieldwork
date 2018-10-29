@@ -14,6 +14,7 @@ import android.view.MenuItem
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileSettingsActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
@@ -71,6 +72,9 @@ open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
       }
       R.id.nav_hillfort -> {
         startActivityForResult<HillfortListActivity>(0)
+      }
+      R.id.nav_add_hillfort -> {
+        startActivityForResult<HillfortActivity>(0)
       }
       R.id.nav_settings -> {
         startActivityForResult<ProfileSettingsActivity>(0)

@@ -34,7 +34,7 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
       foundUser.name = user.name
       foundUser.email = user.email
       foundUser.password = user.password
-      foundUser.hillforts = user.hillforts
+      foundUser.stats = user.stats
       foundUser.userImage = user.userImage
       serialize()
     }
@@ -63,9 +63,9 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
     return foundUser!!
   }
 
-  override fun getVisitedHillforts(user: UserModel): List<Long> {
+  override fun getStats(user: UserModel): MutableList<StatsModel> {
     val foundUser = findUserId(user.id)
-    return foundUser.hillforts
+    return foundUser.stats
   }
 
   private fun serialize() {
