@@ -3,11 +3,15 @@ package org.wit.archaeologicalfieldwork.activities.profile
 import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_user.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.LogInFragment
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragment
 import org.wit.archaeologicalfieldwork.activities.profile.fragments.WelcomeFragment
@@ -15,7 +19,7 @@ import org.wit.archaeologicalfieldwork.main.MainApp
 
 var userLogged = false
 
-class UserActivity : AppCompatActivity(), AnkoLogger {
+class UserActivity : HomeActivity(), AnkoLogger {
   lateinit var app: MainApp
 
   @SuppressLint("ResourceAsColor")
@@ -25,10 +29,10 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
     if(userLogged){
       startActivityForResult<ProfileActivity>(0)
     }else {
-      setContentView(R.layout.activity_user)
+      val contentView = layoutInflater.inflate(R.layout.activity_user, null, false)
+      drawer_layout.addView(contentView, 0)
       toolbarAuth.title = "Auth"
       setSupportActionBar(toolbarAuth)
-      supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
       val welcomeFragment = WelcomeFragment()
       val manager = supportFragmentManager
@@ -56,6 +60,17 @@ class UserActivity : AppCompatActivity(), AnkoLogger {
       transaction.replace(R.id.fragment_container, signupFragment)
       transaction.addToBackStack(null)
       transaction.commit()
+    }
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    info("Boop")
+    return when (item.itemId) {
+      android.R.id.home -> {
+        info("Boop")
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
     }
   }
 }

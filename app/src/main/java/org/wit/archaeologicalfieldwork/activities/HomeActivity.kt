@@ -1,24 +1,27 @@
 package org.wit.archaeologicalfieldwork.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
-import android.view.View
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileSettingsActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
-import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 
-class HomeActivity : AppCompatActivity() {
+open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
-  private lateinit var drawerLayout: DrawerLayout
+  protected lateinit var drawerLayout: DrawerLayout
+  protected lateinit var navigationView: NavigationView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
@@ -36,57 +39,44 @@ class HomeActivity : AppCompatActivity() {
 
     drawerLayout = findViewById(R.id.drawer_layout)
 
-    val navigationView: NavigationView = findViewById(R.id.nav_view)
-    navigationView.setNavigationItemSelectedListener { menuItem ->
+    navigationView = findViewById<NavigationView>(R.id.nav_view)
+    navigationView.setNavigationItemSelectedListener(this)
 
-      menuItem.isChecked = true
+    val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close)
 
-      when (menuItem.itemId){
-        R.id.nav_profile -> {
-          startActivityForResult<UserActivity>(0)
-        }
-        R.id.nav_hillfort -> {
-          startActivityForResult<HillfortListActivity>(0)
-        }
-        R.id.nav_settings -> {
-          startActivityForResult<ProfileSettingsActivity>(0)
-        }
-      }
-      drawerLayout.closeDrawer(GravityCompat.START)
-      true
-   }
-
-    drawerLayout.addDrawerListener(
-        object : DrawerLayout.DrawerListener {
-          override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-            // Respond when the drawer's position changes
-          }
-
-          override fun onDrawerOpened(drawerView: View) {
-            // Respond when the drawer is opened
-          }
-
-          override fun onDrawerClosed(drawerView: View) {
-            // Respond when the drawer is closed
-          }
-
-          override fun onDrawerStateChanged(newState: Int) {
-            // Respond when the drawer motion state changes
-          }
-        }
-    )
-
+    drawerLayout.addDrawerListener(toggle)
+    toggle.syncState()
+    toggle.isDrawerIndicatorEnabled = true
 
   }
 
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when (item.itemId) {
-      android.R.id.home -> {
-        drawerLayout.openDrawer(GravityCompat.START)
-        true
+  private inline fun <reified T : Activity> launch(): Boolean {
+    if (this is T) return closeDrawer()
+    val intent = Intent(applicationContext, T::class.java)
+    startActivity(intent)
+    finish()
+    return true
+  }
+
+  private fun closeDrawer(): Boolean {
+    drawerLayout.closeDrawer(GravityCompat.START)
+    return true
+  }
+
+  override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    val id = item.itemId
+    when (id) {
+      R.id.nav_profile -> {
+        startActivityForResult<UserActivity>(0)
       }
-      else -> super.onOptionsItemSelected(item)
+      R.id.nav_hillfort -> {
+        startActivityForResult<HillfortListActivity>(0)
+      }
+      R.id.nav_settings -> {
+        startActivityForResult<ProfileSettingsActivity>(0)
+      }
     }
+    return false
   }
 
 }

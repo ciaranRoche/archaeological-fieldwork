@@ -46,5 +46,7 @@
   <string name="message_welcome">Welcome to the Archaeological Fieldwork Community</string>
   <string name="message_login">Login with your email and password </string>
   <string name="message_signup">Fill out the form below to join the Archaeological Fieldwork Community</string>
+  <string name="nav_drawer_open">Open</string>
+  <string name="nav_drawer_close">Close</string>
 
 </resources>

@@ -5,17 +5,19 @@ import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.UserModel
 
-class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
+class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
 
   lateinit var app : MainApp
   var user = UserModel()
@@ -25,7 +27,8 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_profile_settings)
+    val contentView = layoutInflater.inflate(R.layout.activity_profile_settings, null, false)
+    drawer_layout.addView(contentView, 0)
 
     if(!userLogged){
       startActivityForResult<UserActivity>(0)
@@ -34,7 +37,6 @@ class ProfileSettingsActivity : AppCompatActivity(), AnkoLogger {
     toolbarSettings.title = "Profile Settings"
 
     setSupportActionBar(toolbarSettings)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     app = application as MainApp
 

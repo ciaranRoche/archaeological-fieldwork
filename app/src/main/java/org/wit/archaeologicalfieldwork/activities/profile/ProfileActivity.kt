@@ -6,30 +6,32 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.UserModel
 
 var loggeduser = UserModel()
 
-class ProfileActivity : AppCompatActivity(), AnkoLogger {
+class ProfileActivity : HomeActivity(), AnkoLogger {
 
   lateinit var app : MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_profile)
+    val contentView = layoutInflater.inflate(R.layout.activity_profile, null, false)
+    drawer_layout.addView(contentView, 0)
 
     toolbarProfile.title = "Profile"
 
     setSupportActionBar(toolbarProfile)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     app = application as MainApp
 

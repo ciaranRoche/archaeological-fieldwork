@@ -6,32 +6,34 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 
 
-class HillfortListActivity : AppCompatActivity(), HillfortListener {
+class HillfortListActivity : HomeActivity(), HillfortListener {
 
   lateinit var app: MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_hillfort_list)
     app = application as MainApp
 
     if(!userLogged){
       startActivityForResult<UserActivity>(0)
     }
 
+    val contentView = layoutInflater.inflate(R.layout.activity_hillfort_list, null, false)
+    drawer_layout.addView(contentView, 0)
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
