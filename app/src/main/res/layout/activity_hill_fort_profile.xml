@@ -44,14 +44,14 @@
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
           android:textSize="30sp"
-          android:text="Name" />
+          android:text="@string/hillfort_profile_name" />
 
         <TextView
           android:id="@+id/hillfortProfileDescription"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
-          android:text="Description" />
+          android:text="@string/profile_description" />
 
         <android.support.v7.widget.RecyclerView
           android:id="@+id/imageRecycler"
