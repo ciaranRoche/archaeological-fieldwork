@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
+import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
@@ -49,11 +50,10 @@ class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
 
     updateUser.setOnClickListener {
       loggeduser.name = settingsUserName.text.toString()
-      loggeduser.email = settingsUserEmail.text.toString()
-      loggeduser.password = settingsUserPassword.text.toString()
-      if (loggeduser.password.equals(settingsUserVerifyPassword.text.toString())){
+      loggeduser.email = settingsUserEmail.text.toString().trim().toLowerCase()
+      loggeduser.password = BCrypt.hashpw(settingsUserPassword.text.toString().trim(), BCrypt.gensalt())
+      if (settingsUserPassword.text.toString().trim().equals(settingsUserVerifyPassword.text.toString().trim())){
         if (loggeduser.name.isNotEmpty() and loggeduser.email.isNotEmpty() and loggeduser.password.isNotEmpty()){
-          info("BOOP ${loggeduser}")
           app.users.update(loggeduser.copy())
           setResult(AppCompatActivity.RESULT_OK)
           startActivityForResult<ProfileActivity>(0)

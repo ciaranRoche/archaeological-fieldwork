@@ -35,10 +35,10 @@ class LogInFragment : Fragment(), AnkoLogger{
     val login: Button? = view.findViewById(R.id.fragment_login)
 
     login?.setOnClickListener {
-      val checkUser = users.checkUser(email?.text.toString())
+      val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
       if(checkUser){
-        val getUser = users.getUser(email?.text.toString())
-        if(BCrypt.checkpw(password?.text.toString(), getUser.password)){
+        val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
+        if(BCrypt.checkpw(password?.text.toString().trim(), getUser.password)){
           userLogged = true
           loggeduser = getUser
           startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggeduser), 0)

@@ -42,10 +42,10 @@ class SignupFragment : Fragment(), AnkoLogger{
 
     submit?.setOnClickListener {
       user.name = name?.text.toString()
-      user.email = email?.text.toString()
-      user.password = BCrypt.hashpw(password?.text.toString(), BCrypt.gensalt())
+      user.email = email?.text.toString().trim().toLowerCase()
+      user.password = BCrypt.hashpw(password?.text.toString().trim(), BCrypt.gensalt())
       user.joined = getDate()
-      if (password?.text.toString().equals(verifyPassword?.text.toString())){
+      if (password?.text.toString().trim().equals(verifyPassword?.text.toString().trim())){
         if(user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()){
           users.create(user.copy())
           val loggedUser = users.getUser(email?.text.toString())
