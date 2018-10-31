@@ -62,15 +62,4 @@ class UserActivity : HomeActivity(), AnkoLogger {
       transaction.commit()
     }
   }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    info("Boop")
-    return when (item.itemId) {
-      android.R.id.home -> {
-        info("Boop")
-        true
-      }
-      else -> super.onOptionsItemSelected(item)
-    }
-  }
 }

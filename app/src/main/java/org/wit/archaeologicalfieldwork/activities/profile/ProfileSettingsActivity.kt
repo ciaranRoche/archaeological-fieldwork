@@ -58,8 +58,8 @@ class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
     } else {
       settingsUserName.setText(loggeduser.name)
       settingsUserEmail.setText(loggeduser.email)
-      settingsUserPassword.setText(user.password)
-      settingsUserVerifyPassword.setText(user.password)
+      settingsUserPassword.setText(loggeduser.password)
+      settingsUserVerifyPassword.setText(loggeduser.password)
       if(loggeduser.userImage.isNotEmpty()){
         profileImage.setText(R.string.button_updateProfileImage)
         Picasso.get().load(loggeduser.userImage)
