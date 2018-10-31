@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.helpers.exists
 import org.wit.archaeologicalfieldwork.helpers.read
 import org.wit.archaeologicalfieldwork.helpers.write
@@ -44,6 +45,7 @@ class HillfortJSONStore(val context: Context) : HillfortStore, AnkoLogger {
       foundHillfort.description = hillfort.description
       foundHillfort.images = hillfort.images
       foundHillfort.location = hillfort.location
+      foundHillfort.comments = hillfort.comments
       serialize()
     }
   }
