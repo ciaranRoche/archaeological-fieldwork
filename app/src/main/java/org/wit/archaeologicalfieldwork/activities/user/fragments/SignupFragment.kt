@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
@@ -51,7 +50,6 @@ class SignupFragment : Fragment(), AnkoLogger{
           val loggedUser = users.getUser(email?.text.toString())
           userLogged = true
           loggeduser = loggedUser
-          info("BOOP $loggeduser")
           startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", user), 0)
         }else{
           toast("Please fill out All fields")

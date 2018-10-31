@@ -3,7 +3,6 @@ package org.wit.archaeologicalfieldwork.activities.hillfort
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.intentFor

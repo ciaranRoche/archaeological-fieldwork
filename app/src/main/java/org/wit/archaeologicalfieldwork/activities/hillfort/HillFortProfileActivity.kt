@@ -9,11 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.InputType
 import android.view.*
 import android.widget.EditText
-import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hill_fort_profile.*
-import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.ViewPagerAdapter

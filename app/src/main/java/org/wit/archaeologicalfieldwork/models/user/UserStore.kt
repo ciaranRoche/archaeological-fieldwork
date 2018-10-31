@@ -1,7 +1,6 @@
 package org.wit.archaeologicalfieldwork.models.user
 
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
-import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 interface UserStore{
   fun create(user: UserModel)

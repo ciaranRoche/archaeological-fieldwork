@@ -2,7 +2,6 @@ package org.wit.archaeologicalfieldwork.main
 
 import android.app.Application
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortStore
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
@@ -17,6 +16,5 @@ class MainApp : Application(), AnkoLogger {
     super.onCreate()
     hillforts = HillfortJSONStore(applicationContext)
     users = UserJSONStore(applicationContext)
-    info("HillFort Application Started")
   }
 }
