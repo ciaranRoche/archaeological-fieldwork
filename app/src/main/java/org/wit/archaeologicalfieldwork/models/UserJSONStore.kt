@@ -46,15 +46,13 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
     serialize()
   }
 
-  override fun verifyUser(email: String, password: String): Boolean{
-    val foundUser: UserModel? = users.find { u -> u.email == email }
-    if (foundUser != null){
-      if(foundUser.password.equals(password)) return true
-    }
+  override fun checkUser(email: String): Boolean {
+    val foundUser: UserModel? = users.find {u -> u.email == email }
+    if (foundUser != null ) return true
     return false
   }
 
-  override fun findUserEmail(email: String): UserModel {
+  override fun getUser(email: String): UserModel {
     val foundUser: UserModel? = users.find { u -> u.email == email }
     return foundUser!!
   }

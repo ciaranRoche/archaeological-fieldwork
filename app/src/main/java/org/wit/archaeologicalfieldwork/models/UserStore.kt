@@ -4,8 +4,8 @@ interface UserStore{
   fun create(user: UserModel)
   fun update(user: UserModel)
   fun delete(user: UserModel)
-  fun findUserEmail(email: String) : UserModel
+  fun getUser(email: String) : UserModel
+  fun checkUser(email: String) : Boolean
   fun findUserId(id: Long) : UserModel
-  fun verifyUser(email: String, password: String) : Boolean
   fun getStats(user: UserModel): MutableList<StatsModel>?
 }

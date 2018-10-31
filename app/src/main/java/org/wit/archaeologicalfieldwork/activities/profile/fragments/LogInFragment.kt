@@ -11,6 +11,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
+import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
@@ -34,12 +35,16 @@ class LogInFragment : Fragment(), AnkoLogger{
     val login: Button? = view.findViewById(R.id.fragment_login)
 
     login?.setOnClickListener {
-      if(users.verifyUser(email?.text.toString(), password?.text.toString())){
-        val loggedUser = users.findUserEmail(email?.text.toString())
-        userLogged = true
-        loggeduser = loggedUser
-        startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggedUser), 0)
-      }else{
+      val checkUser = users.checkUser(email?.text.toString())
+      if(checkUser){
+        val getUser = users.getUser(email?.text.toString())
+        if(BCrypt.checkpw(password?.text.toString(), getUser.password)){
+          userLogged = true
+          loggeduser = getUser
+          startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggeduser), 0)
+        }
+      }
+      else{
         toast("Incorrect Details")
       }
     }

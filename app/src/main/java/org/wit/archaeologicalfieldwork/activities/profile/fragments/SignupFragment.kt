@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
+import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
@@ -41,14 +43,15 @@ class SignupFragment : Fragment(), AnkoLogger{
     submit?.setOnClickListener {
       user.name = name?.text.toString()
       user.email = email?.text.toString()
-      user.password = password?.text.toString()
+      user.password = BCrypt.hashpw(password?.text.toString(), BCrypt.gensalt())
       user.joined = getDate()
-      if (user.password.equals(verifyPassword?.text.toString())){
+      if (password?.text.toString().equals(verifyPassword?.text.toString())){
         if(user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()){
           users.create(user.copy())
-          val loggedUser = users.findUserEmail(email?.text.toString())
+          val loggedUser = users.getUser(email?.text.toString())
           userLogged = true
           loggeduser = loggedUser
+          info("BOOP $loggeduser")
           startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", user), 0)
         }else{
           toast("Please fill out All fields")
