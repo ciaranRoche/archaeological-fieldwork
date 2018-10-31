@@ -46,6 +46,10 @@
   <string name="button_updateUser">Update User</string>
   <string name="button_deleteUser">Delete User</string>
   <string name="menu_logout">Logout</string>
+  <string name="profile_text_member">Member Since :</string>
+  <string name="profile_member_date">0</string>
+  <string name="profile_text_visit">Number of Hillforts Seen :</string>
+  <string name="profile_no_visit">0</string>
 
   <!-- Message Strings -->
   <string name="message_welcome">Welcome to the Archaeological Fieldwork Community</string>

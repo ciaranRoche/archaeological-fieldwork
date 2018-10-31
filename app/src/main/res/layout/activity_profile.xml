@@ -84,17 +84,21 @@
 
           <TextView
             android:id="@+id/profile_text_member"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Member Since :" />
+            android:paddingLeft="10dp"
+            android:text="@string/profile_text_member"
+            android:textSize="18sp" />
 
           <TextView
             android:id="@+id/profile_member_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/profile_member_date"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
           android:layout_width="match_parent"
@@ -106,14 +110,18 @@
             android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Number of Hillforts Seen :" />
+            android:paddingLeft="10dp"
+            android:text="@string/profile_text_visit"
+            android:textSize="18sp" />
 
           <TextView
             android:id="@+id/profile_no_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/profile_no_visit"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         </LinearLayout>
       </LinearLayout>
     </ScrollView>
