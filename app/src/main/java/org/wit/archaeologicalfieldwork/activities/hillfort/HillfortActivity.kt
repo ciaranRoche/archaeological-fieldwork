@@ -30,7 +30,7 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
   val IMAGE_REQUEST = 1
   val LOCATION_REQUEST = 2
   var location = Location(52.245696, -7.139102, 15f)
-  var hillfort = HillfortModel(location = location)
+  var hillfort = HillfortModel()
   var stat = StatsModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
