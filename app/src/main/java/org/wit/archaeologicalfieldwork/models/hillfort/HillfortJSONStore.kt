@@ -8,6 +8,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.helpers.exists
 import org.wit.archaeologicalfieldwork.helpers.read
 import org.wit.archaeologicalfieldwork.helpers.write
+import org.wit.archaeologicalfieldwork.models.comment.CommentsModel
 import java.util.*
 
 val JSON_FILE = "hillforts.json"
@@ -29,6 +30,11 @@ class HillfortJSONStore(val context: Context) : HillfortStore, AnkoLogger {
 
   override fun findAll(): List<HillfortModel> {
     return hillforts
+  }
+
+  override fun findAllComments(hillfort: HillfortModel): List<CommentsModel> {
+    var foundHillfort: HillfortModel? = hillforts.find { h -> h.id == hillfort.id }
+    return foundHillfort!!.comments
   }
 
   override fun create(hillfort: HillfortModel) {

@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.text.InputType
 import android.view.*
 import android.widget.EditText
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hill_fort_profile.*
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.ViewPagerAdapter
 import org.wit.archaeologicalfieldwork.activities.user.loggeduser
+import org.wit.archaeologicalfieldwork.adapters.CommentAdapter
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.comment.CommentsModel
@@ -49,12 +53,25 @@ class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
 
       viewPager = findViewById(R.id.view_pager)
       viewPager.adapter = ViewPagerAdapter(hillfort.images)
+
+      val layoutManager = LinearLayoutManager(this)
+      recyclerCommentView.layoutManager = layoutManager
+      loadComments()
     }
 
     val fab = findViewById(R.id.fab) as FloatingActionButton
     fab.setOnClickListener{
       commentDialog()
     }
+  }
+
+  private fun loadComments(){
+    showComments(app.hillforts.findAllComments(hillfort))
+  }
+
+  fun showComments(comments:List<CommentsModel>){
+    recyclerCommentView.adapter = CommentAdapter(comments)
+    recyclerCommentView.adapter?.notifyDataSetChanged()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -87,6 +104,8 @@ class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
         comment.user = loggeduser.name
         hillfort.comments += comment
         app.hillforts.update(hillfort.copy())
+        startActivityForResult(intentFor<HillFortProfileActivity>().putExtra("hillfort", hillfort), 0)
+
       }
 
       setNegativeButton("Ignore") {
