@@ -65,7 +65,8 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
     btnDelete.setOnClickListener {
       app.hillforts.delete(hillfort.copy())
       setResult(AppCompatActivity.RESULT_OK)
-      finish()
+      toast("Hillfort Removed")
+      startActivityForResult<HillfortListActivity>(0)
     }
 
     btnAdd.setOnClickListener {
