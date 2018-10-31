@@ -34,49 +34,29 @@ class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
       startActivityForResult<UserActivity>(0)
     }
 
-    toolbarSettings.title = "Profile Settings"
-
-    setSupportActionBar(toolbarSettings)
-
     app = application as MainApp
 
-    // Todo Refactor to use only one, parceable or stored user var
-    if (intent.hasExtra("edit_user")){
-      user = intent.extras.getParcelable<UserModel>("edit_user")
-      settingsUserName.setText(user.name)
-      settingsUserEmail.setText(user.email)
-      settingsUserPassword.setText(user.password)
-      settingsUserVerifyPassword.setText(user.password)
-      if(user.userImage.isNotEmpty()){
-        profileImage.setText(R.string.button_updateProfileImage)
-        Picasso.get().load(user.userImage)
-            .config(Bitmap.Config.RGB_565)
-            .resize(500,500)
-            .centerCrop()
-            .into(userImage)
-      }
-    } else {
-      settingsUserName.setText(loggeduser.name)
-      settingsUserEmail.setText(loggeduser.email)
-      settingsUserPassword.setText(loggeduser.password)
-      settingsUserVerifyPassword.setText(loggeduser.password)
-      if(loggeduser.userImage.isNotEmpty()){
-        profileImage.setText(R.string.button_updateProfileImage)
-        Picasso.get().load(loggeduser.userImage)
-            .config(Bitmap.Config.RGB_565)
-            .resize(500,500)
-            .centerCrop()
-            .into(userImage)
-      }
+    settingsUserName.setText(loggeduser.name)
+    settingsUserEmail.setText(loggeduser.email)
+    settingsUserPassword.setText(loggeduser.password)
+    settingsUserVerifyPassword.setText(loggeduser.password)
+    if(loggeduser.userImage.isNotEmpty()){
+      profileImage.setText(R.string.button_updateProfileImage)
+      Picasso.get().load(loggeduser.userImage)
+          .config(Bitmap.Config.RGB_565)
+          .resize(500,500)
+          .centerCrop()
+          .into(userImage)
     }
+
     updateUser.setOnClickListener {
-      user.name = settingsUserName.text.toString()
-      user.email = settingsUserEmail.text.toString()
-      user.password = settingsUserPassword.text.toString()
-      if (user.password.equals(settingsUserVerifyPassword.text.toString())){
-        if (user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()){
-          app.users.update(user.copy())
-          loggeduser = user.copy()
+      loggeduser.name = settingsUserName.text.toString()
+      loggeduser.email = settingsUserEmail.text.toString()
+      loggeduser.password = settingsUserPassword.text.toString()
+      if (loggeduser.password.equals(settingsUserVerifyPassword.text.toString())){
+        if (loggeduser.name.isNotEmpty() and loggeduser.email.isNotEmpty() and loggeduser.password.isNotEmpty()){
+          info("BOOP ${loggeduser}")
+          app.users.update(loggeduser.copy())
           setResult(AppCompatActivity.RESULT_OK)
           startActivityForResult<ProfileActivity>(0)
         }
@@ -99,8 +79,8 @@ class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
     when(requestCode){
       IMAGE_REQUEST -> {
         if (data != null){
-          user.userImage = data.getData().toString()
-          Picasso.get().load(user.userImage)
+          loggeduser.userImage = data.getData().toString()
+          Picasso.get().load(loggeduser.userImage)
               .config(Bitmap.Config.RGB_565)
               .resize(500,500)
               .centerCrop()
