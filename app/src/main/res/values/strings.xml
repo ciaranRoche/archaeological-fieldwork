@@ -24,13 +24,20 @@
   <string name="hint_userEmail">Email</string>
   <string name="hint_userPassword">Password</string>
   <string name="hint_verifyPassword">Verify Password</string>
+  <string name="profile_description">Description</string>
+  <string name="hillfort_profile_name">Name</string>
+  <string name="hillfort_visited">Visited</string>
 
   <!--Menu Strings-->
-  <string name="menu_addHillfort">Add</string>
+  <string name="menu_addHillfort">Add Hillfort</string>
   <string name="menu_cancelHillfort">Cancel</string>
   <string name="menu_profile">Profile</string>
   <string name="menu_settings">Profile Settings</string>
   <string name="menu_editHillfort">Edit</string>
+  <string name="menu_optionsHeading">Archaeological Fieldwork Menu</string>
+  <string name="menu_hillforts">Hillforts</string>
+  <string name="nav_drawer_open">Open</string>
+  <string name="nav_drawer_close">Close</string>
 
   <!-- Profile Strings-->
   <string name="profile_title">Profile</string>
@@ -39,10 +46,16 @@
   <string name="button_updateUser">Update User</string>
   <string name="button_deleteUser">Delete User</string>
   <string name="menu_logout">Logout</string>
+  <string name="profile_text_member">Member Since :</string>
+  <string name="profile_member_date">0</string>
+  <string name="profile_text_visit">Number of Hillforts Seen :</string>
+  <string name="profile_no_visit">0</string>
 
   <!-- Message Strings -->
   <string name="message_welcome">Welcome to the Archaeological Fieldwork Community</string>
   <string name="message_login">Login with your email and password </string>
   <string name="message_signup">Fill out the form below to join the Archaeological Fieldwork Community</string>
+
+
 
 </resources>

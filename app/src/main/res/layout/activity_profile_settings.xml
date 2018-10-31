@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="org.wit.archaeologicalfieldwork.activities.profile.ProfileSettingsActivity">
+  tools:context="org.wit.archaeologicalfieldwork.activities.user.ProfileSettingsActivity">
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
-          android:hint="@string/hint_userPassword"
+          android:hint="@string/hint_verifyPassword"
           android:inputType="textPassword"
           android:maxLength="25"
           android:maxLines="1"
