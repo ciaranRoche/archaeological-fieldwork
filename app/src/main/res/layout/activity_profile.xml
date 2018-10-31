@@ -76,6 +76,45 @@
 
         </LinearLayout>
       </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/profile_text_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Member Since :" />
+
+          <TextView
+            android:id="@+id/profile_member_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+        </LinearLayout>
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/profile_text_visit"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Number of Hillforts Seen :" />
+
+          <TextView
+            android:id="@+id/profile_no_visit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+        </LinearLayout>
       </LinearLayout>
     </ScrollView>
 

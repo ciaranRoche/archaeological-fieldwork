@@ -14,6 +14,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
+import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.models.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.UserModel
 import org.wit.archaeologicalfieldwork.models.UserStore
@@ -41,6 +42,7 @@ class SignupFragment : Fragment(), AnkoLogger{
       user.name = name?.text.toString()
       user.email = email?.text.toString()
       user.password = password?.text.toString()
+      user.joined = getDate()
       if (user.password.equals(verifyPassword?.text.toString())){
         if(user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()){
           users.create(user.copy())

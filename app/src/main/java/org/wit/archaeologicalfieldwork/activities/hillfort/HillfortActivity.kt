@@ -16,6 +16,7 @@ import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
 import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
 import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
 import org.wit.archaeologicalfieldwork.activities.profile.userLogged
+import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.models.HillfortModel
 import org.wit.archaeologicalfieldwork.models.Location
@@ -104,14 +105,12 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
       toast("Hillfort Visited")
       val foundStats = app.users.getStats(loggeduser)
       val foundHillfort = foundStats!!.find { s -> s.hillfort == hillfort.id }
-      val sdf = SimpleDateFormat("dd/M/yyyy")
-      val currentDate = sdf.format(Date())
       if(foundHillfort == null){
         stat.hillfort = hillfort.id
-        stat.date = currentDate
+        stat.date = getDate()
         loggeduser.stats.add(stat)
       } else {
-        stat.date = currentDate
+        stat.date = getDate()
         loggeduser.stats[loggeduser.stats.indexOf(stat)] = stat
       }
       app.users.update(loggeduser)

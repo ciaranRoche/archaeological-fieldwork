@@ -35,10 +35,13 @@ class ProfileActivity : HomeActivity(), AnkoLogger {
 
     app = application as MainApp
 
+    // Todo : refactor this
     if(intent.hasExtra("logged_in")){
       loggeduser = intent.extras.getParcelable<UserModel?>("logged_in")!!
       profile_name.text = loggeduser.name
       profile_email.text = loggeduser.email
+      profile_member_date.text = loggeduser.joined
+      profile_no_visit.text = loggeduser.stats.size.toString()
       if(loggeduser.userImage.isNotEmpty()){
         Picasso.get().load(loggeduser.userImage)
             .config(Bitmap.Config.RGB_565)
@@ -49,6 +52,8 @@ class ProfileActivity : HomeActivity(), AnkoLogger {
     } else {
       profile_name.text = loggeduser.name
       profile_email.text = loggeduser.email
+      profile_member_date.text = loggeduser.joined
+      profile_no_visit.text = loggeduser.stats.size.toString()
       if(loggeduser.userImage.isNotEmpty()){
         Picasso.get().load(loggeduser.userImage)
             .config(Bitmap.Config.RGB_565)
