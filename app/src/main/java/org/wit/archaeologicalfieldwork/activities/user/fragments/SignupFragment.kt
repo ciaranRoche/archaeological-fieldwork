@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.profile.fragments
+package org.wit.archaeologicalfieldwork.activities.user.fragments
 
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
@@ -13,13 +13,13 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.profile.ProfileActivity
-import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
-import org.wit.archaeologicalfieldwork.activities.profile.userLogged
+import org.wit.archaeologicalfieldwork.activities.user.ProfileActivity
+import org.wit.archaeologicalfieldwork.activities.user.loggeduser
+import org.wit.archaeologicalfieldwork.activities.user.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
-import org.wit.archaeologicalfieldwork.models.UserJSONStore
-import org.wit.archaeologicalfieldwork.models.UserModel
-import org.wit.archaeologicalfieldwork.models.UserStore
+import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.models.user.UserStore
 
 class SignupFragment : Fragment(), AnkoLogger{
 

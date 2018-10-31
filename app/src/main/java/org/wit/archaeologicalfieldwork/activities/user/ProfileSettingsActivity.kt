@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.profile
+package org.wit.archaeologicalfieldwork.activities.user
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,7 +8,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
@@ -16,7 +15,7 @@ import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
-import org.wit.archaeologicalfieldwork.models.UserModel
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
 

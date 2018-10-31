@@ -1,20 +1,16 @@
-package org.wit.archaeologicalfieldwork.activities.profile
+package org.wit.archaeologicalfieldwork.activities.user
 
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
-import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_user.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
-import org.wit.archaeologicalfieldwork.activities.profile.fragments.LogInFragment
-import org.wit.archaeologicalfieldwork.activities.profile.fragments.SignupFragment
-import org.wit.archaeologicalfieldwork.activities.profile.fragments.WelcomeFragment
+import org.wit.archaeologicalfieldwork.activities.user.fragments.LogInFragment
+import org.wit.archaeologicalfieldwork.activities.user.fragments.SignupFragment
+import org.wit.archaeologicalfieldwork.activities.user.fragments.WelcomeFragment
 import org.wit.archaeologicalfieldwork.main.MainApp
 
 var userLogged = false

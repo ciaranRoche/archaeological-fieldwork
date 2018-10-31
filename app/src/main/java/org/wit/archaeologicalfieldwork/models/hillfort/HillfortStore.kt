@@ -1,4 +1,6 @@
-package org.wit.archaeologicalfieldwork.models
+package org.wit.archaeologicalfieldwork.models.hillfort
+
+import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
 interface HillfortStore{
   fun findAll(): List<HillfortModel>

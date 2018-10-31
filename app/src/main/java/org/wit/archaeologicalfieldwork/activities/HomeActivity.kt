@@ -16,8 +16,9 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
-import org.wit.archaeologicalfieldwork.activities.profile.ProfileSettingsActivity
-import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
+import org.wit.archaeologicalfieldwork.activities.user.ProfileSettingsActivity
+import org.wit.archaeologicalfieldwork.activities.user.UserActivity
+import org.wit.archaeologicalfieldwork.activities.user.userLogged
 
 open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
@@ -79,8 +80,11 @@ open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
       R.id.nav_settings -> {
         startActivityForResult<ProfileSettingsActivity>(0)
       }
+      R.id.nav_logout -> {
+        userLogged = false
+        startActivityForResult<UserActivity>(0)
+      }
     }
     return false
   }
-
 }

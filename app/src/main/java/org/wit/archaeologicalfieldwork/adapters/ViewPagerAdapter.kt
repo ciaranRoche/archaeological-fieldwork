@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.hillfort
+package org.wit.archaeologicalfieldwork.adapters
 
 import android.support.v4.view.PagerAdapter
 import android.view.View

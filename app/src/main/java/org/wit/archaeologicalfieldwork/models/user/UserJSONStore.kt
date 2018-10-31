@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.models
+package org.wit.archaeologicalfieldwork.models.user
 
 import android.content.Context
 import com.google.gson.Gson
@@ -8,6 +8,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.helpers.exists
 import org.wit.archaeologicalfieldwork.helpers.read
 import org.wit.archaeologicalfieldwork.helpers.write
+import org.wit.archaeologicalfieldwork.models.hillfort.generateRandomId
+import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 
 val USER_FILE = "users.json"
 val gsonBuild = GsonBuilder().setPrettyPrinting().create()
@@ -47,7 +49,7 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
   }
 
   override fun checkUser(email: String): Boolean {
-    val foundUser: UserModel? = users.find {u -> u.email == email }
+    val foundUser: UserModel? = users.find { u -> u.email == email }
     if (foundUser != null ) return true
     return false
   }

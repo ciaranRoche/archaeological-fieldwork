@@ -13,16 +13,14 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
-import org.wit.archaeologicalfieldwork.activities.profile.UserActivity
-import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
-import org.wit.archaeologicalfieldwork.activities.profile.userLogged
+import org.wit.archaeologicalfieldwork.activities.user.UserActivity
+import org.wit.archaeologicalfieldwork.activities.user.loggeduser
+import org.wit.archaeologicalfieldwork.activities.user.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
-import org.wit.archaeologicalfieldwork.models.HillfortModel
-import org.wit.archaeologicalfieldwork.models.Location
-import org.wit.archaeologicalfieldwork.models.StatsModel
-import java.text.SimpleDateFormat
-import java.util.*
+import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.location.Location
+import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 
 class HillfortActivity : HomeActivity(), AnkoLogger {
 
@@ -44,13 +42,7 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
     val contentView = layoutInflater.inflate(R.layout.activity_hillfort, null, false)
     drawer_layout.addView(contentView, 0)
 
-    toolbarAdd.title = title
-
-    setSupportActionBar(toolbarAdd)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     app = application as MainApp
-
 
     if (intent.hasExtra("hillfort_edit")) {
       btnAdd.setText(R.string.save_hillfort)
@@ -115,20 +107,6 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
       }
       app.users.update(loggeduser)
     }
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_hillfort, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.item_cancel -> {
-        finish()
-      }
-    }
-    return super.onOptionsItemSelected(item)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

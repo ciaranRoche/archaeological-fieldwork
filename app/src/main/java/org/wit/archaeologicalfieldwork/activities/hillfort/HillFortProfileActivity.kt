@@ -12,14 +12,14 @@ import kotlinx.android.synthetic.main.activity_hill_fort_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.profile.loggeduser
+import org.wit.archaeologicalfieldwork.adapters.ViewPagerAdapter
+import org.wit.archaeologicalfieldwork.activities.user.loggeduser
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.main.MainApp
-import org.wit.archaeologicalfieldwork.models.CommentsModel
-import org.wit.archaeologicalfieldwork.models.HillfortModel
-import org.wit.archaeologicalfieldwork.models.Location
+import org.wit.archaeologicalfieldwork.models.comment.CommentsModel
+import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.location.Location
 
 class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
 
@@ -82,7 +82,6 @@ class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
       setPositiveButton("Add"){
         dialog, whichButton ->
         dialog.dismiss()
-        info("BOOP ${editTextComment!!.text}")
         comment.date = getDate()
         comment.comment = editTextComment!!.text.toString()
         comment.user = loggeduser.name

@@ -1,7 +1,6 @@
-package org.wit.archaeologicalfieldwork.activities.profile
+package org.wit.archaeologicalfieldwork.activities.user
 
 import android.graphics.Bitmap
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,7 +14,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
-import org.wit.archaeologicalfieldwork.models.UserModel
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 var loggeduser = UserModel()
 
@@ -28,10 +27,6 @@ class ProfileActivity : HomeActivity(), AnkoLogger {
     super.onCreate(savedInstanceState)
     val contentView = layoutInflater.inflate(R.layout.activity_profile, null, false)
     drawer_layout.addView(contentView, 0)
-
-    toolbarProfile.title = "Profile"
-
-    setSupportActionBar(toolbarProfile)
 
     app = application as MainApp
 
@@ -64,21 +59,4 @@ class ProfileActivity : HomeActivity(), AnkoLogger {
     }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_profile, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.item_settings -> startActivityForResult(intentFor<ProfileSettingsActivity>().putExtra("edit_user", loggeduser), 0)
-      R.id.item_logout -> logoutUser()
-    }
-    return super.onOptionsItemSelected(item)
-  }
-
-  private fun logoutUser() {
-    userLogged = false
-    startActivityForResult<HillfortListActivity>(0)
-  }
 }

@@ -1,8 +1,10 @@
-package org.wit.archaeologicalfieldwork.models
+package org.wit.archaeologicalfieldwork.models.hillfort
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import org.wit.archaeologicalfieldwork.models.location.Location
+import org.wit.archaeologicalfieldwork.models.comment.CommentsModel
 
 @SuppressLint("ParcelCreator")
 @Parcelize

@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.hillfort
+package org.wit.archaeologicalfieldwork.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
-import org.wit.archaeologicalfieldwork.models.HillfortModel
+import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
 interface HillfortListener {
   fun onHillfortClick(hillfort: HillfortModel)

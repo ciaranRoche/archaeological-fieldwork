@@ -14,22 +14,22 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme.Launcher"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".activities.HomeActivity">
+    <activity
+      android:name=".activities.user.UserActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".activities.HomeActivity"/>
     <activity android:name=".activities.hillfort.HillfortListActivity"/>
     <activity
       android:name=".activities.hillfort.HillfortActivity"
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
-      android:name=".activities.profile.ProfileActivity"/>
+      android:name=".activities.user.ProfileActivity"/>
     <activity
-      android:name=".activities.profile.UserActivity"/>
-    <activity
-      android:name=".activities.profile.ProfileSettingsActivity"/>
+      android:name=".activities.user.ProfileSettingsActivity"/>
     <activity
       android:name=".activities.hillfort.HillFortProfileActivity"
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />

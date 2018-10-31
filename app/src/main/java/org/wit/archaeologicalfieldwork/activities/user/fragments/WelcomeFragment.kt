@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.profile.fragments
+package org.wit.archaeologicalfieldwork.activities.user.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

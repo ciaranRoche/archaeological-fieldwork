@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.models.Location
+import org.wit.archaeologicalfieldwork.models.location.Location
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
 

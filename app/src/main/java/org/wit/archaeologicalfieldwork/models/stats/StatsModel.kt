@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.models
+package org.wit.archaeologicalfieldwork.models.stats
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
