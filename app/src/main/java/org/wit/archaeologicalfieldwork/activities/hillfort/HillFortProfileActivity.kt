@@ -2,9 +2,8 @@ package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
-import android.view.MenuItem
+import android.support.v4.view.ViewPager
+import android.view.*
 import kotlinx.android.synthetic.main.activity_hill_fort_profile.*
 import org.jetbrains.anko.intentFor
 import org.wit.archaeologicalfieldwork.R
@@ -15,8 +14,9 @@ import org.wit.archaeologicalfieldwork.models.Location
 class HillFortProfileActivity : AppCompatActivity() {
 
   lateinit var app : MainApp
+  private lateinit var viewPager: ViewPager
   var location = Location(0.0, 0.0, 15f)
-  var hillfort = HillfortModel(location = location)
+  var hillfort = HillfortModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme)
@@ -30,16 +30,18 @@ class HillFortProfileActivity : AppCompatActivity() {
 
     app = application as MainApp
 
-    if(intent.hasExtra("hillfort")){
+    if(intent.hasExtra("hillfort")) {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort")
       hillfortProfileName.setText(hillfort.name)
       hillfortProfileDescription.setText(hillfort.description)
       location = hillfort.location
 
-      imageRecycler.layoutManager = LinearLayoutManager(this)
-      imageRecycler.adapter = ImageAdapter(hillfort.images)
+      viewPager = findViewById(R.id.view_pager)
+      viewPager.adapter = ViewPagerAdapter(hillfort.images)
     }
   }
+
+
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_hillfort_profile, menu)
