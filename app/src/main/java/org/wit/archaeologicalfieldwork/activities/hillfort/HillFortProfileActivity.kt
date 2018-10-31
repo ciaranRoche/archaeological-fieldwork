@@ -2,10 +2,12 @@ package org.wit.archaeologicalfieldwork.activities.hillfort
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.ViewPager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_hill_fort_profile.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.HillfortModel
@@ -38,6 +40,11 @@ class HillFortProfileActivity : AppCompatActivity() {
 
       viewPager = findViewById(R.id.view_pager)
       viewPager.adapter = ViewPagerAdapter(hillfort.images)
+    }
+
+    val fab = findViewById(R.id.fab) as FloatingActionButton
+    fab.setOnClickListener{
+      toast("Fab Clicked")
     }
   }
 

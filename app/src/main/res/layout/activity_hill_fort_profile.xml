@@ -8,7 +8,9 @@
 
   <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="271dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <android.support.design.widget.AppBarLayout
       android:id="@+id/appBarLayout"
@@ -23,13 +25,14 @@
         android:id="@+id/toolbarHillfortProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary"/>
+        app:titleTextColor="@color/colorPrimary" />
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@id/appBarLayout"
+      android:layout_marginTop="0dp"
       android:fillViewport="true">
 
       <LinearLayout
@@ -68,6 +71,14 @@
           android:textAlignment="center"
           android:textSize="18sp"
           android:textStyle="bold" />
+
+        <android.support.design.widget.FloatingActionButton
+          android:id="@+id/fab"
+          android:layout_width="312dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|end"
+          android:layout_margin="16dp"
+          android:src="@drawable/baseline_chat_bubble_outline_white_18dp" />
       </LinearLayout>
     </ScrollView>
 
