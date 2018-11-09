@@ -17,66 +17,65 @@ val list = object : TypeToken<ArrayList<UserModel>>() {}.type
 
 class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
 
-  var users = mutableListOf<UserModel>()
+    var users = mutableListOf<UserModel>()
 
-  init {
-    if(exists(context, USER_FILE))
-      deserialize()
-  }
-
-  override fun create(user: UserModel) {
-    user.id = generateRandomId()
-    users.add(user)
-    serialize()
-  }
-
-  override fun update(user: UserModel) {
-    var foundUser: UserModel? = users.find { u -> u.id == user.id }
-    if (foundUser != null){
-      foundUser.name = user.name
-      foundUser.email = user.email
-      foundUser.password = user.password
-      foundUser.stats = user.stats
-      foundUser.userImage = user.userImage
-      foundUser.joined = user.joined
-      serialize()
+    init {
+        if (exists(context, USER_FILE))
+            deserialize()
     }
-  }
 
-  override fun delete(user: UserModel) {
-    users.remove(user)
-    serialize()
-  }
+    override fun create(user: UserModel) {
+        user.id = generateRandomId()
+        users.add(user)
+        serialize()
+    }
 
-  override fun checkUser(email: String): Boolean {
-    val foundUser: UserModel? = users.find { u -> u.email == email }
-    if (foundUser != null ) return true
-    return false
-  }
+    override fun update(user: UserModel) {
+        var foundUser: UserModel? = users.find { u -> u.id == user.id }
+        if (foundUser != null) {
+            foundUser.name = user.name
+            foundUser.email = user.email
+            foundUser.password = user.password
+            foundUser.stats = user.stats
+            foundUser.userImage = user.userImage
+            foundUser.joined = user.joined
+            serialize()
+        }
+    }
 
-  override fun getUser(email: String): UserModel {
-    val foundUser: UserModel? = users.find { u -> u.email == email }
-    return foundUser!!
-  }
+    override fun delete(user: UserModel) {
+        users.remove(user)
+        serialize()
+    }
 
-  override fun findUserId(id: Long): UserModel {
-    val foundUser: UserModel? = users.find { u -> u.id == id }
-    return foundUser!!
-  }
+    override fun checkUser(email: String): Boolean {
+        val foundUser: UserModel? = users.find { u -> u.email == email }
+        if (foundUser != null) return true
+        return false
+    }
 
-  override fun getStats(user: UserModel): MutableList<StatsModel> {
-    val foundUser = findUserId(user.id)
-    return foundUser.stats
-  }
+    override fun getUser(email: String): UserModel {
+        val foundUser: UserModel? = users.find { u -> u.email == email }
+        return foundUser!!
+    }
 
-  private fun serialize() {
-    val jsonString = gsonBuild.toJson(users, list)
-    write(context, USER_FILE, jsonString)
-  }
+    override fun findUserId(id: Long): UserModel {
+        val foundUser: UserModel? = users.find { u -> u.id == id }
+        return foundUser!!
+    }
 
-  private fun deserialize() {
-    val jsonString = read(context, USER_FILE)
-    users = Gson().fromJson(jsonString, list)
-  }
+    override fun getStats(user: UserModel): MutableList<StatsModel> {
+        val foundUser = findUserId(user.id)
+        return foundUser.stats
+    }
 
+    private fun serialize() {
+        val jsonString = gsonBuild.toJson(users, list)
+        write(context, USER_FILE, jsonString)
+    }
+
+    private fun deserialize() {
+        val jsonString = read(context, USER_FILE)
+        users = Gson().fromJson(jsonString, list)
+    }
 }

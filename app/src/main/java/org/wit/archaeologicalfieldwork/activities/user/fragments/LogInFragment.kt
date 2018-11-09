@@ -18,39 +18,35 @@ import org.wit.archaeologicalfieldwork.activities.user.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 
+class LogInFragment : Fragment(), AnkoLogger {
 
-class LogInFragment : Fragment(), AnkoLogger{
+    lateinit var users: UserStore
 
-  lateinit var users: UserStore
-
-  override fun onCreate(savedInstanceState: Bundle?){
-    super.onCreate(savedInstanceState)
-    users = UserJSONStore(this.context!!)
-  }
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.login_fragment,container,false)
-    val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
-    val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
-    val login: Button? = view.findViewById(R.id.fragment_login)
-
-    login?.setOnClickListener {
-      val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
-      if(checkUser){
-        val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
-        if(BCrypt.checkpw(password?.text.toString().trim(), getUser.password)){
-          userLogged = true
-          loggeduser = getUser
-          startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggeduser), 0)
-        }
-      }
-      else{
-        toast("Incorrect Details")
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        users = UserJSONStore(this.context!!)
     }
 
-    return view
-  }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.login_fragment, container, false)
+        val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
+        val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
+        val login: Button? = view.findViewById(R.id.fragment_login)
+
+        login?.setOnClickListener {
+            val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
+            if (checkUser) {
+                val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
+                if (BCrypt.checkpw(password?.text.toString().trim(), getUser.password)) {
+                    userLogged = true
+                    loggeduser = getUser
+                    startActivityForResult(intentFor<ProfileActivity>().putExtra("logged_in", loggeduser), 0)
+                }
+            } else {
+                toast("Incorrect Details")
+            }
+        }
+
+        return view
+    }
 }
-
-

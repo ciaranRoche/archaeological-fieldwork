@@ -22,69 +22,68 @@ import org.wit.archaeologicalfieldwork.activities.user.userLogged
 
 open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
-  protected lateinit var drawerLayout: DrawerLayout
-  protected lateinit var navigationView: NavigationView
+    protected lateinit var drawerLayout: DrawerLayout
+    protected lateinit var navigationView: NavigationView
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    setTheme(R.style.AppTheme)
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_home)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
 
-    val toolbar: Toolbar = findViewById(R.id.toolbar)
-    setSupportActionBar(toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-    val actionbar: ActionBar? = supportActionBar
-    actionbar?.apply {
-      setDisplayHomeAsUpEnabled(true)
-      setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp)
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp)
+        }
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+
+        navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close)
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        toggle.isDrawerIndicatorEnabled = true
     }
 
-    drawerLayout = findViewById(R.id.drawer_layout)
-
-    navigationView = findViewById<NavigationView>(R.id.nav_view)
-    navigationView.setNavigationItemSelectedListener(this)
-
-    val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close)
-
-    drawerLayout.addDrawerListener(toggle)
-    toggle.syncState()
-    toggle.isDrawerIndicatorEnabled = true
-
-  }
-
-  private inline fun <reified T : Activity> launch(): Boolean {
-    if (this is T) return closeDrawer()
-    val intent = Intent(applicationContext, T::class.java)
-    startActivity(intent)
-    finish()
-    return true
-  }
-
-  private fun closeDrawer(): Boolean {
-    drawerLayout.closeDrawer(GravityCompat.START)
-    return true
-  }
-
-  override fun onNavigationItemSelected(item: MenuItem): Boolean {
-    val id = item.itemId
-    when (id) {
-      R.id.nav_profile -> {
-        startActivityForResult<UserActivity>(0)
-      }
-      R.id.nav_hillfort -> {
-        startActivityForResult<HillfortListActivity>(0)
-      }
-      R.id.nav_add_hillfort -> {
-        startActivityForResult<HillfortActivity>(0)
-      }
-      R.id.nav_settings -> {
-        startActivityForResult<ProfileSettingsActivity>(0)
-      }
-      R.id.nav_logout -> {
-        userLogged = false
-        startActivityForResult<UserActivity>(0)
-      }
+    private inline fun <reified T : Activity> launch(): Boolean {
+        if (this is T) return closeDrawer()
+        val intent = Intent(applicationContext, T::class.java)
+        startActivity(intent)
+        finish()
+        return true
     }
-    return false
-  }
+
+    private fun closeDrawer(): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.nav_profile -> {
+                startActivityForResult<UserActivity>(0)
+            }
+            R.id.nav_hillfort -> {
+                startActivityForResult<HillfortListActivity>(0)
+            }
+            R.id.nav_add_hillfort -> {
+                startActivityForResult<HillfortActivity>(0)
+            }
+            R.id.nav_settings -> {
+                startActivityForResult<ProfileSettingsActivity>(0)
+            }
+            R.id.nav_logout -> {
+                userLogged = false
+                startActivityForResult<UserActivity>(0)
+            }
+        }
+        return false
+    }
 }
