@@ -16,44 +16,42 @@ import org.wit.archaeologicalfieldwork.activities.user.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
-
 class HillfortListActivity : HomeActivity(), HillfortListener {
 
-  lateinit var app: MainApp
+    lateinit var app: MainApp
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    setTheme(R.style.AppTheme)
-    super.onCreate(savedInstanceState)
-    app = application as MainApp
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        super.onCreate(savedInstanceState)
+        app = application as MainApp
 
-    if(!userLogged){
-      startActivityForResult<UserActivity>(0)
+        if (!userLogged) {
+            startActivityForResult<UserActivity>(0)
+        }
+
+        val contentView = layoutInflater.inflate(R.layout.activity_hillfort_list, null, false)
+        drawer_layout.addView(contentView, 0)
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        loadHillforts()
     }
 
-    val contentView = layoutInflater.inflate(R.layout.activity_hillfort_list, null, false)
-    drawer_layout.addView(contentView, 0)
+    override fun onHillfortClick(hillfort: HillfortModel) {
+        startActivityForResult(intentFor<HillFortProfileActivity>().putExtra("hillfort", hillfort), 0)
+    }
 
-    val layoutManager = LinearLayoutManager(this)
-    recyclerView.layoutManager = layoutManager
-    loadHillforts()
-  }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        loadHillforts()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
-  override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillFortProfileActivity>().putExtra("hillfort", hillfort), 0)
-  }
+    private fun loadHillforts() {
+        showHillforts(app.hillforts.findAll())
+    }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    loadHillforts()
-    super.onActivityResult(requestCode, resultCode, data)
-  }
-
-  private fun loadHillforts(){
-    showHillforts(app.hillforts.findAll())
-  }
-
-  fun showHillforts(hillforts:List<HillfortModel>){
-    recyclerView.adapter = HillfortAdapter(hillforts, this)
-    recyclerView.adapter?.notifyDataSetChanged()
-  }
+    fun showHillforts(hillforts: List<HillfortModel>) {
+        recyclerView.adapter = HillfortAdapter(hillforts, this)
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
 }
-

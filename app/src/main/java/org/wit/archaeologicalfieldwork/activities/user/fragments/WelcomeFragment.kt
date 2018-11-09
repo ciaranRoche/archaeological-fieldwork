@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import org.wit.archaeologicalfieldwork.R
 
-class WelcomeFragment : Fragment(){
+class WelcomeFragment : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
-  override fun onCreate(savedInstanceState: Bundle?){
-    super.onCreate(savedInstanceState)
-  }
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.welcome_fragment,container,false)
-    return view
-  }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.welcome_fragment, container, false)
+        return view
+    }
 }
-
-
