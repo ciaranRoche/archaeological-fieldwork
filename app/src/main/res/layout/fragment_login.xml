@@ -11,9 +11,9 @@
     android:id="@+id/textInputLayout"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="200dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="125dp"
+    android:layout_marginEnd="24dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -29,9 +29,9 @@
     android:id="@+id/textInputLayout2"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+    android:layout_marginStart="24dp"
     android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginEnd="24dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -47,11 +47,26 @@
     android:id="@+id/fragment_login"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
+    android:layout_marginStart="44dp"
     android:layout_marginTop="8dp"
-    android:layout_marginEnd="32dp"
+    android:layout_marginEnd="44dp"
     android:text="@string/button_logIn"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+  <TextView
+    android:id="@+id/loginMessage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:text="@string/message_login"
+    android:textSize="18dp"
+    app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

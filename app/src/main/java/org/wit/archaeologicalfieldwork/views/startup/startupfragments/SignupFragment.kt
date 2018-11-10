@@ -31,7 +31,7 @@ class SignupFragment : Fragment(), AnkoLogger {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.signup_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_signup, container, false)
         val name: TextInputEditText? = view.findViewById(R.id.fragment_userName)
         val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmail)
         val password: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
