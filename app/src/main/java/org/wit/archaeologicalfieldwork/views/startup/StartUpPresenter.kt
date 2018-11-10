@@ -6,12 +6,12 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.views.startup.startupfragments.LogInFragment
 import org.wit.archaeologicalfieldwork.views.startup.startupfragments.SignupFragment
 
-class StartUpPresenter(val view: StartUpView){
+class StartUpPresenter(val view: StartUpView) {
 
     var signup = false
 
-    fun loadFragment(signupBtn: Button, support: FragmentManager){
-        if(signup){
+    fun loadFragment(signupBtn: Button, support: FragmentManager) {
+        if (signup) {
             loadLogin(support)
             signupBtn.text = "Sign Up"
             signup = false
@@ -22,7 +22,7 @@ class StartUpPresenter(val view: StartUpView){
         }
     }
 
-    fun loadLogin(support: FragmentManager){
+    fun loadLogin(support: FragmentManager) {
         val logInFragment = LogInFragment()
         val manager = support
         val transaction = manager.beginTransaction()
@@ -31,7 +31,7 @@ class StartUpPresenter(val view: StartUpView){
         transaction.commit()
     }
 
-    fun loadSignup(support: FragmentManager){
+    fun loadSignup(support: FragmentManager) {
         val signupFragment = SignupFragment()
         val manager = support
         val transaction = manager.beginTransaction()
