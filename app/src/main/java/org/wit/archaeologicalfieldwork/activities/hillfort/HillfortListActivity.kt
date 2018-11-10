@@ -11,8 +11,8 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.adapters.HillfortAdapter
 import org.wit.archaeologicalfieldwork.adapters.HillfortListener
-import org.wit.archaeologicalfieldwork.activities.user.UserActivity
-import org.wit.archaeologicalfieldwork.activities.user.userLogged
+import org.wit.archaeologicalfieldwork.views.startup.StartUpView
+import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
@@ -26,7 +26,7 @@ class HillfortListActivity : HomeActivity(), HillfortListener {
         app = application as MainApp
 
         if (!userLogged) {
-            startActivityForResult<UserActivity>(0)
+            startActivityForResult<StartUpView>(0)
         }
 
         val contentView = layoutInflater.inflate(R.layout.activity_hillfort_list, null, false)

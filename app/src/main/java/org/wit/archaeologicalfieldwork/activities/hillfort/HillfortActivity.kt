@@ -20,9 +20,9 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
-import org.wit.archaeologicalfieldwork.activities.user.UserActivity
+import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.activities.user.loggeduser
-import org.wit.archaeologicalfieldwork.activities.user.userLogged
+import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
@@ -43,7 +43,7 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
 
         if (!userLogged) {
-            startActivityForResult<UserActivity>(0)
+            startActivityForResult<StartUpView>(0)
         }
 
         val contentView = layoutInflater.inflate(R.layout.activity_hillfort, null, false)

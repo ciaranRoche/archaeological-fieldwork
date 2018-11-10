@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.user.fragments
+package org.wit.archaeologicalfieldwork.views.startup.startupfragments
 
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
@@ -14,7 +14,7 @@ import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.activities.user.ProfileActivity
 import org.wit.archaeologicalfieldwork.activities.user.loggeduser
-import org.wit.archaeologicalfieldwork.activities.user.userLogged
+import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 

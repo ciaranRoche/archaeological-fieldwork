@@ -17,8 +17,8 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.activities.user.ProfileSettingsActivity
-import org.wit.archaeologicalfieldwork.activities.user.UserActivity
-import org.wit.archaeologicalfieldwork.activities.user.userLogged
+import org.wit.archaeologicalfieldwork.views.startup.StartUpView
+import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
 open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
@@ -68,7 +68,7 @@ open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val id = item.itemId
         when (id) {
             R.id.nav_profile -> {
-                startActivityForResult<UserActivity>(0)
+                startActivityForResult<StartUpView>(0)
             }
             R.id.nav_hillfort -> {
                 startActivityForResult<HillfortListActivity>(0)
@@ -81,7 +81,7 @@ open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.nav_logout -> {
                 userLogged = false
-                startActivityForResult<UserActivity>(0)
+                startActivityForResult<StartUpView>(0)
             }
         }
         return false

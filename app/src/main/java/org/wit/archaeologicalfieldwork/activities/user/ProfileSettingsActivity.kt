@@ -16,6 +16,8 @@ import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.views.startup.StartUpView
+import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
 class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
 
@@ -31,7 +33,7 @@ class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
         drawer_layout.addView(contentView, 0)
 
         if (!userLogged) {
-            startActivityForResult<UserActivity>(0)
+            startActivityForResult<StartUpView>(0)
         }
 
         app = application as MainApp
