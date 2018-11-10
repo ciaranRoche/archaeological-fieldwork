@@ -52,7 +52,6 @@
   <string name="profile_no_visit">0</string>
 
   <!-- Message Strings -->
-  <string name="message_welcome">Welcome to the Archaeological Fieldwork Community</string>
   <string name="message_login">Login with your email and password </string>
   <string name="message_signup">Fill out the form below to join the Archaeological Fieldwork Community</string>
   <string name="message_join">Join Archaeological Fieldwork</string>
