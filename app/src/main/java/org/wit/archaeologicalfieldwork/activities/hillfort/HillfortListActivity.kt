@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
@@ -30,7 +29,6 @@ class HillfortListActivity : HomeActivity(), HillfortListener {
         }
 
         val contentView = layoutInflater.inflate(R.layout.activity_hillfort_list, null, false)
-        drawer_layout.addView(contentView, 0)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager

@@ -5,23 +5,20 @@ import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
-import org.wit.archaeologicalfieldwork.views.user.profile.ProfileActivity
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 
-class SettingsView : HomeActivity(), AnkoLogger {
+class SettingsView : AppCompatActivity(), AnkoLogger {
 
     lateinit var app: MainApp
     var user = UserModel()
@@ -31,8 +28,7 @@ class SettingsView : HomeActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        val contentView = layoutInflater.inflate(R.layout.activity_profile_settings, null, false)
-        drawer_layout.addView(contentView, 0)
+        setContentView(R.layout.activity_profile_settings)
 
         if (!userLogged) {
             startActivityForResult<StartUpView>(0)
@@ -59,7 +55,6 @@ class SettingsView : HomeActivity(), AnkoLogger {
                 if (loggeduser.name.isNotEmpty() and loggeduser.email.isNotEmpty() and loggeduser.password.isNotEmpty()) {
                     app.users.update(loggeduser.copy())
                     setResult(AppCompatActivity.RESULT_OK)
-                    startActivityForResult<ProfileActivity>(0)
                 }
             }
         }

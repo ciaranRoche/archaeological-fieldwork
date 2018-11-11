@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_hillfort.visitedBox
 import kotlinx.android.synthetic.main.activity_hillfort.btnDelete
 import kotlinx.android.synthetic.main.activity_hillfort.hillfortLocation
 import kotlinx.android.synthetic.main.activity_hillfort.chooseImage
-import kotlinx.android.synthetic.main.activity_home.drawer_layout
+
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
@@ -47,7 +47,6 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
         }
 
         val contentView = layoutInflater.inflate(R.layout.activity_hillfort, null, false)
-        drawer_layout.addView(contentView, 0)
 
         app = application as MainApp
 
