@@ -31,7 +31,7 @@ open class HomeActivity : AppCompatActivity(), AnkoLogger {
         app_toolbar.title = title
         setSupportActionBar(app_toolbar)
 
-        val homeFragment = HomeFragment.newInstance()
+        val homeFragment = HomeFragment.newInstance(user.name)
         openFragment(homeFragment)
     }
 

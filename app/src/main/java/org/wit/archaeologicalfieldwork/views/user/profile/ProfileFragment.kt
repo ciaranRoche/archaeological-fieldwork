@@ -14,9 +14,10 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 var loggeduser = UserModel()
-lateinit var user: UserModel
 
 class ProfileFragment : Fragment(), AnkoLogger {
+
+    lateinit var user: UserModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

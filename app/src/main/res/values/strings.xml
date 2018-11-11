@@ -57,9 +57,7 @@
   <string name="message_login">Login with your email and password </string>
   <string name="message_signup">Fill out the form below to join the Archaeological Fieldwork Community</string>
   <string name="message_join">Join Archaeological Fieldwork</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
-
+  <string name="message_home">Welcome to Archaeological Fieldwork</string>
+  <string name="message_home_about">Explore and Discover Archaeological Sites all over the World</string>
 
 </resources>
