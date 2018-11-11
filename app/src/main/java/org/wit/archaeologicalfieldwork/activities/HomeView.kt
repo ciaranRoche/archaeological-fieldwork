@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
@@ -12,14 +13,19 @@ import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
-open class HomeActivity : AppCompatActivity(), AnkoLogger {
+open class HomeView : AppCompatActivity(), AnkoLogger {
 
     lateinit var user: UserModel
+    lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        presenter = HomePresenter(this)
+
+        presenter.doCheckUser()
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -64,5 +70,18 @@ open class HomeActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_logout -> {
+                presenter.doLogout()
+                return true
+            }
+            R.id.menu_add_hillfort -> {
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

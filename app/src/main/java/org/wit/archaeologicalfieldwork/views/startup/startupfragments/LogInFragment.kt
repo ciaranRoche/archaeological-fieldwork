@@ -12,7 +12,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
+import org.wit.archaeologicalfieldwork.activities.HomeView
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
@@ -40,7 +40,7 @@ class LogInFragment : Fragment(), AnkoLogger {
                 if (BCrypt.checkpw(password?.text.toString().trim(), getUser.password)) {
                     userLogged = true
                     loggeduser = getUser
-                    startActivityForResult(intentFor<HomeActivity>().putExtra("user", loggeduser), 0)
+                    startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
                 }
             } else {
                 toast("Incorrect Details")

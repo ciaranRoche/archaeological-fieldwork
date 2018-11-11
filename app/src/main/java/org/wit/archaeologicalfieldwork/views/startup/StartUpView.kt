@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.view_start_up.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
+import org.wit.archaeologicalfieldwork.activities.HomeView
 
 var userLogged = false
 
@@ -20,7 +20,7 @@ class StartUpView : AppCompatActivity(), AnkoLogger {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         if (userLogged) {
-            startActivityForResult<HomeActivity>(0)
+            startActivityForResult<HomeView>(0)
         } else {
             presenter = StartUpPresenter(this)
             setContentView(R.layout.view_start_up)

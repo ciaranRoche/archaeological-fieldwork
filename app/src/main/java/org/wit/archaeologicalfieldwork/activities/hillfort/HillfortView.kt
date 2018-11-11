@@ -17,7 +17,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.intentFor
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
+import org.wit.archaeologicalfieldwork.activities.HomeView
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
@@ -29,7 +29,7 @@ import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 
-class HillfortActivity : HomeActivity(), AnkoLogger {
+class HillfortView : HomeView(), AnkoLogger {
 
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
@@ -71,7 +71,7 @@ class HillfortActivity : HomeActivity(), AnkoLogger {
             app.hillforts.delete(hillfort.copy())
             setResult(AppCompatActivity.RESULT_OK)
             toast("Hillfort Removed")
-            startActivityForResult<HillfortListActivity>(0)
+            startActivityForResult<HillfortListView>(0)
         }
 
         btnAdd.setOnClickListener {

@@ -12,7 +12,7 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
+import org.wit.archaeologicalfieldwork.activities.HomeView
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
@@ -49,7 +49,7 @@ class SignupFragment : Fragment(), AnkoLogger {
                     val loggedUser = users.getUser(email?.text.toString())
                     userLogged = true
                     loggeduser = loggedUser
-                    startActivityForResult(intentFor<HomeActivity>().putExtra("user", loggeduser), 0)
+                    startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
                 } else {
                     toast("Please fill out All fields")
                 }

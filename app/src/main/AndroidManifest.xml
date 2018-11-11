@@ -21,18 +21,18 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.HomeActivity"/>
-    <activity android:name=".activities.hillfort.HillfortListActivity"/>
+    <activity android:name=".activities.HomeView"/>
+    <activity android:name=".activities.hillfort.HillfortListView"/>
     <activity
-      android:name=".activities.hillfort.HillfortActivity"
-      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
+      android:name=".activities.hillfort.HillfortView"
+      android:parentActivityName=".activities.hillfort.HillfortListView" />
     <activity
       android:name=".views.user.profile.ProfileActivity"/>
     <activity
       android:name=".views.user.settings.SettingsView"/>
     <activity
       android:name=".activities.hillfort.HillFortProfileActivity"
-      android:parentActivityName=".activities.hillfort.HillfortListActivity" />
+      android:parentActivityName=".activities.hillfort.HillfortListView" />
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"

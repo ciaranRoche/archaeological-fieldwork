@@ -10,7 +10,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
+import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListView
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.user.UserModel
@@ -63,7 +63,7 @@ class SettingsView : AppCompatActivity(), AnkoLogger {
             app.users.delete(user.copy())
             setResult(AppCompatActivity.RESULT_OK)
             userLogged = false
-            startActivityForResult<HillfortListActivity>(0)
+            startActivityForResult<HillfortListView>(0)
         }
         profileImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)

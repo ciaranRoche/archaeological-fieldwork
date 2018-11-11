@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeActivity
+import org.wit.archaeologicalfieldwork.activities.HomeView
 import org.wit.archaeologicalfieldwork.adapters.HillfortAdapter
 import org.wit.archaeologicalfieldwork.adapters.HillfortListener
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
@@ -15,7 +15,7 @@ import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
-class HillfortListActivity : HomeActivity(), HillfortListener {
+class HillfortListView : HomeView(), HillfortListener {
 
     lateinit var app: MainApp
 

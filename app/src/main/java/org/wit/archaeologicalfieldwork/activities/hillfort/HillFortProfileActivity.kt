@@ -82,7 +82,7 @@ class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_edit -> startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+            R.id.item_edit -> startActivityForResult(intentFor<HillfortView>().putExtra("hillfort_edit", hillfort), 0)
         }
         return super.onOptionsItemSelected(item)
     }
