@@ -23,7 +23,6 @@ class HomeFragment : Fragment(), AnkoLogger {
         return view
     }
 
-
     companion object {
         fun newInstance(username: String): HomeFragment {
             val args = Bundle()
