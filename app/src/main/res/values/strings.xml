@@ -63,5 +63,6 @@
 
   <!-- Header Strings -->
   <string name="header_settings">Edit Profile</string>
+  <string name="header_profile">Profile</string>
 
 </resources>
