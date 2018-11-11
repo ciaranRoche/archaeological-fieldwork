@@ -10,12 +10,12 @@ import android.widget.Button
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
-import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.HomeView
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
+import org.wit.archaeologicalfieldwork.helpers.hashPassword
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
@@ -41,9 +41,9 @@ class SignupFragment : Fragment(), AnkoLogger {
         submit?.setOnClickListener {
             user.name = name?.text.toString()
             user.email = email?.text.toString().trim().toLowerCase()
-            user.password = BCrypt.hashpw(password?.text.toString().trim(), BCrypt.gensalt())
+            user.password = hashPassword(password?.text.toString().trim(), verifyPassword?.text.toString().trim())
             user.joined = getDate()
-            if (password?.text.toString().trim().equals(verifyPassword?.text.toString().trim())) {
+            if (user.password.isNotEmpty()) {
                 if (user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()) {
                     users.create(user.copy())
                     val loggedUser = users.getUser(email?.text.toString())
