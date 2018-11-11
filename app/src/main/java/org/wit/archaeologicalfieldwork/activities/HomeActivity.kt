@@ -16,7 +16,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortActivity
 import org.wit.archaeologicalfieldwork.activities.hillfort.HillfortListActivity
-import org.wit.archaeologicalfieldwork.activities.user.ProfileSettingsActivity
+import org.wit.archaeologicalfieldwork.views.user.settings.SettingsView
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
@@ -77,7 +77,7 @@ open class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 startActivityForResult<HillfortActivity>(0)
             }
             R.id.nav_settings -> {
-                startActivityForResult<ProfileSettingsActivity>(0)
+                startActivityForResult<SettingsView>(0)
             }
             R.id.nav_logout -> {
                 userLogged = false

@@ -21,7 +21,7 @@ import org.wit.archaeologicalfieldwork.activities.HomeActivity
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.activities.maps.MapsActivity
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
-import org.wit.archaeologicalfieldwork.activities.user.loggeduser
+import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker

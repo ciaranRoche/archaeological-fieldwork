@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.view_start_up.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.user.ProfileActivity
+import org.wit.archaeologicalfieldwork.views.user.profile.ProfileActivity
 
 var userLogged = false
 
@@ -25,9 +25,10 @@ class StartUpView : AppCompatActivity(), AnkoLogger {
             presenter = StartUpPresenter(this)
             setContentView(R.layout.view_start_up)
             presenter.loadLogin(supportFragmentManager)
-        }
-        signupBtn.setOnClickListener {
-            presenter.loadFragment(signupBtn, supportFragmentManager)
+
+            signupBtn.setOnClickListener {
+                presenter.loadFragment(signupBtn, supportFragmentManager)
+            }
         }
     }
 }

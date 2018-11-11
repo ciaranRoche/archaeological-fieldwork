@@ -27,9 +27,9 @@
       android:name=".activities.hillfort.HillfortActivity"
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />
     <activity
-      android:name=".activities.user.ProfileActivity"/>
+      android:name=".views.user.profile.ProfileActivity"/>
     <activity
-      android:name=".activities.user.ProfileSettingsActivity"/>
+      android:name=".views.user.settings.SettingsView"/>
     <activity
       android:name=".activities.hillfort.HillFortProfileActivity"
       android:parentActivityName=".activities.hillfort.HillfortListActivity" />

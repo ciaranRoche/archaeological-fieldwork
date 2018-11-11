@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.user
+package org.wit.archaeologicalfieldwork.views.user.settings
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -18,8 +18,10 @@ import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
+import org.wit.archaeologicalfieldwork.views.user.profile.ProfileActivity
+import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 
-class ProfileSettingsActivity : HomeActivity(), AnkoLogger {
+class SettingsView : HomeActivity(), AnkoLogger {
 
     lateinit var app: MainApp
     var user = UserModel()
