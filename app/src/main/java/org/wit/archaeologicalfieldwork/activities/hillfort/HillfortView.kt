@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_hillfort.description
 import kotlinx.android.synthetic.main.activity_hillfort.visitedBox
 import kotlinx.android.synthetic.main.activity_hillfort.btnDelete
 import kotlinx.android.synthetic.main.activity_hillfort.hillfortLocation
-import kotlinx.android.synthetic.main.activity_hillfort.chooseImage
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
@@ -24,7 +23,6 @@ import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
-import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
@@ -95,9 +93,9 @@ class HillfortView : HomeView(), AnkoLogger {
             startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
-        chooseImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
-        }
+//        chooseImage.setOnClickListener {
+//            showImagePicker(this, IMAGE_REQUEST)
+//        }
 
         visitedBox.setOnClickListener {
             toast("Hillfort Visited")

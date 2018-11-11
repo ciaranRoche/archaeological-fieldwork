@@ -14,8 +14,9 @@
   <string name="button_location">Set Location</string>
   <string name="button_signUp">Sign Up</string>
   <string name="button_logIn">Log In</string>
-  <string name="button_addProfileImage">Add Profile Image</string>
-  <string name="button_updateProfileImage">Update Profile Image</string>
+  <string name="button_addProfileImage">Add Avatar</string>
+  <string name="button_updateProfileImage">Update Avatar</string>
+  <string name="button_updatePassword">Update Password</string>
 
   <!--Hint Strings-->
   <string name="hint_HillFortTitle">Hillfort Title</string>
@@ -59,5 +60,8 @@
   <string name="message_join">Join Archaeological Fieldwork</string>
   <string name="message_home">Welcome to Archaeological Fieldwork</string>
   <string name="message_home_about">Explore and Discover Archaeological Sites all over the World</string>
+
+  <!-- Header Strings -->
+  <string name="header_settings">Edit Profile</string>
 
 </resources>

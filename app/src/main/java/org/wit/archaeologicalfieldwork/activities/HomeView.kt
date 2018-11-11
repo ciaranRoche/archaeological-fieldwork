@@ -3,7 +3,6 @@ package org.wit.archaeologicalfieldwork.activities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
@@ -12,6 +11,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
+import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment
 
 open class HomeView : AppCompatActivity(), AnkoLogger {
 
@@ -72,6 +72,11 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return true
             }
             R.id.menu_add_hillfort -> {
+                return true
+            }
+            R.id.menu_profile_settings -> {
+                val settingsFragment = SettingsFragment.newInstance(user)
+                presenter.openFragment(settingsFragment, supportFragmentManager)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

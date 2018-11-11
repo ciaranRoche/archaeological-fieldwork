@@ -20,7 +20,7 @@ class HomePresenter(val view: HomeView) {
         }
     }
 
-    fun openFragment(fragment: Fragment, support: FragmentManager){
+    fun openFragment(fragment: Fragment, support: FragmentManager) {
         val transaction = support.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)

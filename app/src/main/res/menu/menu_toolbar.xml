@@ -4,7 +4,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-  <group>
+  <group android:background="@color/colorAccent">
     <item
       android:id="@+id/menu_add_hillfort"
       android:icon="@drawable/baseline_add_circle_outline_white_18dp"
