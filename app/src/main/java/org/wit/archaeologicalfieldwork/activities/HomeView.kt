@@ -38,14 +38,14 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(app_toolbar)
 
         val homeFragment = HomeFragment.newInstance(user.name)
-        openFragment(homeFragment)
+        presenter.openFragment(homeFragment, supportFragmentManager)
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_profile -> {
                 val profileFragment = ProfileFragment.newInstance(user)
-                openFragment(profileFragment)
+                presenter.openFragment(profileFragment, supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_hillforts -> {
@@ -58,13 +58,6 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
             }
         }
         false
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
