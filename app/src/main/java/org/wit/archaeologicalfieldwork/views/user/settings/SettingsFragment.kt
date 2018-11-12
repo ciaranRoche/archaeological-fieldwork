@@ -57,7 +57,7 @@ class SettingsFragment : Fragment(), AnkoLogger {
         }
 
         deleteBtn?.setOnClickListener {
-            presenter.deleteUser(user)
+            presenter.confirmDelete(user)
         }
 
         imgBtn?.setOnClickListener {

@@ -6,8 +6,10 @@ import android.support.v7.app.AlertDialog
 import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.w3c.dom.Text
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.hashPassword
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
@@ -37,6 +39,7 @@ class SettingsPresenter(val view: SettingsFragment) {
         users.delete(user)
         userLogged = false
         view.startActivity<StartUpView>()
+        view.toast("User Deleted")
     }
 
     fun redirectProfile(user: UserModel, support: FragmentManager) {
@@ -93,6 +96,30 @@ class SettingsPresenter(val view: SettingsFragment) {
         }
         val dialog = alert.create()
         dialog.setView(layout)
+        dialog.show()
+    }
+
+    fun confirmDelete(user: UserModel) {
+        val alert = AlertDialog.Builder(view.context!!)
+
+        with(alert) {
+            setTitle("Confirm Account Deletion")
+
+            setMessage("Are you sure you want to delete your account?")
+
+            setPositiveButton("Delete") {
+                dialog, _ ->
+                dialog.dismiss()
+                deleteUser(user)
+            }
+
+            setNegativeButton("Cancel") {
+                dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+
+        val dialog = alert.create()
         dialog.show()
     }
 }
