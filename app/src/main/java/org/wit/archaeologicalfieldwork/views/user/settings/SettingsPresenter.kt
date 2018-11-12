@@ -6,10 +6,8 @@ import android.support.v7.app.AlertDialog
 import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import org.w3c.dom.Text
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.hashPassword
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
