@@ -12,8 +12,8 @@
     android:title="@string/menu_hillforts"/>
 
   <item
-    android:id="@+id/navigation_location"
-    android:icon="@drawable/baseline_map_white_18dp"
-    android:title="@string/menu_location"/>
+    android:id="@+id/navigation_add_hillfort"
+    android:icon="@drawable/baseline_add_circle_outline_white_18dp"
+    android:title="@string/menu_addHillfort" />
 
 </menu>

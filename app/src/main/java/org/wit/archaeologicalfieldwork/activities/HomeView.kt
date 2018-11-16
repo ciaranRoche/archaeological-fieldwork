@@ -67,8 +67,9 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 presenter.openFragment(hillfortMapFragment, supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_location -> {
-
+            R.id.navigation_add_hillfort -> {
+                val hillfortFragment = HillfortFragment.blankInstance()
+                presenter.openFragment(hillfortFragment, supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -84,11 +85,6 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         when (item?.itemId) {
             R.id.menu_logout -> {
                 presenter.doLogout()
-                return true
-            }
-            R.id.menu_add_hillfort -> {
-                val hillfortFragment = HillfortFragment.blankInstance()
-                presenter.openFragment(hillfortFragment, supportFragmentManager)
                 return true
             }
             R.id.menu_profile_settings -> {

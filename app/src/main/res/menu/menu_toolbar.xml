@@ -6,10 +6,6 @@
 
   <group android:background="@color/colorAccent">
     <item
-      android:id="@+id/menu_add_hillfort"
-      android:icon="@drawable/baseline_add_circle_outline_white_18dp"
-      android:title="@string/menu_addHillfort" />
-    <item
       android:id="@+id/menu_profile_settings"
       android:icon="@drawable/baseline_edit_white_18dp"
       android:title="@string/menu_settings" />
