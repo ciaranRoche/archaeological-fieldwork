@@ -24,7 +24,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
 
-        if(presenter.edit){
+        if (presenter.edit) {
             hillfort = arguments!!.getParcelable("hillfort") as HillfortModel
         }
 
@@ -65,7 +65,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
             fragment.arguments = args
             return fragment
         }
-        fun blankInstance(): HillfortFragment{
+        fun blankInstance(): HillfortFragment {
             return HillfortFragment()
         }
     }

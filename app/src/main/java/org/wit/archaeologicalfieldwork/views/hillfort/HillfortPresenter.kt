@@ -9,9 +9,7 @@ import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
-import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
-import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
 class HillfortPresenter(val view: HillfortFragment) {
     lateinit var app: MainApp
@@ -22,7 +20,7 @@ class HillfortPresenter(val view: HillfortFragment) {
     var edit = false
 
     init {
-        if (view.arguments != null){
+        if (view.arguments != null) {
             hillfort = view.arguments!!.getParcelable("hillfort")
             edit = true
         }
@@ -47,7 +45,7 @@ class HillfortPresenter(val view: HillfortFragment) {
         showImagePicker(parent, req)
     }
 
-    fun redirectList(support: FragmentManager){
+    fun redirectList(support: FragmentManager) {
         val list = HillfortListFragment.newInstance(hillfortStore.findAll() as ArrayList<HillfortModel>)
         openFragment(list, support)
     }
