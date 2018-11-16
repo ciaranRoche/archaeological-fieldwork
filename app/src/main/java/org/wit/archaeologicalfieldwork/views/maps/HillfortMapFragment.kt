@@ -16,13 +16,13 @@ import org.wit.archaeologicalfieldwork.R
 
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 
-class HillfortMapFragment : Fragment() ,  GoogleMap.OnMarkerClickListener {
+class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     lateinit var map: GoogleMap
     lateinit var mapView: MapView
     var hillforts = ArrayList<HillfortModel>()
 
-    lateinit var currentTitle : TextView
+    lateinit var currentTitle: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hillfort_map, container, false)

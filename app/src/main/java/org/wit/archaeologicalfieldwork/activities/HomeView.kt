@@ -16,7 +16,6 @@ import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
-import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
 import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.maps.HillfortMapFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
@@ -36,7 +35,6 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_home)
 
         presenter = HomePresenter(this)
-
 
         hillforts = HillfortJSONStore(applicationContext)
         users = UserJSONStore(applicationContext)
