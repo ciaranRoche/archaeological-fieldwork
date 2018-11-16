@@ -14,22 +14,20 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme.Launcher"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity
-      android:name=".views.startup.StartUpView">
+    <activity android:name=".views.startup.StartUpView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
+
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.HomeView"/>
-    <activity android:name=".views.hillfortlist.HillfortListFragment"/>
+    <activity android:name=".activities.HomeView" />
+    <activity android:name=".views.hillfortlist.HillfortListFragment" />
     <activity
       android:name=".views.hillfort.HillfortView"
       android:parentActivityName=".views.hillfortlist.HillfortListFragment" />
-    <activity
-      android:name=".views.user.profile.ProfileActivity"/>
-    <activity
-      android:name=".views.user.settings.SettingsFragment"/>
+    <activity android:name=".views.user.profile.ProfileActivity" />
+    <activity android:name=".views.user.settings.SettingsFragment" />
     <activity
       android:name=".activities.hillfort.HillFortProfileActivity"
       android:parentActivityName=".views.hillfortlist.HillfortListFragment" />
@@ -41,7 +39,9 @@
     <activity
       android:name=".activities.maps.MapsActivity"
       android:label="@string/title_activity_maps" />
-
+    <activity
+      android:name=".views.maps.HillfortMapFragment"
+      android:label="@string/title_activity_hillfort_map"></activity>
   </application>
 
 </manifest>
