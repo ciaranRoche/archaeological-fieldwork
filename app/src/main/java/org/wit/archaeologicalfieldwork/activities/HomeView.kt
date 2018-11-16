@@ -8,7 +8,10 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.main.MainApp
+import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
 import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment
@@ -17,6 +20,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
 
     lateinit var user: UserModel
     lateinit var presenter: HomePresenter
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -24,6 +28,8 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_home)
 
         presenter = HomePresenter(this)
+
+        app = application as MainApp
 
         presenter.doCheckUser()
 
@@ -49,7 +55,9 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_hillforts -> {
-
+                val hillforts: ArrayList<HillfortModel> = app.hillforts.findAll() as ArrayList<HillfortModel>
+                val hillfortListFragment = HillfortListFragment.newInstance(hillforts)
+                presenter.openFragment(hillfortListFragment, supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_location -> {

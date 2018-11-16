@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
-import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 
 class SettingsFragment : Fragment(), AnkoLogger {
 
@@ -86,8 +85,8 @@ class SettingsFragment : Fragment(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    loggeduser.userImage = data.getData().toString()
-                    Picasso.get().load(loggeduser.userImage)
+                    user.userImage = data.getData().toString()
+                    Picasso.get().load(user.userImage)
                         .config(Bitmap.Config.RGB_565)
                         .resize(500, 500)
                         .centerCrop()

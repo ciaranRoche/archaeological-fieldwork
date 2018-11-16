@@ -22,17 +22,17 @@
       </intent-filter>
     </activity>
     <activity android:name=".activities.HomeView"/>
-    <activity android:name=".activities.hillfort.HillfortListView"/>
+    <activity android:name=".views.hillfortlist.HillfortListFragment"/>
     <activity
-      android:name=".activities.hillfort.HillfortView"
-      android:parentActivityName=".activities.hillfort.HillfortListView" />
+      android:name=".views.hillfort.HillfortView"
+      android:parentActivityName=".views.hillfortlist.HillfortListFragment" />
     <activity
       android:name=".views.user.profile.ProfileActivity"/>
     <activity
       android:name=".views.user.settings.SettingsFragment"/>
     <activity
       android:name=".activities.hillfort.HillFortProfileActivity"
-      android:parentActivityName=".activities.hillfort.HillfortListView" />
+      android:parentActivityName=".views.hillfortlist.HillfortListFragment" />
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"
