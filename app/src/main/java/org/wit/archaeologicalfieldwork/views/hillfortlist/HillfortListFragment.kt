@@ -22,7 +22,7 @@ class HillfortListFragment : Fragment(), HillfortListener {
     lateinit var recycler: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.activity_hillfort_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_hillfort_list, container, false)
 
         hillforts = arguments!!.getParcelableArrayList("hillforts")
 

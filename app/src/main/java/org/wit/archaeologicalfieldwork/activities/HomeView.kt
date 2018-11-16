@@ -11,6 +11,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
 import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
@@ -80,6 +81,8 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return true
             }
             R.id.menu_add_hillfort -> {
+                val hillfortFragment = HillfortFragment.blankInstance()
+                presenter.openFragment(hillfortFragment, supportFragmentManager)
                 return true
             }
             R.id.menu_profile_settings -> {
