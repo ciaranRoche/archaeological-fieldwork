@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/navigation_profile"
+    android:icon="@drawable/baseline_person_white_18dp"
+    android:title="@string/menu_profile"/>
+
+  <item
+    android:id="@+id/navigation_hillforts"
+    android:icon="@drawable/baseline_notes_white_18dp"
+    android:title="@string/menu_hillforts"/>
+
+  <item
+    android:id="@+id/navigation_add_hillfort"
+    android:icon="@drawable/baseline_add_circle_outline_white_18dp"
+    android:title="@string/menu_addHillfort" />
+
+</menu>

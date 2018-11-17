@@ -28,5 +28,4 @@
       <item name="android:windowBackground">@drawable/launch_drawable</item>
     </style>
 
-
 </resources>

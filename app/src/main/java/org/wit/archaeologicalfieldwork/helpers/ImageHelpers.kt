@@ -7,10 +7,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.support.v4.app.Fragment
 import org.wit.archaeologicalfieldwork.R
 import java.io.IOException
 
-fun showImagePicker(parent: Activity, id: Int) {
+fun showImagePicker(parent: Fragment, id: Int) {
     val intent = Intent()
     intent.type = "image/*"
     intent.action = Intent.ACTION_OPEN_DOCUMENT
@@ -37,9 +38,9 @@ fun readImageFromPath(context: Context, path: String): Bitmap? {
     if (uri != null) {
         try {
             val parcelFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r")
-            val fileDescriptor = parcelFileDescriptor.getFileDescriptor()
+            val fileDescriptor = parcelFileDescriptor?.getFileDescriptor()
             bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
-            parcelFileDescriptor.close()
+            parcelFileDescriptor?.close()
         } catch (e: Exception) {
         }
     }
