@@ -11,14 +11,18 @@ import android.widget.Button
 import android.widget.CheckBox
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.stats.StatsModel
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 class HillfortFragment : Fragment(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
 
     var hillfort = HillfortModel()
+    var user = UserModel()
     var IMAGE_REQUEST = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,6 +31,8 @@ class HillfortFragment : Fragment(), AnkoLogger {
         if (presenter.edit) {
             hillfort = arguments!!.getParcelable("hillfort") as HillfortModel
         }
+
+        user = arguments!!.getParcelable("user") as UserModel
 
         val view = inflater.inflate(R.layout.fragment_hillfort, container, false)
         val name: TextInputEditText? = view?.findViewById(R.id.hillfortName)
@@ -37,6 +43,8 @@ class HillfortFragment : Fragment(), AnkoLogger {
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
 
+        handleButton(deleteBtn, view)
+
         addBtn?.setOnClickListener {
             hillfort.name = name?.text.toString()
             hillfort.description = description?.text.toString()
@@ -44,7 +52,8 @@ class HillfortFragment : Fragment(), AnkoLogger {
             if (hillfort.name.isNotEmpty()) {
                 presenter.doAddOrSave(hillfort.copy())
             }
-            presenter.redirectList(this.fragmentManager!!)
+            toast("${hillfort.name} has been added")
+            //todo: add redirect
         }
 
         imageBtn?.setOnClickListener {
@@ -54,42 +63,45 @@ class HillfortFragment : Fragment(), AnkoLogger {
         deleteBtn?.setOnClickListener {
             presenter.doDelete()
         }
+
+        visited?.setOnClickListener {
+            toast("Hillfort Visited")
+            presenter.doVisit(user)
+        }
+
         return view
     }
 
+    fun handleButton(button: Button?, view: View){
+        if (!presenter.edit()) button?.visibility = View.INVISIBLE
+    }
+
     companion object {
-        fun newInstance(hillfort: HillfortModel): HillfortFragment {
+        fun newInstance(hillfort: HillfortModel?, user: UserModel, edit: Boolean): HillfortFragment {
             val args = Bundle()
             args.putParcelable("hillfort", hillfort)
+            args.putParcelable("user", user)
+            args.putBoolean("edit", edit)
             val fragment = HillfortFragment()
             fragment.arguments = args
             return fragment
         }
-        fun blankInstance(): HillfortFragment {
-            return HillfortFragment()
+        fun blankInstance(user: UserModel, edit: Boolean): HillfortFragment {
+            val args = Bundle()
+            args.putParcelable("user", user)
+            args.putBoolean("edit", edit)
+            val fragment = HillfortFragment()
+            fragment.arguments = args
+            return fragment
         }
     }
 
+    //todo: Handle current location
 //        hillfortLocation.setOnClickListener {
 //            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
 //        }
-//
-//        visitedBox.setOnClickListener {
-//            toast("Hillfort Visited")
-//            val foundStats = app.users.getStats(loggeduser)
-//            val foundHillfort = foundStats!!.find { s -> s.hillfort == hillfort.id }
-//            if (foundHillfort == null) {
-//                stat.hillfort = hillfort.id
-//                stat.date = getDate()
-//                loggeduser.stats.add(stat)
-//            } else {
-//                stat.date = getDate()
-//                loggeduser.stats[loggeduser.stats.indexOf(stat)] = stat
-//            }
-//            app.users.update(loggeduser)
-//        }
-//    }
-//
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

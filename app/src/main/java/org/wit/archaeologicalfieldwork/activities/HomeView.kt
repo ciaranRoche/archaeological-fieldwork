@@ -68,7 +68,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_add_hillfort -> {
-                val hillfortFragment = HillfortFragment.blankInstance()
+                val hillfortFragment = HillfortFragment.blankInstance(user, false)
                 presenter.openFragment(hillfortFragment, supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
