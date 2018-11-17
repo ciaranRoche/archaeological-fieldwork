@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.views.home
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,6 @@ import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
-import org.wit.archaeologicalfieldwork.views.home.HomeFragment
 import org.wit.archaeologicalfieldwork.views.maps.HillfortMapFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment

@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities
+package org.wit.archaeologicalfieldwork.views.home
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

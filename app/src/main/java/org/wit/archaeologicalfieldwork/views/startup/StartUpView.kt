@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.view_start_up.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.activities.HomeView
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 var userLogged = false
 

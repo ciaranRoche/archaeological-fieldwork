@@ -12,7 +12,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
-import org.wit.archaeologicalfieldwork.activities.HomeView
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore

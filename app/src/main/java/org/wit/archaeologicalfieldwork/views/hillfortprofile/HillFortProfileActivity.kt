@@ -1,4 +1,4 @@
-package org.wit.archaeologicalfieldwork.activities.hillfort
+package org.wit.archaeologicalfieldwork.views.hillfortprofile
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,10 +10,10 @@ import android.text.InputType
 import android.view.MenuItem
 import android.view.Menu
 import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_hill_fort_profile.toolbarHillfortProfile
-import kotlinx.android.synthetic.main.activity_hill_fort_profile.hillfortProfileName
-import kotlinx.android.synthetic.main.activity_hill_fort_profile.hillfortProfileDescription
-import kotlinx.android.synthetic.main.activity_hill_fort_profile.recyclerCommentView
+import kotlinx.android.synthetic.main.fragment_hill_fort_profile.toolbarHillfortProfile
+import kotlinx.android.synthetic.main.fragment_hill_fort_profile.hillfortProfileName
+import kotlinx.android.synthetic.main.fragment_hill_fort_profile.hillfortProfileDescription
+import kotlinx.android.synthetic.main.fragment_hill_fort_profile.recyclerCommentView
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.intentFor
 import org.wit.archaeologicalfieldwork.R
@@ -25,7 +25,7 @@ import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.comment.CommentsModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.location.Location
-
+// todo Refactor to new layout
 class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
 
     lateinit var app: MainApp
@@ -37,7 +37,7 @@ class HillFortProfileActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hill_fort_profile)
+        setContentView(R.layout.fragment_hill_fort_profile)
 
         toolbarHillfortProfile.title = "About Hillfort"
 
