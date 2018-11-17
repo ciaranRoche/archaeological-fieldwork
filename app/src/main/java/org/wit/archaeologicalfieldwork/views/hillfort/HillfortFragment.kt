@@ -14,7 +14,6 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
-import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 class HillfortFragment : Fragment(), AnkoLogger {
@@ -53,7 +52,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
                 presenter.doAddOrSave(hillfort.copy())
             }
             toast("${hillfort.name} has been added")
-            //todo: add redirect
+            // todo: add redirect
         }
 
         imageBtn?.setOnClickListener {
@@ -72,7 +71,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
         return view
     }
 
-    fun handleButton(button: Button?, view: View){
+    fun handleButton(button: Button?, view: View) {
         if (!presenter.edit()) button?.visibility = View.INVISIBLE
     }
 
@@ -96,11 +95,10 @@ class HillfortFragment : Fragment(), AnkoLogger {
         }
     }
 
-    //todo: Handle current location
+    // todo: Handle current location
 //        hillfortLocation.setOnClickListener {
 //            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
 //        }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

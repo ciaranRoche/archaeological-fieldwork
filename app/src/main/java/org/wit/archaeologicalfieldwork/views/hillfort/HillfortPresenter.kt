@@ -2,8 +2,6 @@ package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.widget.Button
-import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
@@ -39,7 +37,7 @@ class HillfortPresenter(val view: HillfortFragment) {
         }
     }
 
-    fun edit() : Boolean{
+    fun edit(): Boolean {
         return edit
     }
 
@@ -51,7 +49,7 @@ class HillfortPresenter(val view: HillfortFragment) {
         showImagePicker(parent, req)
     }
 
-    fun doVisit(user: UserModel){
+    fun doVisit(user: UserModel) {
         val foundStats = user.stats
         val foundHillfort = foundStats!!.find { s -> s.hillfort == hillfort.id }
         if (foundHillfort == null) {
