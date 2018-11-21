@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.toast
@@ -22,6 +24,10 @@ class HillfortFragment : Fragment(), AnkoLogger {
     var hillfort = HillfortModel()
     var user = UserModel()
     var IMAGE_REQUEST = 1
+    lateinit var map: GoogleMap
+    lateinit var mapView: MapView
+    lateinit var nameText: TextInputEditText
+    lateinit var descriptionText: TextInputEditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
@@ -33,20 +39,26 @@ class HillfortFragment : Fragment(), AnkoLogger {
         user = arguments!!.getParcelable("user") as UserModel
 
         val view = inflater.inflate(R.layout.fragment_hillfort, container, false)
-        val name: TextInputEditText? = view?.findViewById(R.id.hillfortName)
-        val description: TextInputEditText? = view?.findViewById(R.id.description)
+        nameText = view.findViewById(R.id.hillfortName)
+        descriptionText = view.findViewById(R.id.description)
         // val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
         val imageBtn: Button? = view?.findViewById(R.id.chooseImage)
         // val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
+        mapView = view.findViewById(R.id.mapView)
+
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync {
+            presenter.doConfigureMap(it)
+        }
 
         handleButton(deleteBtn, view)
 
         addBtn?.setOnClickListener {
-            hillfort.name = name?.text.toString()
-            hillfort.description = description?.text.toString()
-            hillfort.location = presenter.location
+            hillfort.name = nameText.text.toString()
+            hillfort.description = descriptionText.text.toString()
+            hillfort.location = presenter.defaultLocation
             if (hillfort.name.isNotEmpty()) {
                 presenter.doAddOrSave(hillfort.copy())
             }
@@ -114,5 +126,30 @@ class HillfortFragment : Fragment(), AnkoLogger {
 //                }
 //            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 }
