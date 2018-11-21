@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 
 import org.jetbrains.anko.AnkoLogger
@@ -24,7 +23,6 @@ class HillfortFragment : Fragment(), AnkoLogger {
     var hillfort = HillfortModel()
     var user = UserModel()
     var IMAGE_REQUEST = 1
-    lateinit var map: GoogleMap
     lateinit var mapView: MapView
     lateinit var nameText: TextInputEditText
     lateinit var descriptionText: TextInputEditText
@@ -41,9 +39,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
         val view = inflater.inflate(R.layout.fragment_hillfort, container, false)
         nameText = view.findViewById(R.id.hillfortName)
         descriptionText = view.findViewById(R.id.description)
-        // val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
         val imageBtn: Button? = view?.findViewById(R.id.chooseImage)
-        // val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
         mapView = view.findViewById(R.id.mapView)
@@ -58,7 +54,7 @@ class HillfortFragment : Fragment(), AnkoLogger {
         addBtn?.setOnClickListener {
             hillfort.name = nameText.text.toString()
             hillfort.description = descriptionText.text.toString()
-            hillfort.location = presenter.defaultLocation
+            hillfort.location = presenter.getLocation()
             if (hillfort.name.isNotEmpty()) {
                 presenter.doAddOrSave(hillfort.copy())
             }

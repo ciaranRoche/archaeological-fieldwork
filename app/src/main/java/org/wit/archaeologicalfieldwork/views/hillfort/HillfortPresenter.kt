@@ -81,6 +81,10 @@ class HillfortPresenter(val view: HillfortFragment) {
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
     }
 
+    fun getLocation(): Location {
+        return hillfort.location
+    }
+
     fun doAddOrSave(hillfort: HillfortModel) {
         if (edit) {
             hillfortStore.update(hillfort)
