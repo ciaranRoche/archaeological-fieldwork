@@ -1,5 +1,6 @@
 package org.wit.archaeologicalfieldwork.views.maps
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.content_hillfort_maps.*
 import org.wit.archaeologicalfieldwork.R
 
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
@@ -20,6 +23,7 @@ class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
     lateinit var map: GoogleMap
     lateinit var mapView: MapView
+    lateinit var presenter: HillfortMapPresenter
     var hillforts = ArrayList<HillfortModel>()
 
     lateinit var currentTitle: TextView
@@ -28,6 +32,7 @@ class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         val view = inflater.inflate(R.layout.fragment_hillfort_map, container, false)
         currentTitle = view.findViewById(R.id.currentTitle)
         hillforts = arguments!!.getParcelableArrayList("hillforts")
+        presenter = HillfortMapPresenter(this)
 
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
@@ -75,7 +80,17 @@ class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
+        val hillfort = presenter.getHillfort(marker)
+        currentTitle.text = hillfort.name
+        currentDescription.text = hillfort.description
+        if (hillfort.images.isNotEmpty()) {
+            Picasso.get().load(hillfort.images[0])
+                .config(Bitmap.Config.RGB_565)
+                .resize(500, 500)
+                .centerCrop()
+                .into(imageView)
+        }
+
         return false
     }
 
