@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.toast
@@ -36,9 +35,9 @@ class HillfortFragment : Fragment(), AnkoLogger {
         val view = inflater.inflate(R.layout.fragment_hillfort, container, false)
         val name: TextInputEditText? = view?.findViewById(R.id.hillfortName)
         val description: TextInputEditText? = view?.findViewById(R.id.description)
-        //val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
+        // val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
         val imageBtn: Button? = view?.findViewById(R.id.chooseImage)
-        //val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
+        // val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
 
