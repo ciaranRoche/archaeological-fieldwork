@@ -1,9 +1,18 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
+import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.getDate
+import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
@@ -16,17 +25,64 @@ import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
 
 class HillfortPresenter(val view: HillfortFragment) {
     lateinit var app: MainApp
+
     var hillfortStore: HillfortJSONStore = HillfortJSONStore(view.context!!)
     var userStore: UserJSONStore = UserJSONStore(view.context!!)
-    var location = Location(52.245696, -7.139102, 15f)
+
+    var defaultLocation = Location(52.245696, -7.139102, 15f)
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
+
     var hillfort = HillfortModel()
     var stat = StatsModel()
+
     var edit = view.arguments!!.getBoolean("edit")
+
+    var map: GoogleMap? = null
 
     init {
         if (edit) {
             hillfort = view.arguments!!.getParcelable("hillfort")
+        } else {
+            if (checkLocationPermissions(view.activity!!)) {
+                doSetCurrentLocation()
+            }
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
+    }
+
+    fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            // permissions denied, so use the default location
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(hillfort.location.lat, hillfort.location.lng)
+    }
+
+    fun locationUpdate(lat: Double, lng: Double) {
+        hillfort.location.lat = lat
+        hillfort.location.lng = lng
+        hillfort.location.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.setZoomControlsEnabled(true)
+        val options = MarkerOptions().title(hillfort.name).position(LatLng(hillfort.location.lat, hillfort.location.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
+    }
+
+    fun getLocation(): Location {
+        return hillfort.location
     }
 
     fun doAddOrSave(hillfort: HillfortModel) {

@@ -8,4 +8,5 @@ interface HillfortStore {
     fun update(hillfort: HillfortModel)
     fun delete(hillfort: HillfortModel)
     fun findAllComments(hillfort: HillfortModel): List<CommentsModel>
+    fun findById(id: Long): HillfortModel
 }
