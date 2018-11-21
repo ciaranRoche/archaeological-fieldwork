@@ -1,13 +1,18 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
+import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.getDate
+import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
@@ -25,6 +30,7 @@ class HillfortPresenter(val view: HillfortFragment) {
     var userStore: UserJSONStore = UserJSONStore(view.context!!)
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
 
     var hillfort = HillfortModel()
     var stat = StatsModel()
@@ -37,8 +43,25 @@ class HillfortPresenter(val view: HillfortFragment) {
         if (edit) {
             hillfort = view.arguments!!.getParcelable("hillfort")
         } else {
-            hillfort.location.lat = defaultLocation.lat
-            hillfort.location.lng = defaultLocation.lng
+            if (checkLocationPermissions(view.activity!!)) {
+                doSetCurrentLocation()
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
+    }
+
+    fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            // permissions denied, so use the default location
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
         }
     }
 
