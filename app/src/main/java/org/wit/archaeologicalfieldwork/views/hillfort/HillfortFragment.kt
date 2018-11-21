@@ -36,9 +36,9 @@ class HillfortFragment : Fragment(), AnkoLogger {
         val view = inflater.inflate(R.layout.fragment_hillfort, container, false)
         val name: TextInputEditText? = view?.findViewById(R.id.hillfortName)
         val description: TextInputEditText? = view?.findViewById(R.id.description)
-        val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
+        //val visited: CheckBox? = view?.findViewById(R.id.visitedBox)
         val imageBtn: Button? = view?.findViewById(R.id.chooseImage)
-        val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
+        //val locationBtn: Button? = view?.findViewById(R.id.hillfortLocation)
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
 
@@ -63,10 +63,10 @@ class HillfortFragment : Fragment(), AnkoLogger {
             presenter.doDelete()
         }
 
-        visited?.setOnClickListener {
-            toast("Hillfort Visited")
-            presenter.doVisit(user)
-        }
+//        visited?.setOnClickListener {
+//            toast("Hillfort Visited")
+//            presenter.doVisit(user)
+//        }
 
         return view
     }
