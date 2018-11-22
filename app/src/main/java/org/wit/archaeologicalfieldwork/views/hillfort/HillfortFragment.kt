@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.Marker
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.toast
@@ -16,7 +18,7 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
-class HillfortFragment : Fragment(), AnkoLogger {
+class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener {
 
     lateinit var presenter: HillfortPresenter
 
@@ -70,11 +72,6 @@ class HillfortFragment : Fragment(), AnkoLogger {
             presenter.doDelete()
         }
 
-//        visited?.setOnClickListener {
-//            toast("Hillfort Visited")
-//            presenter.doVisit(user)
-//        }
-
         return view
     }
 
@@ -102,11 +99,6 @@ class HillfortFragment : Fragment(), AnkoLogger {
         }
     }
 
-    // todo: Handle current location
-//        hillfortLocation.setOnClickListener {
-//            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
-//        }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -116,11 +108,6 @@ class HillfortFragment : Fragment(), AnkoLogger {
                     hillfort.images += image
                 }
             }
-//            LOCATION_REQUEST -> {
-//                if (data != null) {
-//                    location = data.extras.getParcelable<Location>("location")
-//                }
-//            }
         }
     }
 
@@ -147,5 +134,15 @@ class HillfortFragment : Fragment(), AnkoLogger {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onMarkerDragEnd(marker: Marker?) {
+    }
+
+    override fun onMarkerDragStart(marker: Marker?) {
+    }
+
+    override fun onMarkerDrag(marker: Marker) {
+        presenter.doMarkerDrag(marker)
     }
 }

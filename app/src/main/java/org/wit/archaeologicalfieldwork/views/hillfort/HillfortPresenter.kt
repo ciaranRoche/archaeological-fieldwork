@@ -8,6 +8,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
@@ -76,9 +77,16 @@ class HillfortPresenter(val view: HillfortFragment) {
         hillfort.location.zoom = 15f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(hillfort.name).position(LatLng(hillfort.location.lat, hillfort.location.lng))
+        map?.setOnMarkerDragListener(view)
+        val options = MarkerOptions().title(hillfort.name).position(LatLng(hillfort.location.lat, hillfort.location.lng)).draggable(true)
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
+    }
+
+    fun doMarkerDrag(marker: Marker) {
+        hillfort.location.lat = marker.position.latitude
+        hillfort.location.lng = marker.position.longitude
+        hillfort.location.zoom = map?.cameraPosition!!.zoom
     }
 
     fun getLocation(): Location {
