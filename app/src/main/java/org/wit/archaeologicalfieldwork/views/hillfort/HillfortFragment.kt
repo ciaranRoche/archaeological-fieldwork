@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,12 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.Marker
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
 
 class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener {
 
@@ -61,7 +64,9 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
                 presenter.doAddOrSave(hillfort.copy())
             }
             toast("${hillfort.name} has been added")
-            // todo: add redirect
+            startActivityForResult(intentFor<HillfortListActivity>(), 0)
+            activity!!.setResult(AppCompatActivity.RESULT_OK)
+            activity!!.finish()
         }
 
         imageBtn?.setOnClickListener {
@@ -70,6 +75,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
 
         deleteBtn?.setOnClickListener {
             presenter.doDelete()
+            activity!!.finish()
         }
 
         return view

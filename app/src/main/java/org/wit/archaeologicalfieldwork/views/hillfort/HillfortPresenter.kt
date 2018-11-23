@@ -1,8 +1,6 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.annotation.SuppressLint
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -10,7 +8,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import org.wit.archaeologicalfieldwork.R
+import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -22,9 +20,8 @@ import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
-import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListFragment
 
-class HillfortPresenter(val view: HillfortFragment) {
+class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
     lateinit var app: MainApp
 
     var hillfortStore: HillfortJSONStore = HillfortJSONStore(view.context!!)
@@ -125,17 +122,5 @@ class HillfortPresenter(val view: HillfortFragment) {
             user.stats[user.stats.indexOf(stat)] = stat
         }
         userStore.update(user)
-    }
-
-    fun redirectList(support: FragmentManager) {
-        val list = HillfortListFragment.newInstance(hillfortStore.findAll() as ArrayList<HillfortModel>)
-        openFragment(list, support)
-    }
-
-    fun openFragment(fragment: Fragment, support: FragmentManager) {
-        val transaction = support.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 }
