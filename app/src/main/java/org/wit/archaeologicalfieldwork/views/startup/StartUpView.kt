@@ -11,7 +11,7 @@ import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 var userLogged = false
-var loggeduser : UserModel? = null
+var loggeduser: UserModel? = null
 
 class StartUpView : AppCompatActivity(), AnkoLogger {
 

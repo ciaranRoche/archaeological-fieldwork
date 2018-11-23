@@ -27,7 +27,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         setSupportActionBar(toolbarList)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         loadHillforts()
