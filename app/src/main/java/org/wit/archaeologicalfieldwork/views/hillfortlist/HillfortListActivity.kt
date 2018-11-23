@@ -2,20 +2,24 @@ package org.wit.archaeologicalfieldwork.views.hillfortlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import kotlinx.android.synthetic.main.fragment_hillfort_list.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.adapters.HillfortAdapter
 import org.wit.archaeologicalfieldwork.adapters.HillfortListener
+import org.wit.archaeologicalfieldwork.adapters.HillfortPagerAdapter
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortStore
 
-class HillfortListActivity : AppCompatActivity(), HillfortListener {
+class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
 
     lateinit var hillforts: HillfortStore
+    lateinit var viewPager: ViewPager
+    lateinit var pagerAdapter: HillfortPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -26,10 +30,14 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         toolbarList.title = "Hill Fort Profiles"
         setSupportActionBar(toolbarList)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        info("boop ${hillforts.findAll()}")
+        viewPager = findViewById(R.id.viewPager)
+        pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts.findAll() as ArrayList<HillfortModel>)
+        viewPager.adapter = pagerAdapter
 
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        loadHillforts()
+        // val layoutManager = LinearLayoutManager(this)
+        // recyclerView.layoutManager = layoutManager
+        // loadHillforts()
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
@@ -51,7 +59,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {
-        recyclerView.adapter = HillfortAdapter(hillforts, this)
-        recyclerView.adapter?.notifyDataSetChanged()
+        // recyclerView.adapter = HillfortAdapter(hillforts, this)
+        // recyclerView.adapter?.notifyDataSetChanged()
     }
 }
