@@ -23,8 +23,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         setContentView(R.layout.fragment_hillfort_list)
         hillforts = HillfortJSONStore(applicationContext)
 
-        toolbarList.title = title
+        toolbarList.title = "Hill Fort Profiles"
         setSupportActionBar(toolbarList)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
