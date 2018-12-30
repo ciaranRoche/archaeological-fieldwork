@@ -12,22 +12,6 @@
     tools:layout_editor_absoluteX="271dp"
     tools:layout_editor_absoluteY="0dp">
 
-    <android.support.design.widget.AppBarLayout
-      android:id="@+id/appBarLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/colorAccent"
-      android:fitsSystemWindows="true"
-      app:elevation="0dip"
-      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarHillfortProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary" />
-    </android.support.design.widget.AppBarLayout>
-
     <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -39,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <TextView
           android:id="@+id/hillfortProfileName"
@@ -62,29 +45,6 @@
           android:layout_width="match_parent"
           android:layout_height="274dp" />
 
-        <TextView
-          android:id="@+id/textView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:padding="5sp"
-          android:text="Comments"
-          android:textAlignment="center"
-          android:textSize="18sp"
-          android:textStyle="bold" />
-
-        <android.support.design.widget.FloatingActionButton
-          android:id="@+id/fab"
-          android:layout_width="312dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="bottom|end"
-          android:layout_margin="16dp"
-          android:src="@drawable/baseline_chat_bubble_outline_white_18dp" />
-
-        <android.support.v7.widget.RecyclerView
-          android:id="@+id/recyclerCommentView"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:scrollbars="vertical" />
       </LinearLayout>
     </ScrollView>
 

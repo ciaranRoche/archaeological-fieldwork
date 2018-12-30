@@ -10,6 +10,10 @@
       android:icon="@drawable/baseline_edit_white_18dp"
       android:title="@string/menu_settings" />
     <item
+      android:id="@+id/menu_profiles"
+      android:icon="@drawable/baseline_notes_white_18dp"
+      android:title="@string/menu_profiles" />
+    <item
       android:id="@+id/menu_logout"
       android:icon="@drawable/baseline_close_white_18dp"
       android:title="@string/menu_logout" />

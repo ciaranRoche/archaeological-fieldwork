@@ -7,9 +7,11 @@ import kotlinx.android.synthetic.main.view_start_up.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 var userLogged = false
+var loggeduser: UserModel? = null
 
 class StartUpView : AppCompatActivity(), AnkoLogger {
 

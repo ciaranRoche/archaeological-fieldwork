@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.support.v4.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
@@ -16,8 +18,10 @@ import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
+import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
 import org.wit.archaeologicalfieldwork.views.maps.HillfortMapFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
+import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment
 
 open class HomeView : AppCompatActivity(), AnkoLogger {
@@ -45,12 +49,14 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
 
         if (intent.hasExtra("user")) {
             user = intent.extras.getParcelable<UserModel>("user")
+        } else {
+            user = loggeduser
         }
 
         app_toolbar.title = title
         setSupportActionBar(app_toolbar)
 
-        val homeFragment = HomeFragment.newInstance(user.name)
+        val homeFragment = HomeFragment.newInstance(loggeduser.name)
         presenter.openFragment(homeFragment, supportFragmentManager)
     }
 
@@ -89,6 +95,10 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
             R.id.menu_profile_settings -> {
                 val settingsFragment = SettingsFragment.newInstance(user)
                 presenter.openFragment(settingsFragment, supportFragmentManager)
+                return true
+            }
+            R.id.menu_profiles -> {
+                startActivityForResult(intentFor<HillfortListActivity>(), 0)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

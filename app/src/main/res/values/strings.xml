@@ -41,6 +41,7 @@
   <string name="nav_drawer_open">Open</string>
   <string name="nav_drawer_close">Close</string>
   <string name="menu_signup">Sign Up</string>
+  <string name="menu_profiles">Hill Fort Profiles</string>
 
   <!-- Profile Strings-->
   <string name="profile_title">Profile</string>
@@ -65,5 +66,6 @@
   <string name="header_settings">Edit Profile</string>
   <string name="header_profile">Profile</string>
   <string name="title_activity_hillfort_map">HillfortMap</string>
+  <string name="hillfort_profiles">Hill Fort Profiles</string>
 
 </resources>
