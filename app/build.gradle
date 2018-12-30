@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 configurations {
   ktlint
 }
@@ -55,6 +57,10 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
   args "-F", "src/**/*.kt"
 }
 
+ext{
+  firebase_version = '16.0.5'
+}
+
 dependencies {
   ktlint "com.github.shyiko:ktlint:0.29.0"
   implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -71,6 +77,9 @@ dependencies {
   implementation "com.google.android.gms:play-services-location:16.0.0"
   implementation 'com.squareup.picasso:picasso:2.71828'
   implementation 'org.mindrot:jbcrypt:0.4'
+
+  implementation "com.google.firebase:firebase-auth:$firebase_version"
+  implementation "com.google.firebase:firebase-database:$firebase_version"
 
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   testImplementation 'junit:junit:4.12'

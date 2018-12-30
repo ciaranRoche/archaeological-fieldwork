@@ -2,6 +2,8 @@ package org.wit.archaeologicalfieldwork.views.startup
 
 import androidx.fragment.app.FragmentManager
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.views.startup.startupfragments.LogInFragment
 import org.wit.archaeologicalfieldwork.views.startup.startupfragments.SignupFragment
@@ -9,6 +11,7 @@ import org.wit.archaeologicalfieldwork.views.startup.startupfragments.SignupFrag
 class StartUpPresenter(val view: StartUpView) {
 
     var signup = false
+
 
     fun loadFragment(signupBtn: Button, support: FragmentManager) {
         if (signup) {
