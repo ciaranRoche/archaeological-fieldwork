@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
@@ -24,6 +25,7 @@ class SignupFragment : Fragment(), AnkoLogger {
 
     var user = UserModel()
     lateinit var users: UserStore
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +39,12 @@ class SignupFragment : Fragment(), AnkoLogger {
         val password: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
         val verifyPassword: TextInputEditText? = view.findViewById(R.id.fragment_verifyPassword)
         val submit: Button? = view.findViewById(R.id.fragment_saveUser)
+        progressBar = view.findViewById(R.id.progressBar2)
+
+        hideProgress()
 
         submit?.setOnClickListener {
+            showProgress()
             user.name = name?.text.toString()
             user.email = email?.text.toString().trim().toLowerCase()
             user.password = hashPassword(password?.text.toString().trim(), verifyPassword?.text.toString().trim())
@@ -58,5 +64,13 @@ class SignupFragment : Fragment(), AnkoLogger {
             }
         }
         return view
+    }
+
+    private fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 }

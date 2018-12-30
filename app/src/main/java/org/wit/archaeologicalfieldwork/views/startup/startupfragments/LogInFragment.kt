@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
@@ -18,9 +19,11 @@ import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 
+
 class LogInFragment : Fragment(), AnkoLogger {
 
     lateinit var users: UserStore
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +35,12 @@ class LogInFragment : Fragment(), AnkoLogger {
         val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
         val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
         val login: Button? = view.findViewById(R.id.fragment_login)
+        progressBar = view.findViewById(R.id.progressBar)
+
+        hideProgress()
 
         login?.setOnClickListener {
+            showProgress()
             val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
             if (checkUser) {
                 val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
@@ -48,5 +55,13 @@ class LogInFragment : Fragment(), AnkoLogger {
         }
 
         return view
+    }
+
+    private fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 }
