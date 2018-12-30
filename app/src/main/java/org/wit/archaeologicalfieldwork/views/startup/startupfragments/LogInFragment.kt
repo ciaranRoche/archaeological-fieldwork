@@ -19,7 +19,6 @@ import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 
-
 class LogInFragment : Fragment(), AnkoLogger {
 
     lateinit var users: UserStore
