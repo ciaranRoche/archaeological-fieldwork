@@ -1,8 +1,8 @@
 package org.wit.archaeologicalfieldwork.views.user.settings
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AlertDialog
 import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout

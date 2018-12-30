@@ -1,6 +1,6 @@
 package org.wit.archaeologicalfieldwork.views.startup
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import android.widget.Button
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.views.startup.startupfragments.LogInFragment

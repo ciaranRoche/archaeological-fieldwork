@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".views.home.HomeView">
 
-  <android.support.design.widget.AppBarLayout
+  <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,12 +19,12 @@ tools:context=".views.home.HomeView">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
       android:id="@+id/app_toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:titleTextColor="@color/colorPrimary" />
-  </android.support.design.widget.AppBarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
 
   <FrameLayout
     android:id="@+id/container"
@@ -36,7 +36,7 @@ tools:context=".views.home.HomeView">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-  <android.support.design.widget.BottomNavigationView
+  <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/navigationView"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -51,4 +51,4 @@ tools:context=".views.home.HomeView">
     app:itemTextColor="@color/colorPrimary"
     app:menu="@menu/menu_navigation"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

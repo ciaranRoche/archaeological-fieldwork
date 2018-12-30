@@ -3,7 +3,7 @@ package org.wit.archaeologicalfieldwork.helpers
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import android.util.Log
 
 val REQUEST_PERMISSIONS_REQUEST_CODE = 34

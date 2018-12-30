@@ -1,7 +1,7 @@
 package org.wit.archaeologicalfieldwork.views.home
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import org.jetbrains.anko.startActivity
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
