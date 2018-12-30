@@ -9,7 +9,7 @@ fun hashPassword(pass: String?, verify: String?): String {
     return ""
 }
 
-fun getHash(pass:String?): String {
+fun getHash(pass: String?): String {
     return BCrypt.hashpw(pass, BCrypt.gensalt())
 }
 

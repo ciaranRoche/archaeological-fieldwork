@@ -10,18 +10,11 @@ import android.widget.Button
 import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 import org.mindrot.jbcrypt.BCrypt
-import org.wit.archaeologicalfieldwork.helpers.getHash
-import org.wit.archaeologicalfieldwork.helpers.hashPassword
-import org.wit.archaeologicalfieldwork.views.home.HomeView
-import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
-import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 
-class LogInFragment : Fragment(), AnkoLogger{
+class LogInFragment : Fragment(), AnkoLogger {
 
     lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
@@ -51,17 +44,15 @@ class LogInFragment : Fragment(), AnkoLogger{
                 presenter.doLogin(email?.text.toString().trim().toLowerCase(), password?.text.toString().trim())
                 val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
                 if (BCrypt.checkpw(password?.text.toString().trim(), getUser.password)) {
-                    //userLogged = true
-                    //loggeduser = getUser
-                    //startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
-                    //val user = FirebaseAuth.getInstance().currentUser
+                    // userLogged = true
+                    // loggeduser = getUser
+                    // startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
+                    // val user = FirebaseAuth.getInstance().currentUser
                 }
             } else {
-
             }
         }
 
         return view
     }
-
 }
