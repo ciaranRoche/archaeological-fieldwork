@@ -17,6 +17,7 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
     lateinit var db: DatabaseReference
 
     override fun create(user: UserModel) {
+        db = FirebaseDatabase.getInstance().reference
         val key = db.child("users").push().key
         user.fbid = key!!
         users.add(user)

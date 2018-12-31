@@ -11,6 +11,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
+import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortStore
@@ -30,6 +31,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
     lateinit var presenter: HomePresenter
     lateinit var app: MainApp
     lateinit var hillforts: HillfortStore
+    lateinit var data: DataFireStore
     lateinit var users: UserStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
 
         hillforts = HillfortJSONStore(applicationContext)
         users = UserJSONStore(applicationContext)
+        data = DataFireStore(applicationContext)
 
         presenter.doCheckUser()
 

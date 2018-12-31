@@ -7,7 +7,7 @@ import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.views.home.HomeView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
-class LoginPresenter(val view: LogInFragment) {
+class SignupPresenter(val view: SignupFragment) {
 
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     var fireStore: DataFireStore? = null
@@ -16,23 +16,18 @@ class LoginPresenter(val view: LogInFragment) {
         fireStore = DataFireStore(view.context!!)
     }
 
-    fun doLogin(email: String, password: String) {
+    fun doSignUp(email: String, password: String) {
         view.showProgress()
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view.activity!!) { task ->
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view.activity!!) { task ->
             if (task.isSuccessful) {
                 if (fireStore != null) {
-                    fireStore!!.fetchHillforts {}
-                    view.hideProgress()
-                    userLogged = true
-                    view.startActivity<HomeView>()
-                } else {
                     view.hideProgress()
                     userLogged = true
                     view.startActivity<HomeView>()
                 }
             } else {
                 view.hideProgress()
-                view.toast("Login Failed : ${task.exception?.message}")
+                view.toast("Sign Up Failed : ${task.exception?.message}")
             }
         }
     }

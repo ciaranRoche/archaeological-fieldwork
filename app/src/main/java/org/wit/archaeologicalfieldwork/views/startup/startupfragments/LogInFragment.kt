@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
-import org.mindrot.jbcrypt.BCrypt
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 
@@ -30,29 +29,25 @@ class LogInFragment : Fragment(), AnkoLogger {
         presenter = LoginPresenter(this)
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
+        val email: TextInputEditText? = view.findViewById<TextInputEditText>(R.id.fragment_userEmailLogin)
         val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
         val login: Button? = view.findViewById(R.id.fragment_login)
         progressBar = view.findViewById(R.id.progressBar)
 
-        presenter.hideProgress(progressBar)
+        hideProgress()
 
         login?.setOnClickListener {
-            presenter.showProgress(progressBar)
-            val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
-            if (checkUser) {
-                presenter.doLogin(email?.text.toString().trim().toLowerCase(), password?.text.toString().trim())
-                val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
-                if (BCrypt.checkpw(password?.text.toString().trim(), getUser.password)) {
-                    // userLogged = true
-                    // loggeduser = getUser
-                    // startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
-                    // val user = FirebaseAuth.getInstance().currentUser
-                }
-            } else {
-            }
+            presenter.doLogin(email?.text.toString().trim().toLowerCase(), password?.text.toString().trim())
         }
 
         return view
+    }
+
+    fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 }
