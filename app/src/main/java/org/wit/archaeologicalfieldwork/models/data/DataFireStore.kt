@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 class DataFireStore(val context: Context) : DataStore, AnkoLogger {
 
@@ -15,11 +16,14 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
     lateinit var userId: String
     lateinit var db: DatabaseReference
 
-    override suspend fun findAll(): List<DataModel> {
+    override suspend fun findAll(): ArrayList<DataModel> {
+        fetchHillforts {}
         return hillforts
     }
 
     override suspend fun findById(id: Long): DataModel? {
+        fetchHillforts {}
+        info("boop in find by id")
         val foundHillfort: DataModel? = hillforts.find { h -> h.id == id }
         return foundHillfort
     }
@@ -59,7 +63,8 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
             override fun onCancelled(error: DatabaseError) {
             }
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot.children.mapNotNullTo(hillforts) { it.getValue<DataModel>(DataModel::class.java) }
+                dataSnapshot.children.iterator().forEach { hillforts.add(it.getValue<DataModel>(DataModel::class.java)!!) }
+                info("boop fetch $hillforts")
                 hillfortsReady()
             }
         }

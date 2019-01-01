@@ -1,7 +1,7 @@
 package org.wit.archaeologicalfieldwork.models.data
 
 interface DataStore {
-    suspend fun findAll(): List<DataModel>
+    suspend fun findAll(): ArrayList<DataModel>
     suspend fun findById(id: Long): DataModel?
     suspend fun create(data: DataModel)
     suspend fun update(data: DataModel)
