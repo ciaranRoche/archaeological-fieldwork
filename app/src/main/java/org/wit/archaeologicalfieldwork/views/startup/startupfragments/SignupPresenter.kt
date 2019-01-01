@@ -2,6 +2,7 @@ package org.wit.archaeologicalfieldwork.views.startup.startupfragments
 
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.support.v4.toast
+import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
@@ -28,6 +29,7 @@ class SignupPresenter(val view: SignupFragment) {
                     if (userFireStore != null) {
                         newUser.email = email
                         newUser.name = name
+                        newUser.joined = getDate()
                         userFireStore!!.create(newUser.copy())
                         view.hideProgress()
                         userLogged = true
