@@ -11,7 +11,7 @@ import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.hashPassword
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
@@ -19,7 +19,7 @@ import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
 class SettingsPresenter(val view: SettingsFragment) {
 
-    var users: UserJSONStore = UserJSONStore(view.context!!)
+    var users: UserFireStore = UserFireStore(view.context!!)
 
     fun doImagePicker(parent: SettingsFragment, req: Int) {
         showImagePicker(parent, req)
