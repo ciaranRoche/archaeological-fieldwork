@@ -21,10 +21,11 @@ class LoginPresenter(val view: LogInFragment) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view.activity!!) { task ->
             if (task.isSuccessful) {
                 if (fireStore != null) {
-                    fireStore!!.fetchHillforts {}
-                    view.hideProgress()
-                    userLogged = true
-                    view.startActivity<HomeView>()
+                    fireStore!!.fetchHillforts {
+                        view.hideProgress()
+                        userLogged = true
+                        view.startActivity<HomeView>()
+                    }
                 } else {
                     view.hideProgress()
                     userLogged = true

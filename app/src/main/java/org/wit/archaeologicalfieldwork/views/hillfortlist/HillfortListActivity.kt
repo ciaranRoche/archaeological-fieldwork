@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import kotlinx.android.synthetic.main.fragment_hillfort_list.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.HillfortListener
 import org.wit.archaeologicalfieldwork.adapters.HillfortPagerAdapter
@@ -30,7 +29,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
         toolbarList.title = "Hill Fort Profiles"
         setSupportActionBar(toolbarList)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        info("boop ${hillforts.findAll()}")
         viewPager = findViewById(R.id.viewPager)
         pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts.findAll() as ArrayList<HillfortModel>)
         viewPager.adapter = pagerAdapter

@@ -25,6 +25,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
     }
 
     override suspend fun create(data: DataModel) {
+        fetchHillforts {}
         val key = db.child("users").child(userId).child("hillforts").push().key
         data.fbId = key!!
         hillforts.add(data)
@@ -32,6 +33,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
     }
 
     override suspend fun update(data: DataModel) {
+        fetchHillforts {}
         val foundHillfort: DataModel? = hillforts.find { h -> h.fbId == data.fbId }
         if (foundHillfort != null) {
             foundHillfort.title = data.title
@@ -43,6 +45,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
     }
 
     override suspend fun delete(data: DataModel) {
+        fetchHillforts {}
         db.child("users").child(userId).child("hillforts").child(data.fbId).removeValue()
         hillforts.remove(data)
     }
