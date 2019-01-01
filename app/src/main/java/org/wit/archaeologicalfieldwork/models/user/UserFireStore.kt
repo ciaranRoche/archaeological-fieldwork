@@ -12,33 +12,34 @@ import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 
 class UserFireStore(val context: Context) : UserStore, AnkoLogger {
 
-    val users = ArrayList<UserModel>()
+    var users = mutableListOf<UserModel>()
     lateinit var userId: String
     lateinit var db: DatabaseReference
 
     override fun create(user: UserModel) {
-        db = FirebaseDatabase.getInstance().reference
-        val key = db.child("users").push().key
+        fetchUserProfile { }
+        val key = db.child("users").child(userId).child("profile").push().key
         user.fbid = key!!
         users.add(user)
-        db.child("users").child(key).setValue(user)
+        db.child("users").child(userId).child("profile").child(key).setValue(user)
     }
 
     override fun update(user: UserModel) {
+        fetchUserProfile { }
         var foundUser: UserModel? = users.find { u -> u.id == user.id }
         if (foundUser != null) {
             foundUser.name = user.name
             foundUser.email = user.email
-            foundUser.password = user.password
             foundUser.stats = user.stats
             foundUser.userImage = user.userImage
             foundUser.joined = user.joined
         }
-        db.child("users").child(user.fbid).setValue(user)
+        db.child("users").child(userId).child("profile").child(user.fbid).setValue(user)
     }
 
     override fun delete(user: UserModel) {
-        db.child("users").child(user.fbid).removeValue()
+        fetchUserProfile { }
+        db.child("users").child(userId).child("profile").child(user.fbid).removeValue()
         users.remove(user)
     }
 
@@ -63,7 +64,7 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
         return foundUser.stats
     }
 
-    fun fetchUsers(usersReady: () -> Unit) {
+    fun fetchUserProfile(usersReady: () -> Unit) {
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }
@@ -75,7 +76,6 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
         }
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         db = FirebaseDatabase.getInstance().reference
-        users.clear()
-        db.child("users").addListenerForSingleValueEvent(valueEventListener)
+        db.child("users").child(userId).child("profile").addListenerForSingleValueEvent(valueEventListener)
     }
 }

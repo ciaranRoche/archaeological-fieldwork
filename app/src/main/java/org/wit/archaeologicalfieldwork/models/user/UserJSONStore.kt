@@ -35,7 +35,6 @@ class UserJSONStore(val context: Context) : UserStore, AnkoLogger {
         if (foundUser != null) {
             foundUser.name = user.name
             foundUser.email = user.email
-            foundUser.password = user.password
             foundUser.stats = user.stats
             foundUser.userImage = user.userImage
             foundUser.joined = user.joined

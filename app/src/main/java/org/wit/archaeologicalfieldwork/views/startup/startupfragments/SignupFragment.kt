@@ -22,6 +22,7 @@ class SignupFragment : Fragment(), AnkoLogger {
     lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
     lateinit var presenter: SignupPresenter
+    lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class SignupFragment : Fragment(), AnkoLogger {
         val view = inflater.inflate(R.layout.fragment_signup, container, false)
         val name: TextInputEditText? = view.findViewById(R.id.fragment_userName)
         val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmail)
-        val password: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
+        val passwordText: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
         val verifyPassword: TextInputEditText? = view.findViewById(R.id.fragment_verifyPassword)
         val submit: Button? = view.findViewById(R.id.fragment_saveUser)
         progressBar = view.findViewById(R.id.progressBar2)
@@ -45,11 +46,11 @@ class SignupFragment : Fragment(), AnkoLogger {
         submit?.setOnClickListener {
             user.name = name?.text.toString()
             user.email = email?.text.toString().trim().toLowerCase()
-            user.password = password?.text.toString().trim()
+            password = passwordText?.text.toString().trim()
             user.joined = getDate()
-            if (user.password.isNotEmpty()) {
-                if (user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()) {
-                    presenter.doSignUp(user.email, user.password)
+            if (password.isNotEmpty()) {
+                if (user.name.isNotEmpty() and user.email.isNotEmpty() and password.isNotEmpty()) {
+                    presenter.doSignUp(user.email, password, user.name)
                 } else {
                     toast("Please fill out All fields")
                 }

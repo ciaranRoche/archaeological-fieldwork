@@ -80,7 +80,7 @@ class SettingsPresenter(val view: SettingsFragment) {
                 val verify = verifyPass?.text.toString().trim()
                 if (pass.equals(verify)) {
                     val hash = hashPassword(pass, verify)
-                    user.password = hash
+                    // user.password = hash
                     users.update(user.copy())
                     view.toast("Password Updated")
                 } else {
