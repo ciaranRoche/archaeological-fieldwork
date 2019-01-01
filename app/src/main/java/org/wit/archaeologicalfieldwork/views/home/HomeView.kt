@@ -15,7 +15,7 @@ import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortStore
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
@@ -42,7 +42,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         presenter = HomePresenter(this)
 
         hillforts = HillfortJSONStore(applicationContext)
-        users = UserJSONStore(applicationContext)
+        users = UserFireStore(applicationContext)
         data = DataFireStore(applicationContext)
 
         presenter.doCheckUser()
@@ -59,7 +59,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         app_toolbar.title = title
         setSupportActionBar(app_toolbar)
 
-        val homeFragment = HomeFragment.newInstance(loggeduser.name)
+        val homeFragment = HomeFragment.newInstance(user.name)
         presenter.openFragment(homeFragment, supportFragmentManager)
     }
 

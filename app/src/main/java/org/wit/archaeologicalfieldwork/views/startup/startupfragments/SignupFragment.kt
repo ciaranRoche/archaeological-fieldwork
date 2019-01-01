@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class SignupFragment : Fragment(), AnkoLogger {
 
@@ -59,6 +61,10 @@ class SignupFragment : Fragment(), AnkoLogger {
             }
         }
         return view
+    }
+
+    fun login(user: UserModel) {
+        startActivityForResult(intentFor<HomeView>().putExtra("user", user), 0)
     }
 
     fun showProgress() {

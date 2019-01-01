@@ -1,12 +1,11 @@
 package org.wit.archaeologicalfieldwork.views.startup.startupfragments
 
 import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
-import org.wit.archaeologicalfieldwork.views.home.HomeView
+import org.wit.archaeologicalfieldwork.views.startup.loggeduser
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
 class SignupPresenter(val view: SignupFragment) {
@@ -32,7 +31,8 @@ class SignupPresenter(val view: SignupFragment) {
                         userFireStore!!.create(newUser.copy())
                         view.hideProgress()
                         userLogged = true
-                        view.startActivity<HomeView>()
+                        loggeduser = newUser
+                        view.login(loggeduser!!)
                     }
                 }
             } else {

@@ -10,8 +10,11 @@ import android.widget.Button
 import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.support.v4.intentFor
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class LogInFragment : Fragment(), AnkoLogger {
 
@@ -41,6 +44,10 @@ class LogInFragment : Fragment(), AnkoLogger {
         }
 
         return view
+    }
+
+    fun login(user: UserModel) {
+        startActivityForResult(intentFor<HomeView>().putExtra("user", user), 0)
     }
 
     fun showProgress() {
