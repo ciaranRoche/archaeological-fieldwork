@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import java.io.ByteArrayOutputStream
 import java.io.File
