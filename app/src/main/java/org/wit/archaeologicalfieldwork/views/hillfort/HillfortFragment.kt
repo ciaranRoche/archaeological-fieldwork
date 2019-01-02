@@ -173,7 +173,6 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
             }
             IMAGE_CAPTURE -> {
                 val imageBitmap = data!!.extras.get("data") as Bitmap
-                info("boop on result : $currentPhotoPath")
                 presenter.doUploadBitmap(imageBitmap, currentPhotoPath, hillfort)
             }
         }

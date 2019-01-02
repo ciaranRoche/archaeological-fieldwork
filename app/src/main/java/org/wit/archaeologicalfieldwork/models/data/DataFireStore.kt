@@ -47,7 +47,6 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         val key = db.child("users").child(userId).child("hillforts").push().key
         data.fbId = key!!
         hillforts.add(data)
-        info("boop create : $data")
         db.child("users").child(userId).child("hillforts").child(key).setValue(data)
     }
 
@@ -76,7 +75,6 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
 
     override fun updateImage(image: String, hillfort: DataModel) {
         fetchHillforts { }
-        info("boop image firestore called : $image")
         val fileName = File(image)
         val imageName = fileName.name
 
@@ -93,7 +91,6 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
             }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                     hillfort.images += it.toString()
-                    info("boop image hillfort : $hillfort")
                 }
             }
         }
@@ -114,7 +111,6 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
             }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                     hillfort.images += it.toString()
-                    info("boop image hillfort : $hillfort")
                 }
             }
         }

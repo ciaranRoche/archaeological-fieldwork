@@ -115,7 +115,6 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
     }
 
     fun doUploadImage(image: String, hillfort: DataModel) {
-        info("boop upload image: $image")
         fireStore.updateImage(image, hillfort)
     }
 
@@ -123,7 +122,6 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
     }
 
     fun doUploadBitmap(bitmap: Bitmap, name: String, hillfort: DataModel) {
-        info("boop : $bitmap")
         fireStore.updateBitMapImage(bitmap, name, hillfort)
     }
 
