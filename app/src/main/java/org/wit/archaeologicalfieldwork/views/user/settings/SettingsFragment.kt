@@ -64,7 +64,7 @@ class SettingsFragment : Fragment(), AnkoLogger {
         }
 
         passwordBtn?.setOnClickListener {
-            presenter.doPasswordUpdate(user)
+            presenter.doPasswordUpdate()
         }
 
         return view

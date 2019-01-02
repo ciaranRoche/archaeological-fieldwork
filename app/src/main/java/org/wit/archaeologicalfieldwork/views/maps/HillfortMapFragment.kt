@@ -15,16 +15,16 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
+import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
-
-class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
+class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
     lateinit var map: GoogleMap
     lateinit var mapView: MapView
     lateinit var presenter: HillfortMapPresenter
-    var hillforts = ArrayList<HillfortModel>()
+    var hillforts = ArrayList<DataModel>()
 
     lateinit var currentTitle: TextView
 
@@ -72,16 +72,16 @@ class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         map.uiSettings.setZoomControlsEnabled(true)
         hillforts.forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
-            val options = MarkerOptions().title(it.name).position(loc)
-            map.addMarker(options).tag = it.id
+            val options = MarkerOptions().title(it.title).position(loc)
+            map.addMarker(options).tag = it.fbId
             map.setOnMarkerClickListener(this)
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val hillfort = presenter.getHillfort(marker)
-        currentTitle.text = hillfort.name
+        val hillfort = hillforts.find { h -> h.fbId == marker.tag as String }
+        currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort.description
         if (hillfort.images.isNotEmpty()) {
             Picasso.get().load(hillfort.images[0])
@@ -95,7 +95,7 @@ class HillfortMapFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     companion object {
-        fun newInstance(hillforts: ArrayList<HillfortModel>): HillfortMapFragment {
+        fun newInstance(hillforts: ArrayList<DataModel>): HillfortMapFragment {
             val args = Bundle()
             args.putParcelableArrayList("hillforts", hillforts)
             val fragment = HillfortMapFragment()

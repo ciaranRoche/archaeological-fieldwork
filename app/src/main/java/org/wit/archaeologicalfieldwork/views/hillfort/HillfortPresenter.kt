@@ -8,29 +8,29 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
-import org.wit.archaeologicalfieldwork.main.MainApp
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.data.DataFireStore
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
 class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
-    lateinit var app: MainApp
 
-    var hillfortStore: HillfortJSONStore = HillfortJSONStore(view.context!!)
-    var userStore: UserJSONStore = UserJSONStore(view.context!!)
+    val fireStore: DataFireStore = DataFireStore(view.context!!)
+    // var hillfortStore: HillfortJSONStore = HillfortJSONStore(view.context!!)
+    // var userStore: UserJSONStore = UserJSONStore(view.context!!)
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
 
-    var hillfort = HillfortModel()
+    var hillfort = DataModel()
     var stat = StatsModel()
 
     var edit = view.arguments!!.getBoolean("edit")
@@ -75,7 +75,7 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
         map?.setOnMarkerDragListener(view)
-        val options = MarkerOptions().title(hillfort.name).position(LatLng(hillfort.location.lat, hillfort.location.lng)).draggable(true)
+        val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng)).draggable(true)
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
     }
@@ -90,11 +90,13 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
         return hillfort.location
     }
 
-    fun doAddOrSave(hillfort: HillfortModel) {
-        if (edit) {
-            hillfortStore.update(hillfort)
-        } else {
-            hillfortStore.create(hillfort)
+    fun doAddOrSave(hillfort: DataModel) {
+        async(UI) {
+            if (edit) {
+                fireStore.update(hillfort)
+            } else {
+                fireStore.create(hillfort)
+            }
         }
     }
 
@@ -103,7 +105,9 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
     }
 
     fun doDelete() {
-        hillfortStore.delete(hillfort)
+        async(UI) {
+            fireStore.delete(hillfort)
+        }
     }
 
     fun doSelectImage(parent: HillfortFragment, req: Int) {
@@ -121,6 +125,6 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
             stat.date = getDate()
             user.stats[user.stats.indexOf(stat)] = stat
         }
-        userStore.update(user)
+        // userStore.update(user)
     }
 }

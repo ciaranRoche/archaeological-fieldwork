@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.ViewPagerAdapter
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 
 class HillFortProfileFragment : Fragment() {
+    lateinit var pagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hill_fort_profile, container, false)
@@ -19,17 +20,18 @@ class HillFortProfileFragment : Fragment() {
         val descriptionTextView = view.findViewById<TextView>(R.id.hillfortProfileDescription)
         val imagePager = view.findViewById<ViewPager>(R.id.view_pager)
 
-        val hillfort = arguments!!.getParcelable("hillfort") as HillfortModel
+        val hillfort = arguments!!.getParcelable("hillfort") as DataModel
 
-        nameTextview.text = hillfort.name
+        nameTextview.text = hillfort.title
         descriptionTextView.text = hillfort.description
-        imagePager.adapter = ViewPagerAdapter(hillfort.images)
+        pagerAdapter = ViewPagerAdapter(hillfort.images)
+        imagePager.adapter = pagerAdapter
 
         return view
     }
 
     companion object {
-        fun newInstance(hillfort: HillfortModel): HillFortProfileFragment {
+        fun newInstance(hillfort: DataModel): HillFortProfileFragment {
             val args = Bundle()
             args.putParcelable("hillfort", hillfort)
             val fragment = HillFortProfileFragment()

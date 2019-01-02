@@ -6,34 +6,46 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import kotlinx.android.synthetic.main.fragment_hillfort_list.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.HillfortListener
 import org.wit.archaeologicalfieldwork.adapters.HillfortPagerAdapter
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortJSONStore
+import org.wit.archaeologicalfieldwork.models.data.DataFireStore
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortStore
+import com.nshmura.recyclertablayout.RecyclerTabLayout
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
 
-    lateinit var hillforts: HillfortStore
+    lateinit var hillforts: ArrayList<DataModel>
     lateinit var viewPager: ViewPager
     lateinit var pagerAdapter: HillfortPagerAdapter
+    lateinit var data: DataFireStore
+    private lateinit var recyclerTabLayout: RecyclerTabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_hillfort_list)
-        hillforts = HillfortJSONStore(applicationContext)
 
-        toolbarList.title = "Hill Fort Profiles"
-        setSupportActionBar(toolbarList)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        info("boop ${hillforts.findAll()}")
-        viewPager = findViewById(R.id.viewPager)
-        pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts.findAll() as ArrayList<HillfortModel>)
-        viewPager.adapter = pagerAdapter
+        data = DataFireStore(applicationContext)
+
+        async(UI) {
+            hillforts = data.findAll()
+            delay(1000)
+            toolbarList.title = "Hill Fort Profiles"
+            setSupportActionBar(toolbarList)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            viewPager = findViewById(R.id.viewPager)
+            pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts as ArrayList<DataModel>)
+            viewPager.adapter = pagerAdapter
+            viewPager.currentItem = pagerAdapter.count / 2
+            recyclerTabLayout = findViewById(R.id.recyclerTabLayout)
+            recyclerTabLayout.setUpWithViewPager(viewPager)
+        }
 
         // val layoutManager = LinearLayoutManager(this)
         // recyclerView.layoutManager = layoutManager
@@ -45,7 +57,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadHillforts()
+//        loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -54,11 +66,13 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun loadHillforts() {
-        showHillforts(hillforts.findAll())
-    }
+//    private fun loadHillforts() {
+//        async (UI) {
+//            showHillforts(hillforts.findAll())
+//        }
+//    }
 
-    fun showHillforts(hillforts: List<HillfortModel>) {
+    fun showHillforts(hillforts: ArrayList<DataModel>) {
         // recyclerView.adapter = HillfortAdapter(hillforts, this)
         // recyclerView.adapter?.notifyDataSetChanged()
     }

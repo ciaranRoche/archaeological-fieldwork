@@ -12,31 +12,33 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.views.home.HomeView
-import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
-import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.helpers.getDate
-import org.wit.archaeologicalfieldwork.helpers.hashPassword
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class SignupFragment : Fragment(), AnkoLogger {
 
     var user = UserModel()
     lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
+    lateinit var presenter: SignupPresenter
+    lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        users = UserJSONStore(this.context!!)
+        users = UserFireStore(this.context!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        presenter = SignupPresenter(this)
+
         val view = inflater.inflate(R.layout.fragment_signup, container, false)
         val name: TextInputEditText? = view.findViewById(R.id.fragment_userName)
         val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmail)
-        val password: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
+        val passwordText: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
         val verifyPassword: TextInputEditText? = view.findViewById(R.id.fragment_verifyPassword)
         val submit: Button? = view.findViewById(R.id.fragment_saveUser)
         progressBar = view.findViewById(R.id.progressBar2)
@@ -44,18 +46,13 @@ class SignupFragment : Fragment(), AnkoLogger {
         hideProgress()
 
         submit?.setOnClickListener {
-            showProgress()
             user.name = name?.text.toString()
             user.email = email?.text.toString().trim().toLowerCase()
-            user.password = hashPassword(password?.text.toString().trim(), verifyPassword?.text.toString().trim())
+            password = passwordText?.text.toString().trim()
             user.joined = getDate()
-            if (user.password.isNotEmpty()) {
-                if (user.name.isNotEmpty() and user.email.isNotEmpty() and user.password.isNotEmpty()) {
-                    users.create(user.copy())
-                    val loggedUser = users.getUser(email?.text.toString())
-                    userLogged = true
-                    loggeduser = loggedUser
-                    startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
+            if (password.isNotEmpty()) {
+                if (user.name.isNotEmpty() and user.email.isNotEmpty() and password.isNotEmpty()) {
+                    presenter.doSignUp(user.email, password, user.name)
                 } else {
                     toast("Please fill out All fields")
                 }
@@ -66,11 +63,15 @@ class SignupFragment : Fragment(), AnkoLogger {
         return view
     }
 
-    private fun showProgress() {
+    fun login(user: UserModel) {
+        startActivityForResult(intentFor<HomeView>().putExtra("user", user), 0)
+    }
+
+    fun showProgress() {
         progressBar.visibility = View.VISIBLE
     }
 
-    private fun hideProgress() {
+    fun hideProgress() {
         progressBar.visibility = View.GONE
     }
 }

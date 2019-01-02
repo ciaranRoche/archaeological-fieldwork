@@ -17,6 +17,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
@@ -25,7 +26,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
 
     lateinit var presenter: HillfortPresenter
 
-    var hillfort = HillfortModel()
+    var hillfort = DataModel()
     var user = UserModel()
     var IMAGE_REQUEST = 1
     lateinit var mapView: MapView
@@ -35,9 +36,9 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
 
-        if (presenter.edit) {
-            hillfort = arguments!!.getParcelable("hillfort") as HillfortModel
-        }
+//        if (presenter.edit) {
+//            hillfort = arguments!!.getParcelable("hillfort") as HillfortModel
+//        }
 
         user = arguments!!.getParcelable("user") as UserModel
 
@@ -57,13 +58,13 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         handleButton(deleteBtn, view)
 
         addBtn?.setOnClickListener {
-            hillfort.name = nameText.text.toString()
+            hillfort.title = nameText.text.toString()
             hillfort.description = descriptionText.text.toString()
             hillfort.location = presenter.getLocation()
-            if (hillfort.name.isNotEmpty()) {
+            if (hillfort.title.isNotEmpty()) {
                 presenter.doAddOrSave(hillfort.copy())
             }
-            toast("${hillfort.name} has been added")
+            toast("${hillfort.title} has been added")
             startActivityForResult(intentFor<HillfortListActivity>(), 0)
             activity!!.setResult(AppCompatActivity.RESULT_OK)
             activity!!.finish()

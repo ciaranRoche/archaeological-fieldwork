@@ -6,12 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
-import org.wit.archaeologicalfieldwork.helpers.hashPassword
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
@@ -19,7 +19,7 @@ import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
 class SettingsPresenter(val view: SettingsFragment) {
 
-    var users: UserJSONStore = UserJSONStore(view.context!!)
+    var users: UserFireStore = UserFireStore(view.context!!)
 
     fun doImagePicker(parent: SettingsFragment, req: Int) {
         showImagePicker(parent, req)
@@ -52,7 +52,7 @@ class SettingsPresenter(val view: SettingsFragment) {
         transaction.commit()
     }
 
-    fun doPasswordUpdate(user: UserModel) {
+    fun doPasswordUpdate() {
         val alert = AlertDialog.Builder(view.context!!)
         var layout: LinearLayout? = null
         var updatePass: EditText?
@@ -79,10 +79,14 @@ class SettingsPresenter(val view: SettingsFragment) {
                 val pass = updatePass?.text.toString().trim()
                 val verify = verifyPass?.text.toString().trim()
                 if (pass.equals(verify)) {
-                    val hash = hashPassword(pass, verify)
-                    user.password = hash
-                    users.update(user.copy())
-                    view.toast("Password Updated")
+                    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+                    val authUser = auth.currentUser
+                    authUser!!.updatePassword(pass).addOnCompleteListener(view.activity!!) {
+                        task -> if (!task.isSuccessful) {
+                        view.toast("Password Update Failed : ${task.exception?.message}")
+                    } else {
+                        view.toast("Password Updated")
+                    } }
                 } else {
                     view.toast("Looks like something went wrong")
                 }

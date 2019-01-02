@@ -11,18 +11,16 @@ import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
-import org.mindrot.jbcrypt.BCrypt
-import org.wit.archaeologicalfieldwork.views.home.HomeView
-import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
-import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
+import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.models.user.UserStore
+import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class LogInFragment : Fragment(), AnkoLogger {
 
     lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
+    lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +28,11 @@ class LogInFragment : Fragment(), AnkoLogger {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        presenter = LoginPresenter(this)
+
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmailLogin)
+        val email: TextInputEditText? = view.findViewById<TextInputEditText>(R.id.fragment_userEmailLogin)
         val password: TextInputEditText? = view.findViewById(R.id.fragment_userPasswordLogin)
         val login: Button? = view.findViewById(R.id.fragment_login)
         progressBar = view.findViewById(R.id.progressBar)
@@ -39,28 +40,21 @@ class LogInFragment : Fragment(), AnkoLogger {
         hideProgress()
 
         login?.setOnClickListener {
-            showProgress()
-            val checkUser = users.checkUser(email?.text.toString().trim().toLowerCase())
-            if (checkUser) {
-                val getUser = users.getUser(email?.text.toString().trim().toLowerCase())
-                if (BCrypt.checkpw(password?.text.toString().trim(), getUser.password)) {
-                    userLogged = true
-                    loggeduser = getUser
-                    startActivityForResult(intentFor<HomeView>().putExtra("user", loggeduser), 0)
-                }
-            } else {
-                toast("Incorrect Details")
-            }
+            presenter.doLogin(email?.text.toString().trim().toLowerCase(), password?.text.toString().trim())
         }
 
         return view
     }
 
-    private fun showProgress() {
+    fun login(user: UserModel) {
+        startActivityForResult(intentFor<HomeView>().putExtra("user", user), 0)
+    }
+
+    fun showProgress() {
         progressBar.visibility = View.VISIBLE
     }
 
-    private fun hideProgress() {
+    fun hideProgress() {
         progressBar.visibility = View.GONE
     }
 }
