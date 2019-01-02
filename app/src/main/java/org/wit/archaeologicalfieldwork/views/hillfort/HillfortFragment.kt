@@ -119,7 +119,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
             IMAGE_REQUEST -> {
                 if (data != null) {
                     val image: String = data.data.toString()
-                    hillfort.images += image
+                    presenter.doUploadImage(image, hillfort)
                 }
             }
         }

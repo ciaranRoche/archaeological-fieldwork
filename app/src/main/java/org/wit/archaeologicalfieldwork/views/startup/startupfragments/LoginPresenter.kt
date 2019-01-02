@@ -1,8 +1,9 @@
 package org.wit.archaeologicalfieldwork.views.startup.startupfragments
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.main.MainApp
@@ -35,12 +36,13 @@ class LoginPresenter(val view: LogInFragment) : AnkoLogger {
                     fireStore!!.fetchHillforts {
                         if (userFireStore != null) {
                             userFireStore!!.fetchUserProfile {
-                                user = userFireStore!!.getUser(email)
-                                view.hideProgress()
-                                userLogged = true
-                                info("boop : $user")
-                                loggeduser = user
-                                view.login(loggeduser!!)
+                                async(UI) {
+                                    user = userFireStore!!.getUser(email)
+                                    view.hideProgress()
+                                    userLogged = true
+                                    loggeduser = user
+                                    view.login(loggeduser!!)
+                                }
                             }
                         }
                     }

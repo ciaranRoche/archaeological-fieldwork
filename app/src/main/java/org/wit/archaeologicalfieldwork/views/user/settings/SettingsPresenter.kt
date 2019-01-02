@@ -7,6 +7,8 @@ import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
@@ -26,7 +28,9 @@ class SettingsPresenter(val view: SettingsFragment) {
     }
 
     fun updateUser(user: UserModel) {
-        users.update(user.copy())
+        async(UI) {
+            users.update(user.copy())
+        }
     }
 
     fun checkUser() {
@@ -34,10 +38,12 @@ class SettingsPresenter(val view: SettingsFragment) {
     }
 
     fun deleteUser(user: UserModel) {
-        users.delete(user)
-        userLogged = false
-        view.startActivity<StartUpView>()
-        view.toast("User Deleted")
+        async(UI) {
+            users.delete(user)
+            userLogged = false
+            view.startActivity<StartUpView>()
+            view.toast("User Deleted")
+        }
     }
 
     fun redirectProfile(user: UserModel, support: FragmentManager) {

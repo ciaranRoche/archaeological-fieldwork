@@ -24,8 +24,6 @@ import org.wit.archaeologicalfieldwork.models.user.UserModel
 class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     val fireStore: DataFireStore = DataFireStore(view.context!!)
-    // var hillfortStore: HillfortJSONStore = HillfortJSONStore(view.context!!)
-    // var userStore: UserJSONStore = UserJSONStore(view.context!!)
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
@@ -112,6 +110,10 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     fun doSelectImage(parent: HillfortFragment, req: Int) {
         showImagePicker(parent, req)
+    }
+
+    fun doUploadImage(image: String, hillfort: DataModel) {
+        fireStore.updateImage(image, hillfort)
     }
 
     fun doVisit(user: UserModel) {

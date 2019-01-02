@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_settings.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
