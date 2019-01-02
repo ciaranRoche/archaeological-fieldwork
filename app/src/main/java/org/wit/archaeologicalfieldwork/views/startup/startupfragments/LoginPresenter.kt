@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
@@ -13,14 +14,16 @@ import org.wit.archaeologicalfieldwork.views.startup.userLogged
 
 class LoginPresenter(val view: LogInFragment) : AnkoLogger {
 
+    var app: MainApp = view?.context!!.applicationContext as MainApp
+
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     var userFireStore: UserFireStore? = null
     var fireStore: DataFireStore? = null
     var user = UserModel()
 
     init {
-        fireStore = DataFireStore(view.context!!)
-        userFireStore = UserFireStore(view.context!!)
+        fireStore = app.hillforts as DataFireStore
+        userFireStore = app.users as UserFireStore
     }
 
     fun doLogin(email: String, password: String) {

@@ -1,7 +1,9 @@
 package org.wit.archaeologicalfieldwork.views.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.Menu
 import android.view.MenuItem
@@ -15,7 +17,6 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
-import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.data.DataStore
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
@@ -27,14 +28,18 @@ import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment
 
+enum class VIEW {
+    PROFILE
+}
+
 open class HomeView : AppCompatActivity(), AnkoLogger {
 
     lateinit var user: UserModel
     lateinit var presenter: HomePresenter
-    lateinit var app: MainApp
     lateinit var hillforts: DataStore
     lateinit var data: DataFireStore
     lateinit var users: UserStore
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -43,6 +48,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
 
         presenter = HomePresenter(this)
 
+        app = application as MainApp
         hillforts = DataFireStore(applicationContext)
         users = UserFireStore(applicationContext)
         data = DataFireStore(applicationContext)
@@ -73,12 +79,9 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_hillforts -> {
-                var fortsArray = ArrayList<DataModel>()
                 data.fetchHillforts {
                     async(UI) {
-                        fortsArray = data.findAll()
-                        info("boop $fortsArray")
-                        val hillfortMapFragment = HillfortMapFragment.newInstance(fortsArray as ArrayList<DataModel>)
+                        val hillfortMapFragment = HillfortMapFragment.newInstance(data.findAll())
                         presenter.openFragment(hillfortMapFragment, supportFragmentManager)
                     }
                 }
@@ -110,10 +113,27 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return true
             }
             R.id.menu_profiles -> {
-                startActivityForResult(intentFor<HillfortListActivity>(), 0)
+                data.fetchHillforts {
+                    async(UI) {
+                        val hillforts = data.findAll()
+                        startActivity(intentFor<HillfortListActivity>())
+                    }
+                }
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
+        var intent = Intent(this, HomeView::class.java)
+        when (view) {
+            VIEW.PROFILE -> intent = Intent(this, HillfortListActivity::class.java)
+        }
+        if (key != "") {
+            intent.putExtra(key, value)
+        }
+        info("boop $view")
+        startActivityForResult(intent, code)
     }
 }

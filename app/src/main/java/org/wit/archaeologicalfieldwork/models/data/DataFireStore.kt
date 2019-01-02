@@ -21,6 +21,11 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         return hillforts
     }
 
+    override fun find(): ArrayList<DataModel> {
+        fetchHillforts {}
+        return hillforts
+    }
+
     override suspend fun findById(id: Long): DataModel? {
         fetchHillforts {}
         info("boop in find by id")
