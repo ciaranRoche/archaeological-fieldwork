@@ -18,4 +18,8 @@ class HillfortPagerAdapter(fragmentManager: FragmentManager, private val hillfor
     override fun getItem(position: Int): Fragment {
         return HillFortProfileFragment.newInstance(hillforts[position % hillforts.size])
     }
+
+    override fun getPageTitle(position: Int): CharSequence {
+        return hillforts[position % hillforts.size].title
+    }
 }

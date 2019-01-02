@@ -16,6 +16,7 @@ import org.wit.archaeologicalfieldwork.adapters.HillfortPagerAdapter
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import com.nshmura.recyclertablayout.RecyclerTabLayout
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
 
@@ -23,6 +24,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
     lateinit var viewPager: ViewPager
     lateinit var pagerAdapter: HillfortPagerAdapter
     lateinit var data: DataFireStore
+    private lateinit var recyclerTabLayout: RecyclerTabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -41,6 +43,8 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
             pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts as ArrayList<DataModel>)
             viewPager.adapter = pagerAdapter
             viewPager.currentItem = pagerAdapter.count / 2
+            recyclerTabLayout = findViewById(R.id.recyclerTabLayout)
+            recyclerTabLayout.setUpWithViewPager(viewPager)
         }
 
         // val layoutManager = LinearLayoutManager(this)
