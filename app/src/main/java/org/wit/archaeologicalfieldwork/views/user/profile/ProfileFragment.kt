@@ -13,8 +13,6 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
-var loggeduser = UserModel()
-
 class ProfileFragment : Fragment(), AnkoLogger {
 
     lateinit var user: UserModel

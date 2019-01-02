@@ -16,7 +16,6 @@ import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import com.nshmura.recyclertablayout.RecyclerTabLayout
-import org.jetbrains.anko.info
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
 
@@ -44,7 +43,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
             setSupportActionBar(toolbarList)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             viewPager = findViewById(R.id.viewPager)
-            info("boop snoop : $hillforts")
             if (favorites) {
                 toolbarList.title = "HillFort Favorites"
                 val favoritesList = ArrayList<DataModel>()

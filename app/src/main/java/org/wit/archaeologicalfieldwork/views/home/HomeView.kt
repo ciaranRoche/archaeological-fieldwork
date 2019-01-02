@@ -11,9 +11,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.support.v4.intentFor
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.main.MainApp
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
@@ -24,8 +22,8 @@ import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.hillfort.HillfortFragment
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
 import org.wit.archaeologicalfieldwork.views.maps.HillfortMapFragment
+import org.wit.archaeologicalfieldwork.views.startup.loggeduser
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
-import org.wit.archaeologicalfieldwork.views.user.profile.loggeduser
 import org.wit.archaeologicalfieldwork.views.user.settings.SettingsFragment
 
 enum class VIEW {
@@ -61,7 +59,7 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("user")) {
             user = intent.extras.getParcelable<UserModel>("user")
         } else {
-            user = loggeduser
+            user = loggeduser!!
         }
 
         app_toolbar.title = title
@@ -132,7 +130,6 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
         if (key != "") {
             intent.putExtra(key, value)
         }
-        info("boop $view")
         startActivityForResult(intent, code)
     }
 }
