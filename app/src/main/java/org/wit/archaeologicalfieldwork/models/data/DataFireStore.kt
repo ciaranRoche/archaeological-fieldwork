@@ -1,19 +1,26 @@
 package org.wit.archaeologicalfieldwork.models.data
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
+import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class DataFireStore(val context: Context) : DataStore, AnkoLogger {
 
     val hillforts = ArrayList<DataModel>()
     lateinit var userId: String
     lateinit var db: DatabaseReference
+    lateinit var st: StorageReference
 
     override suspend fun findAll(): ArrayList<DataModel> {
         fetchHillforts {}
@@ -65,6 +72,29 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         hillforts.clear()
     }
 
+    override fun updateImage(image: String, hillfort: DataModel) {
+        fetchHillforts { }
+        val fileName = File(image)
+        val imageName = fileName.name
+
+        var imageRef = st.child(userId + '/' + imageName)
+        val baos = ByteArrayOutputStream()
+        val bitmap = readImageFromPath(context, image)
+
+        bitmap?.let {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            val uploadTask = imageRef.putBytes(data)
+            uploadTask.addOnFailureListener {
+                println(it.message)
+            }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                    hillfort.images += it.toString()
+                }
+            }
+        }
+    }
+
     fun fetchHillforts(hillfortsReady: () -> Unit) {
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -76,6 +106,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         }
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         db = FirebaseDatabase.getInstance().reference
+        st = FirebaseStorage.getInstance().reference
         hillforts.clear()
         db.child("users").child(userId).child("hillforts").addListenerForSingleValueEvent(valueEventListener)
     }

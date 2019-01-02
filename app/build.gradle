@@ -84,6 +84,7 @@ dependencies {
 
   implementation "com.google.firebase:firebase-core:$firebase_version"
   implementation "com.google.firebase:firebase-auth:$firebase_version"
+  implementation "com.google.firebase:firebase-storage:$firebase_version"
   implementation "com.google.firebase:firebase-database:$firebase_version"
 
   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
