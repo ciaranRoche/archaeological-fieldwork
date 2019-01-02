@@ -2,6 +2,7 @@ package org.wit.archaeologicalfieldwork.views.startup.startupfragments
 
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.main.MainApp
@@ -37,6 +38,7 @@ class LoginPresenter(val view: LogInFragment) : AnkoLogger {
                                 user = userFireStore!!.getUser(email)
                                 view.hideProgress()
                                 userLogged = true
+                                info("boop : $user")
                                 loggeduser = user
                                 view.login(loggeduser!!)
                             }

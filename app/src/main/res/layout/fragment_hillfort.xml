@@ -23,7 +23,9 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
+      android:background="@color/colorPrimaryDark"
       android:text="@string/button_addImage"
+      android:textColor="@color/colorPrimary"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
@@ -47,10 +49,13 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
+      android:background="@color/colorPrimaryDark"
       android:text="@string/button_addHillFort"
+      android:textColor="@color/colorPrimary"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/mapView" />
+      app:layout_constraintTop_toBottomOf="@+id/ratingBarAdd" />
 
     <Button
       android:id="@+id/btnDelete"
@@ -59,6 +64,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
+      android:backgroundTint="@color/colorDanger"
       android:text="@string/button_deleteHillfort"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +105,17 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_HillFortDescription" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <RatingBar
+      android:id="@+id/ratingBarAdd"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

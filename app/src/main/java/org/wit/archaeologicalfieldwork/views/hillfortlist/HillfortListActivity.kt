@@ -1,6 +1,5 @@
 package org.wit.archaeologicalfieldwork.views.hillfortlist
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
@@ -25,55 +24,46 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
     lateinit var pagerAdapter: HillfortPagerAdapter
     lateinit var data: DataFireStore
     private lateinit var recyclerTabLayout: RecyclerTabLayout
+    var favorites: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_hillfort_list)
 
+        if (intent.hasExtra("favorites")) {
+            favorites = intent.extras.getBoolean("favorites")
+        }
+
         data = DataFireStore(applicationContext)
 
         async(UI) {
             hillforts = data.findAll()
             delay(1000)
-            toolbarList.title = "Hill Fort Profiles"
             setSupportActionBar(toolbarList)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             viewPager = findViewById(R.id.viewPager)
-            pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts as ArrayList<DataModel>)
+            if (favorites) {
+                toolbarList.title = "HillFort Favorites"
+                val favoritesList = ArrayList<DataModel>()
+                hillforts.forEach { if (it.rating > 4) favoritesList.add(it) }
+                pagerAdapter = HillfortPagerAdapter(supportFragmentManager, favoritesList as ArrayList<DataModel>)
+            } else {
+                toolbarList.title = "HillFort Profiles"
+                pagerAdapter = HillfortPagerAdapter(supportFragmentManager, hillforts as ArrayList<DataModel>)
+            }
             viewPager.adapter = pagerAdapter
             viewPager.currentItem = pagerAdapter.count / 2
             recyclerTabLayout = findViewById(R.id.recyclerTabLayout)
             recyclerTabLayout.setUpWithViewPager(viewPager)
         }
-
-        // val layoutManager = LinearLayoutManager(this)
-        // recyclerView.layoutManager = layoutManager
-        // loadHillforts()
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        // startActivityForResult(intentFor<HillFortProfileActivity>().putExtra("hillfort", hillfort), 0)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        loadHillforts()
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_list, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-//    private fun loadHillforts() {
-//        async (UI) {
-//            showHillforts(hillforts.findAll())
-//        }
-//    }
-
-    fun showHillforts(hillforts: ArrayList<DataModel>) {
-        // recyclerView.adapter = HillfortAdapter(hillforts, this)
-        // recyclerView.adapter?.notifyDataSetChanged()
     }
 }

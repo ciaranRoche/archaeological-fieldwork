@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RatingBar
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.Marker
@@ -32,6 +33,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     lateinit var mapView: MapView
     lateinit var nameText: TextInputEditText
     lateinit var descriptionText: TextInputEditText
+    lateinit var ratingBar: RatingBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
@@ -48,6 +50,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         val imageBtn: Button? = view?.findViewById(R.id.chooseImage)
         val addBtn: Button? = view?.findViewById(R.id.btnAdd)
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
+        ratingBar = view.findViewById(R.id.ratingBarAdd)
         mapView = view.findViewById(R.id.mapView)
 
         mapView.onCreate(savedInstanceState)
@@ -56,6 +59,10 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         }
 
         handleButton(deleteBtn, view)
+
+        ratingBar.setOnRatingBarChangeListener { ratingBar, fl, b ->
+            hillfort.rating = fl
+        }
 
         addBtn?.setOnClickListener {
             hillfort.title = nameText.text.toString()
