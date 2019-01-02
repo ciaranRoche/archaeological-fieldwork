@@ -17,6 +17,7 @@
   <string name="button_addProfileImage">Add Avatar</string>
   <string name="button_updateProfileImage">Update Avatar</string>
   <string name="button_updatePassword">Update Password</string>
+  <string name="button_camera">Camera</string>
 
   <!--Hint Strings-->
   <string name="hint_HillFortTitle">Hillfort Title</string>

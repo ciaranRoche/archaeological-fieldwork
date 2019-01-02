@@ -1,6 +1,7 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -113,7 +115,16 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
     }
 
     fun doUploadImage(image: String, hillfort: DataModel) {
+        info("boop upload image: $image")
         fireStore.updateImage(image, hillfort)
+    }
+
+    fun doCamera() {
+    }
+
+    fun doUploadBitmap(bitmap: Bitmap, name: String, hillfort: DataModel) {
+        info("boop : $bitmap")
+        fireStore.updateBitMapImage(bitmap, name, hillfort)
     }
 
     fun doVisit(user: UserModel) {

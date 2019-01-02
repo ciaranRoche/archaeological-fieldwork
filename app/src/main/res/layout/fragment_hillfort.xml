@@ -26,8 +26,7 @@
       android:background="@color/colorPrimaryDark"
       android:text="@string/button_addImage"
       android:textColor="@color/colorPrimary"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintEnd_toStartOf="@+id/cameraButton"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
 
@@ -39,6 +38,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/chooseImage" />
 
@@ -116,6 +116,30 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
+    <Button
+      android:id="@+id/cameraButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@color/colorPrimaryDark"
+      android:text="@string/button_camera"
+      android:textColor="@color/colorPrimary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
+
+    <ImageView
+      android:id="@+id/imageView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+      tools:src="@tools:sample/avatars" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

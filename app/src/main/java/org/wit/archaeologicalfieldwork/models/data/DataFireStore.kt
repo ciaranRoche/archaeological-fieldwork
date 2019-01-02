@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -46,6 +47,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         val key = db.child("users").child(userId).child("hillforts").push().key
         data.fbId = key!!
         hillforts.add(data)
+        info("boop create : $data")
         db.child("users").child(userId).child("hillforts").child(key).setValue(data)
     }
 
@@ -74,6 +76,7 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
 
     override fun updateImage(image: String, hillfort: DataModel) {
         fetchHillforts { }
+        info("boop image firestore called : $image")
         val fileName = File(image)
         val imageName = fileName.name
 
@@ -90,6 +93,28 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
             }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                     hillfort.images += it.toString()
+                    info("boop image hillfort : $hillfort")
+                }
+            }
+        }
+    }
+
+    override fun updateBitMapImage(image: Bitmap, name: String, hillfort: DataModel) {
+        fetchHillforts { }
+        var imageRef = st.child(userId + '/' + name)
+        val baos = ByteArrayOutputStream()
+        val bitmap = image
+
+        bitmap?.let {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            val uploadTask = imageRef.putBytes(data)
+            uploadTask.addOnFailureListener {
+                println(it.message)
+            }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                    hillfort.images += it.toString()
+                    info("boop image hillfort : $hillfort")
                 }
             }
         }

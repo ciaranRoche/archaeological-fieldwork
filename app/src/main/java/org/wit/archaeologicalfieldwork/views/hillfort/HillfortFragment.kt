@@ -1,7 +1,10 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import com.google.android.material.textfield.TextInputEditText
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -9,12 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RatingBar
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.Marker
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
@@ -22,6 +27,10 @@ import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener {
 
@@ -30,10 +39,14 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     var hillfort = DataModel()
     var user = UserModel()
     var IMAGE_REQUEST = 1
+    var IMAGE_CAPTURE = 2
     lateinit var mapView: MapView
     lateinit var nameText: TextInputEditText
     lateinit var descriptionText: TextInputEditText
     lateinit var ratingBar: RatingBar
+    lateinit var cameraBtn: Button
+    lateinit var imageView: ImageView
+    lateinit var currentPhotoPath: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
@@ -52,6 +65,8 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
         ratingBar = view.findViewById(R.id.ratingBarAdd)
         mapView = view.findViewById(R.id.mapView)
+        cameraBtn = view.findViewById(R.id.cameraButton)
+        imageView = view.findViewById(R.id.imageView2)
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
@@ -86,11 +101,45 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
             activity!!.finish()
         }
 
+        cameraBtn?.setOnClickListener {
+            doCamera()
+        }
+
         return view
     }
 
     fun handleButton(button: Button?, view: View) {
         if (!presenter.edit()) button?.visibility = View.INVISIBLE
+    }
+
+    fun doCamera() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+                photoFile?.also {
+                    startActivityForResult(takePictureIntent, IMAGE_CAPTURE)
+                }
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = activity!!.applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
     }
 
     companion object {
@@ -121,6 +170,11 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
                     val image: String = data.data.toString()
                     presenter.doUploadImage(image, hillfort)
                 }
+            }
+            IMAGE_CAPTURE -> {
+                val imageBitmap = data!!.extras.get("data") as Bitmap
+                info("boop on result : $currentPhotoPath")
+                presenter.doUploadBitmap(imageBitmap, currentPhotoPath, hillfort)
             }
         }
     }
