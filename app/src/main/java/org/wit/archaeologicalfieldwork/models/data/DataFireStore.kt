@@ -20,9 +20,12 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         return hillforts
     }
 
-    override fun find(): ArrayList<DataModel> {
+    override suspend fun findFavorites(): ArrayList<DataModel> {
         fetchHillforts {}
-        return hillforts
+        val favorites = ArrayList<DataModel>()
+        hillforts.forEach { if (it.rating > 4) favorites.add(it) }
+
+        return favorites
     }
 
     override suspend fun findById(id: Long): DataModel? {

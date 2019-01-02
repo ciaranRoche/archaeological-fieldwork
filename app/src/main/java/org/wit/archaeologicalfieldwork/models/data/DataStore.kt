@@ -6,6 +6,6 @@ interface DataStore {
     suspend fun create(data: DataModel)
     suspend fun update(data: DataModel)
     suspend fun delete(data: DataModel)
-    fun find(): ArrayList<DataModel>
+    suspend fun findFavorites(): ArrayList<DataModel>
     fun clear()
 }

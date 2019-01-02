@@ -113,12 +113,11 @@ open class HomeView : AppCompatActivity(), AnkoLogger {
                 return true
             }
             R.id.menu_profiles -> {
-                data.fetchHillforts {
-                    async(UI) {
-                        val hillforts = data.findAll()
-                        startActivity(intentFor<HillfortListActivity>())
-                    }
-                }
+                startActivity(intentFor<HillfortListActivity>().putExtra("favorites", false))
+                return true
+            }
+            R.id.menu_hillfort_favorites -> {
+                startActivity(intentFor<HillfortListActivity>().putExtra("favorites", true))
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

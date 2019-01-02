@@ -14,6 +14,10 @@
       android:icon="@drawable/baseline_notes_white_18dp"
       android:title="@string/menu_profiles" />
     <item
+      android:id="@+id/menu_hillfort_favorites"
+      android:icon="@drawable/baseline_favorite_white_18dp"
+      android:title="@string/menu_favorites"/>
+    <item
       android:id="@+id/menu_logout"
       android:icon="@drawable/baseline_close_white_18dp"
       android:title="@string/menu_logout" />
