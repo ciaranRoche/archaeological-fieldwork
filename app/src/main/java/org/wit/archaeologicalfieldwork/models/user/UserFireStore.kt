@@ -108,7 +108,6 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                info("boop : $dataSnapshot")
                 dataSnapshot.children.mapNotNullTo(users) { it.getValue<UserModel>(UserModel::class.java) }
                 usersReady()
             }
