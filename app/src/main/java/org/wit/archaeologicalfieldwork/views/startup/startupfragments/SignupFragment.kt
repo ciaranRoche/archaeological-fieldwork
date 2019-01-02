@@ -13,23 +13,15 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.getDate
-import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
-import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class SignupFragment : Fragment(), AnkoLogger {
 
     var user = UserModel()
-    lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
     lateinit var presenter: SignupPresenter
     lateinit var password: String
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        users = UserFireStore(this.context!!)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

@@ -15,5 +15,6 @@ data class DataModel(
     var title: String = "",
     var description: String = "",
     var images: List<String> = emptyList(),
+    var rating: Float = 0.0F,
     @Embedded var location: Location = Location()
 ) : Parcelable

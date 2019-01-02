@@ -11,21 +11,13 @@ import android.widget.ProgressBar
 import org.wit.archaeologicalfieldwork.R
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.intentFor
-import org.wit.archaeologicalfieldwork.models.user.UserJSONStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
-import org.wit.archaeologicalfieldwork.models.user.UserStore
 import org.wit.archaeologicalfieldwork.views.home.HomeView
 
 class LogInFragment : Fragment(), AnkoLogger {
 
-    lateinit var users: UserStore
     lateinit var progressBar: ProgressBar
     lateinit var presenter: LoginPresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        users = UserJSONStore(this.context!!)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

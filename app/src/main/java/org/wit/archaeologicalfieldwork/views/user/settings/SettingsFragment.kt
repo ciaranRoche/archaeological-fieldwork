@@ -29,7 +29,7 @@ class SettingsFragment : Fragment(), AnkoLogger {
         user = arguments!!.getParcelable("user") as UserModel
 
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-        val name: TextInputEditText? = view.findViewById(R.id.settingsUserName)
+        val name: TextInputEditText? = view.findViewById<TextInputEditText>(R.id.settingsUserName)
         val email: TextInputEditText? = view.findViewById(R.id.settingsUserEmail)
         image = view.findViewById(R.id.userImage)
         val imgBtn: Button? = view.findViewById(R.id.profileImage)
