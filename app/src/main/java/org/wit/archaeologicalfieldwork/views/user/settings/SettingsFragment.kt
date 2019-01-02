@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_settings.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 
@@ -28,6 +30,7 @@ class SettingsFragment : Fragment(), AnkoLogger {
 
         user = arguments!!.getParcelable("user") as UserModel
 
+        info("boop heel $user")
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val name: TextInputEditText? = view.findViewById<TextInputEditText>(R.id.settingsUserName)
         val email: TextInputEditText? = view.findViewById(R.id.settingsUserEmail)
