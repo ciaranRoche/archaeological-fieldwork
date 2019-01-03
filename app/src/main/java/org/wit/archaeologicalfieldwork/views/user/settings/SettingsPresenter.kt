@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
@@ -20,7 +21,7 @@ import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
-class SettingsPresenter(val view: SettingsFragment) {
+class SettingsPresenter(val view: SettingsFragment) : AnkoLogger {
 
     var users: UserFireStore = UserFireStore(view.context!!)
     var data: DataFireStore = DataFireStore(view.context!!)

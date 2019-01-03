@@ -49,7 +49,7 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
     }
 
     override suspend fun delete(user: UserModel) {
-        fetchUserProfile { }
+        fetchUserProfile {}
         db.child("users").child(userId).child("profile").child(user.fbid).removeValue()
         users.remove(user)
     }
