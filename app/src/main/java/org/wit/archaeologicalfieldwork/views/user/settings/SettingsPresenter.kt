@@ -43,7 +43,7 @@ class SettingsPresenter(val view: SettingsFragment) : AnkoLogger {
     fun deleteUser(user: UserModel) {
         async(UI) {
             users.delete(user)
-            data.deleteByFbif(user.fbid)
+            data.deleteByFbif()
             userLogged = false
             FirebaseAuth.getInstance().currentUser!!.delete()
             view.startActivity<StartUpView>()
