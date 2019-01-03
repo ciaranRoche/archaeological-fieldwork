@@ -31,7 +31,6 @@ class SignupFragment : Fragment(), AnkoLogger {
         val name: TextInputEditText? = view.findViewById(R.id.fragment_userName)
         val email: TextInputEditText? = view.findViewById(R.id.fragment_userEmail)
         val passwordText: TextInputEditText? = view.findViewById(R.id.fragment_userPassword)
-        val verifyPassword: TextInputEditText? = view.findViewById(R.id.fragment_verifyPassword)
         val submit: Button? = view.findViewById(R.id.fragment_saveUser)
         progressBar = view.findViewById(R.id.progressBar2)
 
