@@ -68,6 +68,11 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         hillforts.remove(data)
     }
 
+    override suspend fun deleteByFbif(fbid: String) {
+        fetchHillforts {}
+        db.child("users").child(userId).child("hillforts").child(fbid).removeValue()
+    }
+
     override fun clear() {
         hillforts.clear()
     }
