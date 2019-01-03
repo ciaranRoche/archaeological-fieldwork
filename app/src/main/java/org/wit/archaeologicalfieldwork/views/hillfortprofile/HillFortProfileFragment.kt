@@ -16,7 +16,6 @@ import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.adapters.ViewPagerAdapter
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
-import android.content.Intent
 
 class HillFortProfileFragment : Fragment(), AnkoLogger {
     lateinit var pagerAdapter: ViewPagerAdapter
@@ -24,8 +23,10 @@ class HillFortProfileFragment : Fragment(), AnkoLogger {
     lateinit var hillfort: DataModel
     lateinit var fireStore: DataFireStore
     lateinit var shareBtn: Button
+    lateinit var presenter: HillFortProfilePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        presenter = HillFortProfilePresenter(this)
         val view = inflater.inflate(R.layout.fragment_hill_fort_profile, container, false)
         val nameTextview = view.findViewById<TextView>(R.id.hillfortProfileName)
         val descriptionTextView = view.findViewById<TextView>(R.id.hillfortProfileDescription)
@@ -46,12 +47,7 @@ class HillFortProfileFragment : Fragment(), AnkoLogger {
         imagePager.adapter = pagerAdapter
 
         shareBtn.setOnClickListener {
-            val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            val shareBody = "Hey I found this awesome hillfort here, lat : ${hillfort.location.lat} , lng : ${hillfort.location.lng}"
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "I found this cool hillfort")
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(sharingIntent, "Share via"))
+            presenter.doShare(hillfort)
         }
 
         return view
