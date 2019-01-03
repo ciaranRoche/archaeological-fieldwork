@@ -9,13 +9,14 @@
 
     <TextView
       android:id="@+id/signupMessage"
-      android:layout_width="302dp"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
       android:gravity="center"
       android:text="@string/message_signup"
+      android:textAlignment="center"
       android:textSize="18sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +26,9 @@
       android:id="@+id/textInputLayout3"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
+      android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
-      android:layout_marginEnd="24dp"
+      android:layout_marginEnd="8dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/signupMessage">
@@ -36,16 +37,17 @@
           android:id="@+id/fragment_userName"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:hint="@string/hint_userName" />
+          android:hint="@string/hint_userName"
+          android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/textInputLayout4"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
+      android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
-      android:layout_marginEnd="24dp"
+      android:layout_marginEnd="8dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -61,9 +63,9 @@
       android:id="@+id/textInputLayout5"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
+      android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
-      android:layout_marginEnd="24dp"
+      android:layout_marginEnd="8dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
@@ -79,7 +81,7 @@
     <Button
       android:id="@+id/fragment_saveUser"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="47dp"
       android:layout_marginStart="44dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="44dp"
@@ -87,6 +89,7 @@
       android:text="@string/button_signUp"
       android:textColor="@color/colorPrimary"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 
@@ -101,4 +104,5 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/fragment_saveUser" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
