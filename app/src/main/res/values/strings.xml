@@ -18,6 +18,7 @@
   <string name="button_updateProfileImage">Update Avatar</string>
   <string name="button_updatePassword">Update Password</string>
   <string name="button_camera">Camera</string>
+  <string name="button_share">Share</string>
 
   <!--Hint Strings-->
   <string name="hint_HillFortTitle">Hillfort Title</string>
@@ -29,6 +30,8 @@
   <string name="profile_description">Description</string>
   <string name="hillfort_profile_name">Name</string>
   <string name="hillfort_visited">Visited</string>
+  <string name="hint_longitude">Longitude</string>
+  <string name="hint_latitude">Latitude</string>
 
   <!--Menu Strings-->
   <string name="menu_addHillfort">Add Hillfort</string>
