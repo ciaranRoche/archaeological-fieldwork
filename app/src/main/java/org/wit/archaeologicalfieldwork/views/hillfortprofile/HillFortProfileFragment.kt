@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
 import kotlinx.coroutines.experimental.android.UI
@@ -21,12 +22,16 @@ class HillFortProfileFragment : Fragment(), AnkoLogger {
     lateinit var ratingBar: RatingBar
     lateinit var hillfort: DataModel
     lateinit var fireStore: DataFireStore
+    lateinit var shareBtn: Button
+    lateinit var presenter: HillFortProfilePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        presenter = HillFortProfilePresenter(this)
         val view = inflater.inflate(R.layout.fragment_hill_fort_profile, container, false)
         val nameTextview = view.findViewById<TextView>(R.id.hillfortProfileName)
         val descriptionTextView = view.findViewById<TextView>(R.id.hillfortProfileDescription)
         val imagePager = view.findViewById<ViewPager>(R.id.view_pager)
+        shareBtn = view.findViewById(R.id.shareHillfort)
         ratingBar = view.findViewById(R.id.ratingBar)
 
         fireStore = DataFireStore(context!!)
@@ -40,6 +45,10 @@ class HillFortProfileFragment : Fragment(), AnkoLogger {
         ratingBar.rating = hillfort.rating
         pagerAdapter = ViewPagerAdapter(hillfort.images)
         imagePager.adapter = pagerAdapter
+
+        shareBtn.setOnClickListener {
+            presenter.doShare(hillfort)
+        }
 
         return view
     }
