@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.os.Environment
 import android.provider.MediaStore
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,10 +17,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
+import org.wit.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
-import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
+import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.location.Location
@@ -35,6 +38,7 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
+    val locationRequest = createDefaultLocationRequest()
 
     lateinit var currentPhotoPath: String
 
@@ -68,6 +72,21 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
         } else {
             // permissions denied, so use the default location
             locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
     }
 

@@ -158,6 +158,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        presenter.doResartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
