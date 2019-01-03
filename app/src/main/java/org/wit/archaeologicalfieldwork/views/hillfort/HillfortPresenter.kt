@@ -1,6 +1,10 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Bitmap
+import android.os.Environment
+import android.provider.MediaStore
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,6 +24,10 @@ import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
@@ -27,6 +35,8 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
+
+    lateinit var currentPhotoPath: String
 
     var hillfort = DataModel()
     var stat = StatsModel()
@@ -114,6 +124,40 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     fun doUploadImage(image: String, hillfort: DataModel) {
         fireStore.updateImage(image, hillfort)
+    }
+
+    fun doCamera() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(view.activity!!.packageManager)?.also {
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+                photoFile?.also {
+                    view.startActivityForResult(takePictureIntent, view.IMAGE_CAPTURE)
+                }
+            }
+        }
+    }
+
+    fun doUploadBitmap(bitmap: Bitmap, hillfort: DataModel) {
+        fireStore.updateBitMapImage(bitmap, currentPhotoPath, hillfort)
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = view.activity!!.applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
     }
 
     fun doVisit(user: UserModel) {

@@ -1,6 +1,7 @@
 package org.wit.archaeologicalfieldwork.views.hillfort
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import com.google.android.material.textfield.TextInputEditText
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RatingBar
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -30,10 +32,13 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     var hillfort = DataModel()
     var user = UserModel()
     var IMAGE_REQUEST = 1
+    var IMAGE_CAPTURE = 2
     lateinit var mapView: MapView
     lateinit var nameText: TextInputEditText
     lateinit var descriptionText: TextInputEditText
     lateinit var ratingBar: RatingBar
+    lateinit var cameraBtn: Button
+    lateinit var imageView: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = HillfortPresenter(this)
@@ -52,6 +57,8 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         val deleteBtn: Button? = view?.findViewById(R.id.btnDelete)
         ratingBar = view.findViewById(R.id.ratingBarAdd)
         mapView = view.findViewById(R.id.mapView)
+        cameraBtn = view.findViewById(R.id.cameraButton)
+        imageView = view.findViewById(R.id.imageView2)
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
@@ -84,6 +91,10 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
         deleteBtn?.setOnClickListener {
             presenter.doDelete()
             activity!!.finish()
+        }
+
+        cameraBtn?.setOnClickListener {
+            presenter.doCamera()
         }
 
         return view
@@ -121,6 +132,10 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
                     val image: String = data.data.toString()
                     presenter.doUploadImage(image, hillfort)
                 }
+            }
+            IMAGE_CAPTURE -> {
+                val imageBitmap = data!!.extras.get("data") as Bitmap
+                presenter.doUploadBitmap(imageBitmap, hillfort)
             }
         }
     }

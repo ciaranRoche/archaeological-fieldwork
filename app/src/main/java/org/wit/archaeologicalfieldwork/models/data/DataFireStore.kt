@@ -95,6 +95,26 @@ class DataFireStore(val context: Context) : DataStore, AnkoLogger {
         }
     }
 
+    override fun updateBitMapImage(image: Bitmap, name: String, hillfort: DataModel) {
+        fetchHillforts { }
+        var imageRef = st.child(userId + '/' + name)
+        val baos = ByteArrayOutputStream()
+        val bitmap = image
+
+        bitmap?.let {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            val uploadTask = imageRef.putBytes(data)
+            uploadTask.addOnFailureListener {
+                println(it.message)
+            }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                    hillfort.images += it.toString()
+                }
+            }
+        }
+    }
+
     fun fetchHillforts(hillfortsReady: () -> Unit) {
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
