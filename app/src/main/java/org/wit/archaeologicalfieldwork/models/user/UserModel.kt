@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
-import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 
 @SuppressLint("ParecelCreator")
 @Parcelize
@@ -15,7 +14,7 @@ data class UserModel(
     var fbid: String = "",
     var name: String = "",
     var email: String = "",
-    var stats: MutableList<StatsModel> = mutableListOf(),
+    var stat: Long = 0,
     var userImage: String = "",
     var joined: String = ""
 ) : Parcelable

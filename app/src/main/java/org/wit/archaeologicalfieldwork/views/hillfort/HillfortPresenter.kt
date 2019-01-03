@@ -21,12 +21,11 @@ import org.wit.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import org.wit.archaeologicalfieldwork.helpers.checkLocationPermissions
 import org.wit.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
-import org.wit.archaeologicalfieldwork.helpers.getDate
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
 import org.wit.archaeologicalfieldwork.models.location.Location
 import org.wit.archaeologicalfieldwork.models.stats.StatsModel
-import org.wit.archaeologicalfieldwork.models.user.UserModel
+import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -35,6 +34,7 @@ import java.util.Date
 class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
 
     val fireStore: DataFireStore = DataFireStore(view.context!!)
+    val userStore: UserFireStore = UserFireStore(view.context!!)
 
     var defaultLocation = Location(52.245696, -7.139102, 15f)
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.activity!!)
@@ -123,6 +123,7 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
                 fireStore.update(hillfort)
             } else {
                 fireStore.create(hillfort)
+                userStore.addStats(view.user)
             }
         }
     }
@@ -177,19 +178,5 @@ class HillfortPresenter(val view: HillfortFragment) : AnkoLogger {
             // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
         }
-    }
-
-    fun doVisit(user: UserModel) {
-        val foundStats = user.stats
-        val foundHillfort = foundStats!!.find { s -> s.hillfort == hillfort.id }
-        if (foundHillfort == null) {
-            stat.hillfort = hillfort.id
-            stat.date = getDate()
-            user.stats.add(stat)
-        } else {
-            stat.date = getDate()
-            user.stats[user.stats.indexOf(stat)] = stat
-        }
-        // userStore.update(user)
     }
 }

@@ -12,7 +12,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
-import org.wit.archaeologicalfieldwork.models.stats.StatsModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -38,7 +37,7 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
         if (foundUser != null) {
             foundUser.name = user.name
             foundUser.email = user.email
-            foundUser.stats = user.stats
+            foundUser.stat = user.stat
             foundUser.userImage = user.userImage
             foundUser.joined = user.joined
         }
@@ -70,9 +69,15 @@ class UserFireStore(val context: Context) : UserStore, AnkoLogger {
         return foundUser!!
     }
 
-    override suspend fun getStats(user: UserModel): MutableList<StatsModel>? {
+    override suspend fun getStats(user: UserModel): Long {
         val foundUser = findUserId(user.id)
-        return foundUser.stats
+        return foundUser.stat
+    }
+
+    override suspend fun addStats(user: UserModel) {
+        fetchUserProfile {}
+        user.stat = user.stat + 1L
+        db.child("users").child(userId).child("profile").child(user.fbid).setValue(user)
     }
 
     override fun updateImage(user: UserModel) {
