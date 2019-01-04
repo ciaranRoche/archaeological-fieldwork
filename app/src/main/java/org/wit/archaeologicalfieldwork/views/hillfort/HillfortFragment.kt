@@ -21,7 +21,6 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.models.data.DataModel
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.hillfortlist.HillfortListActivity
 
@@ -105,7 +104,7 @@ class HillfortFragment : Fragment(), AnkoLogger, GoogleMap.OnMarkerDragListener 
     }
 
     companion object {
-        fun newInstance(hillfort: HillfortModel?, user: UserModel, edit: Boolean): HillfortFragment {
+        fun newInstance(hillfort: DataModel?, user: UserModel, edit: Boolean): HillfortFragment {
             val args = Bundle()
             args.putParcelable("hillfort", hillfort)
             args.putParcelable("user", user)
