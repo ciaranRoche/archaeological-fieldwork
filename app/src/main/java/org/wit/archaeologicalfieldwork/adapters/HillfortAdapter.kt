@@ -8,13 +8,13 @@ import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.readImageFromPath
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
+import org.wit.archaeologicalfieldwork.models.data.DataModel
 
 interface HillfortListener {
-    fun onHillfortClick(hillfort: HillfortModel)
+    fun onHillfortClick(hillfort: DataModel)
 }
 
-class HillfortAdapter constructor(private var hillforts: List<HillfortModel>, private val listener: HillfortListener) : RecyclerView.Adapter<HillfortAdapter.MainHolder>() {
+class HillfortAdapter constructor(private var hillforts: List<DataModel>, private val listener: HillfortListener) : RecyclerView.Adapter<HillfortAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_hillfort, parent, false))
@@ -29,8 +29,8 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>, pr
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView), AnkoLogger {
 
-        fun bind(hillfort: HillfortModel, listener: HillfortListener) {
-            itemView.hillfortName.text = hillfort.name
+        fun bind(hillfort: DataModel, listener: HillfortListener) {
+            itemView.hillfortName.text = hillfort.title
             itemView.description.text = hillfort.description
             if (hillfort.images.isNotEmpty()) itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.images.get(0)))
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }

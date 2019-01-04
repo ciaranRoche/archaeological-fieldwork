@@ -8,6 +8,7 @@ interface DataStore {
     suspend fun create(data: DataModel)
     suspend fun update(data: DataModel)
     suspend fun delete(data: DataModel)
+    suspend fun deleteByFbif()
     suspend fun findFavorites(): ArrayList<DataModel>
     fun updateImage(image: String, hillfort: DataModel)
     fun updateBitMapImage(image: Bitmap, name: String, hillfort: DataModel)

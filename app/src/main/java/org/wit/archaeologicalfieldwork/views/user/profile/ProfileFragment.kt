@@ -30,7 +30,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
         name?.text = user.name
         email?.text = user.email
         date?.text = user.joined
-        visit?.text = user.stats.size.toString()
+        visit?.text = user.stat.toString()
         if (user.userImage.isNotEmpty()) {
             Picasso.get().load(user.userImage)
                 .config(Bitmap.Config.RGB_565)

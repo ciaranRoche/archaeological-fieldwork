@@ -9,19 +9,22 @@ import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.wit.archaeologicalfieldwork.R
 import org.wit.archaeologicalfieldwork.helpers.showImagePicker
+import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserFireStore
 import org.wit.archaeologicalfieldwork.models.user.UserModel
 import org.wit.archaeologicalfieldwork.views.startup.StartUpView
 import org.wit.archaeologicalfieldwork.views.startup.userLogged
 import org.wit.archaeologicalfieldwork.views.user.profile.ProfileFragment
 
-class SettingsPresenter(val view: SettingsFragment) {
+class SettingsPresenter(val view: SettingsFragment) : AnkoLogger {
 
     var users: UserFireStore = UserFireStore(view.context!!)
+    var data: DataFireStore = DataFireStore(view.context!!)
 
     fun doImagePicker(parent: SettingsFragment, req: Int) {
         showImagePicker(parent, req)
@@ -40,7 +43,9 @@ class SettingsPresenter(val view: SettingsFragment) {
     fun deleteUser(user: UserModel) {
         async(UI) {
             users.delete(user)
+            data.deleteByFbif()
             userLogged = false
+            FirebaseAuth.getInstance().currentUser!!.delete()
             view.startActivity<StartUpView>()
             view.toast("User Deleted")
         }

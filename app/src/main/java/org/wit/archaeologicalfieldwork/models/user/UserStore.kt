@@ -1,7 +1,5 @@
 package org.wit.archaeologicalfieldwork.models.user
 
-import org.wit.archaeologicalfieldwork.models.stats.StatsModel
-
 interface UserStore {
     suspend fun create(user: UserModel)
     suspend fun update(user: UserModel)
@@ -9,6 +7,7 @@ interface UserStore {
     suspend fun getUser(email: String): UserModel
     suspend fun checkUser(email: String): Boolean
     suspend fun findUserId(id: Long): UserModel
-    suspend fun getStats(user: UserModel): MutableList<StatsModel>?
+    suspend fun getStats(user: UserModel): Long
+    suspend fun addStats(user: UserModel)
     fun updateImage(user: UserModel)
 }

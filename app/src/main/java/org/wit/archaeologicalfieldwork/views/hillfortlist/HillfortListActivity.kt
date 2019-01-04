@@ -14,7 +14,6 @@ import org.wit.archaeologicalfieldwork.adapters.HillfortListener
 import org.wit.archaeologicalfieldwork.adapters.HillfortPagerAdapter
 import org.wit.archaeologicalfieldwork.models.data.DataFireStore
 import org.wit.archaeologicalfieldwork.models.data.DataModel
-import org.wit.archaeologicalfieldwork.models.hillfort.HillfortModel
 import com.nshmura.recyclertablayout.RecyclerTabLayout
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
@@ -59,7 +58,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener, AnkoLogger {
         }
     }
 
-    override fun onHillfortClick(hillfort: HillfortModel) {
+    override fun onHillfortClick(hillfort: DataModel) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
